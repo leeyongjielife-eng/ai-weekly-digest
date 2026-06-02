@@ -265,10 +265,87 @@ def strip_html_tags(text: str) -> str:
     return text
 
 
+def select_fallback_items(items: list[FeedItem]) -> list[FeedItem]:
+    keywords = [
+        "agent",
+        "agents",
+        "workflow",
+        "automation",
+        "product",
+        "launch",
+        "release",
+        "tool",
+        "startup",
+        "business",
+        "work",
+        "career",
+        "jobs",
+        "employment",
+        "market",
+        "strategy",
+        "llm",
+        "gpt",
+        "gemini",
+        "claude",
+        "copilot",
+        "reasoning",
+        "inference",
+        "benchmark",
+    ]
+    excluded_sources = {
+        source.strip().lower()
+        for source in os.getenv("FALLBACK_EXCLUDED_SOURCES", "Arxiv AI").split(",")
+        if source.strip()
+    }
+    max_items = int(os.getenv("FALLBACK_MAX_ITEMS", "20").strip())
+    per_source_limit = int(os.getenv("FALLBACK_MAX_ITEMS_PER_SOURCE", "4").strip())
+
+    filtered: list[FeedItem] = []
+    source_counts: dict[str, int] = {}
+
+    for item in items:
+        source_key = item.source.strip().lower()
+        if source_key in excluded_sources:
+            continue
+
+        haystack = f"{item.title} {strip_html_tags(item.summary)}".lower()
+        if not any(keyword in haystack for keyword in keywords):
+            continue
+
+        count = source_counts.get(source_key, 0)
+        if count >= per_source_limit:
+            continue
+
+        filtered.append(item)
+        source_counts[source_key] = count + 1
+        if len(filtered) >= max_items:
+            break
+
+    if filtered:
+        return filtered
+
+    # If keyword filtering is too strict, still avoid flooding with research papers.
+    backup: list[FeedItem] = []
+    source_counts.clear()
+    for item in items:
+        source_key = item.source.strip().lower()
+        if source_key in excluded_sources:
+            continue
+        count = source_counts.get(source_key, 0)
+        if count >= per_source_limit:
+            continue
+        backup.append(item)
+        source_counts[source_key] = count + 1
+        if len(backup) >= max_items:
+            break
+    return backup
+
+
 def build_fallback_html(items: list[FeedItem]) -> str:
     today = datetime.now().strftime("%Y-%m-%d")
+    selected_items = select_fallback_items(items)
     sections: list[str] = []
-    for item in items:
+    for item in selected_items:
         summary = strip_html_tags(item.summary)
         if len(summary) > 320:
             summary = summary[:317].rstrip() + "..."
@@ -283,11 +360,11 @@ def build_fallback_html(items: list[FeedItem]) -> str:
       </section>"""
         )
 
-    content = "\n".join(sections) if sections else "<p>No articles were available.</p>"
+    content = "\n".join(sections) if sections else "<p>No suitable fallback articles were available.</p>"
     return f"""<html>
   <body style="font-family: Arial, sans-serif; max-width: 760px; margin: 0 auto; color: #111827; padding: 24px;">
     <h1 style="margin-bottom: 8px;">Your AI Weekly Digest</h1>
-    <p style="color: #6b7280; margin-top: 0;">Generated on {today}. This fallback version was built directly from RSS metadata.</p>
+    <p style="color: #6b7280; margin-top: 0;">Generated on {today}. This fallback version was built directly from filtered RSS metadata.</p>
     {content}
   </body>
 </html>"""

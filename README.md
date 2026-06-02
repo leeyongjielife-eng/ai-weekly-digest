@@ -27,6 +27,7 @@ cp .env.example .env
 - 如果 Gemini 偶发拥堵，可通过 `GEMINI_MAX_RETRIES` 和 `GEMINI_FALLBACK_MODELS` 增加稳定性
 - 如果模型服务临时不可用，`ALLOW_BASIC_HTML_FALLBACK=1` 会改用 RSS 元数据生成基础版邮件，避免整封邮件发送失败
 - `GEMINI_TIMEOUT_SECONDS` 可以限制单次 Gemini 请求等待时间，超时后会按你的配置重试或降级
+- 兜底版默认会排除 `Arxiv AI`，并限制总条数，避免邮件被论文 RSS 淹没
 - `LLM_PROVIDER=openai` 时填写 `OPENAI_API_KEY`
 - `EMAIL_USERNAME` / `EMAIL_FROM` / `EMAIL_TO` 填你的 Gmail
 - 把从 Google Cloud 下载的 OAuth 客户端文件保存为 `credentials.json`
