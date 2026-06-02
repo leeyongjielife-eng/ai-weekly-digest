@@ -1,0 +1,56 @@
+name: AI Weekly Digest
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 08:00 Monday Asia/Shanghai == 00:00 Monday UTC
+    - cron: "0 0 * * 1"
+
+jobs:
+  send-digest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      TZ: Asia/Shanghai
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Restore Gmail OAuth files
+        run: |
+          printf '%s' '${{ secrets.GMAIL_CREDENTIALS_JSON }}' > credentials.json
+          printf '%s' '${{ secrets.GMAIL_TOKEN_JSON }}' > token.json
+
+      - name: Create runtime .env
+        run: |
+          cat > .env <<EOF
+          LLM_PROVIDER=gemini
+          LLM_MODEL=gemini-2.5-flash
+          GEMINI_FALLBACK_MODELS=
+          GEMINI_MAX_RETRIES=3
+          GEMINI_RETRY_BACKOFF_SECONDS=5
+          GEMINI_TIMEOUT_SECONDS=45
+          ALLOW_BASIC_HTML_FALLBACK=1
+          GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}
+          EMAIL_USERNAME=${{ secrets.EMAIL_USERNAME }}
+          EMAIL_FROM=${{ secrets.EMAIL_FROM }}
+          EMAIL_TO=${{ secrets.EMAIL_TO }}
+          EMAIL_SUBJECT_PREFIX=AI Weekly Digest
+          DISABLE_SYSTEM_PROXY=1
+          RSS_TIMEOUT_SECONDS=15
+          EOF
+
+      - name: Send digest
+        run: python ai_digest.py
