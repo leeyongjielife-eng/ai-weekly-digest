@@ -31,10 +31,11 @@ DEFAULT_FEEDS = [
     {"name": "Dan Shipper", "url": "https://every.to/chain-of-thought/feed"},
     {"name": "Lenny Rachitsky", "url": "https://www.lennysnewsletter.com/feed"},
     {"name": "Sequoia Capital", "url": "https://medium.com/feed/sequoia-capital"},
-    {"name": "Arxiv AI", "url": "https://rss.arxiv.org/rss/cs.AI"},
-    {"name": "a16z blog", "url": "https://rss.app/feeds/KLHRSbumZAMLqbVo.xml"},
     {"name": "TechCrunch AI", "url": "https://techcrunch.com/category/artificial-intelligence/feed/"},
-    {"name": "Addy Osmani", "url": "https://rss.app/feeds/1ZrksiAoRsZuDlpy.xml"},
+]
+
+OPTIONAL_RESEARCH_FEEDS = [
+    {"name": "Arxiv AI", "url": "https://rss.arxiv.org/rss/cs.AI"},
 ]
 
 SYSTEM_PROMPT = """You are an AI content curator. Every week you receive a list of articles and posts from RSS feeds of AI thought leaders.
@@ -67,6 +68,67 @@ class FeedItem:
     author: str
     published_at: str
     summary: str
+
+
+RELEVANCE_KEYWORDS = [
+    "agent",
+    "agents",
+    "workflow",
+    "automation",
+    "tool",
+    "tools",
+    "product",
+    "products",
+    "launch",
+    "release",
+    "startup",
+    "vc",
+    "funding",
+    "investment",
+    "acquisition",
+    "market",
+    "business",
+    "strategy",
+    "work",
+    "career",
+    "job",
+    "jobs",
+    "employment",
+    "hiring",
+    "copilot",
+    "codex",
+    "claude",
+    "gemini",
+    "gpt",
+    "openai",
+    "anthropic",
+    "nvidia",
+    "meta",
+    "google",
+    "microsoft",
+    "inference",
+    "reasoning",
+    "benchmark",
+    "app",
+    "search",
+    "assistant",
+]
+
+NEGATIVE_KEYWORDS = [
+    "proof",
+    "theorem",
+    "finite element",
+    "molecular optimization",
+    "radiology",
+    "bayesian optimization",
+    "offshore wind",
+    "quantum transformer",
+    "materials",
+    "inorganic",
+    "drug design",
+    "trajectory compression",
+    "legal triage",
+]
 
 
 def load_env() -> None:
@@ -141,8 +203,12 @@ def fetch_recent_items(days: int = 7) -> list[FeedItem]:
     timeout = float(os.getenv("RSS_TIMEOUT_SECONDS", "15").strip())
     session = requests.Session()
     session.trust_env = False
+    feeds = list(DEFAULT_FEEDS)
 
-    for feed in DEFAULT_FEEDS:
+    if os.getenv("INCLUDE_RESEARCH_FEEDS", "0").strip() == "1":
+        feeds.extend(OPTIONAL_RESEARCH_FEEDS)
+
+    for feed in feeds:
         try:
             response = session.get(
                 feed["url"],
@@ -178,6 +244,57 @@ def fetch_recent_items(days: int = 7) -> list[FeedItem]:
 
     items.sort(key=lambda item: item.published_at, reverse=True)
     return items
+
+
+def get_excluded_sources(env_name: str, default: str) -> set[str]:
+    return {source.strip().lower() for source in os.getenv(env_name, default).split(",") if source.strip()}
+
+
+def relevance_score(item: FeedItem) -> int:
+    haystack = f"{item.title} {strip_html_tags(item.summary)}".lower()
+    score = 0
+    for keyword in RELEVANCE_KEYWORDS:
+        if keyword in haystack:
+            score += 2
+    for keyword in NEGATIVE_KEYWORDS:
+        if keyword in haystack:
+            score -= 3
+    if item.source.lower() in {"techcrunch ai", "lenny rachitsky", "dan shipper", "sequoia capital"}:
+        score += 2
+    return score
+
+
+def curate_items(items: list[FeedItem]) -> list[FeedItem]:
+    excluded_sources = get_excluded_sources("PRIMARY_EXCLUDED_SOURCES", "Arxiv AI")
+    max_items = int(os.getenv("PRIMARY_MAX_ITEMS", "25").strip())
+    per_source_limit = int(os.getenv("PRIMARY_MAX_ITEMS_PER_SOURCE", "6").strip())
+    min_score = int(os.getenv("PRIMARY_MIN_RELEVANCE_SCORE", "1").strip())
+
+    ranked = sorted(items, key=lambda item: (relevance_score(item), item.published_at), reverse=True)
+    curated: list[FeedItem] = []
+    source_counts: dict[str, int] = {}
+
+    for item in ranked:
+        source_key = item.source.strip().lower()
+        if source_key in excluded_sources:
+            continue
+        if relevance_score(item) < min_score:
+            continue
+        count = source_counts.get(source_key, 0)
+        if count >= per_source_limit:
+            continue
+        curated.append(item)
+        source_counts[source_key] = count + 1
+        if len(curated) >= max_items:
+            break
+
+    if curated:
+        curated.sort(key=lambda item: item.published_at, reverse=True)
+        return curated
+
+    # If filtering is too strict, still remove excluded sources before sending to the model.
+    fallback = [item for item in items if item.source.strip().lower() not in excluded_sources]
+    return fallback[:max_items]
 
 
 def build_user_prompt(items: Iterable[FeedItem]) -> str:
@@ -266,37 +383,8 @@ def strip_html_tags(text: str) -> str:
 
 
 def select_fallback_items(items: list[FeedItem]) -> list[FeedItem]:
-    keywords = [
-        "agent",
-        "agents",
-        "workflow",
-        "automation",
-        "product",
-        "launch",
-        "release",
-        "tool",
-        "startup",
-        "business",
-        "work",
-        "career",
-        "jobs",
-        "employment",
-        "market",
-        "strategy",
-        "llm",
-        "gpt",
-        "gemini",
-        "claude",
-        "copilot",
-        "reasoning",
-        "inference",
-        "benchmark",
-    ]
-    excluded_sources = {
-        source.strip().lower()
-        for source in os.getenv("FALLBACK_EXCLUDED_SOURCES", "Arxiv AI").split(",")
-        if source.strip()
-    }
+    keywords = RELEVANCE_KEYWORDS
+    excluded_sources = get_excluded_sources("FALLBACK_EXCLUDED_SOURCES", "Arxiv AI")
     max_items = int(os.getenv("FALLBACK_MAX_ITEMS", "20").strip())
     per_source_limit = int(os.getenv("FALLBACK_MAX_ITEMS_PER_SOURCE", "4").strip())
 
@@ -381,7 +469,8 @@ def generate_html(items: list[FeedItem]) -> str:
 </html>"""
 
     provider = os.getenv("LLM_PROVIDER", "gemini").strip().lower()
-    prompt = build_user_prompt(items)
+    curated_items = curate_items(items)
+    prompt = build_user_prompt(curated_items)
 
     if provider == "gemini":
         model = os.getenv("LLM_MODEL", "gemini-2.5-flash").strip()
@@ -391,7 +480,7 @@ def generate_html(items: list[FeedItem]) -> str:
             if os.getenv("ALLOW_BASIC_HTML_FALLBACK", "1").strip() != "1":
                 raise
             print(f"Warning: Gemini generation failed, using basic HTML fallback: {exc}", file=sys.stderr)
-            return build_fallback_html(items)
+            return build_fallback_html(curated_items)
     if provider == "openai":
         model = os.getenv("LLM_MODEL", "gpt-4.1-mini").strip()
         try:
@@ -400,7 +489,7 @@ def generate_html(items: list[FeedItem]) -> str:
             if os.getenv("ALLOW_BASIC_HTML_FALLBACK", "1").strip() != "1":
                 raise
             print(f"Warning: OpenAI generation failed, using basic HTML fallback: {exc}", file=sys.stderr)
-            return build_fallback_html(items)
+            return build_fallback_html(curated_items)
 
     raise RuntimeError("LLM_PROVIDER must be either 'gemini' or 'openai'.")
 
