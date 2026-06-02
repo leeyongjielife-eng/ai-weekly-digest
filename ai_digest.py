@@ -31,7 +31,9 @@ DEFAULT_FEEDS = [
     {"name": "Dan Shipper", "url": "https://every.to/chain-of-thought/feed"},
     {"name": "Lenny Rachitsky", "url": "https://www.lennysnewsletter.com/feed"},
     {"name": "Sequoia Capital", "url": "https://medium.com/feed/sequoia-capital"},
+    {"name": "a16z blog", "url": "https://rss.app/feeds/KLHRSbumZAMLqbVo.xml"},
     {"name": "TechCrunch AI", "url": "https://techcrunch.com/category/artificial-intelligence/feed/"},
+    {"name": "Addy Osmani", "url": "https://rss.app/feeds/1ZrksiAoRsZuDlpy.xml"},
 ]
 
 OPTIONAL_RESEARCH_FEEDS = [
@@ -53,10 +55,12 @@ Your job:
 4. For each selected item, write a 2-3 sentence summary explaining what it's about and why it matters
 5. Format the output as a clean HTML email with:
    - A header: "Your AI Weekly Digest"
+   - Group items by author, keeping the same author's items together
    - Each item as a section with: Author name, article title (as a clickable link), and your summary
    - A clean, readable layout
 
-Be comprehensive - include all relevant articles, don't skip to save space.
+Be comprehensive across the last 7 days, but prioritize items that are most helpful for understanding the latest AI news, product changes, AI agents, workflows, business moves, and how AI is changing work.
+Do not include research-paper style content unless it is a major industry-relevant development.
 Output only the final HTML - no explanation, no preamble."""
 
 
@@ -266,9 +270,9 @@ def relevance_score(item: FeedItem) -> int:
 
 def curate_items(items: list[FeedItem]) -> list[FeedItem]:
     excluded_sources = get_excluded_sources("PRIMARY_EXCLUDED_SOURCES", "Arxiv AI")
-    max_items = int(os.getenv("PRIMARY_MAX_ITEMS", "25").strip())
-    per_source_limit = int(os.getenv("PRIMARY_MAX_ITEMS_PER_SOURCE", "6").strip())
-    min_score = int(os.getenv("PRIMARY_MIN_RELEVANCE_SCORE", "1").strip())
+    max_items = int(os.getenv("PRIMARY_MAX_ITEMS", "60").strip())
+    per_source_limit = int(os.getenv("PRIMARY_MAX_ITEMS_PER_SOURCE", "12").strip())
+    min_score = int(os.getenv("PRIMARY_MIN_RELEVANCE_SCORE", "0").strip())
 
     ranked = sorted(items, key=lambda item: (relevance_score(item), item.published_at), reverse=True)
     curated: list[FeedItem] = []
@@ -289,7 +293,7 @@ def curate_items(items: list[FeedItem]) -> list[FeedItem]:
             break
 
     if curated:
-        curated.sort(key=lambda item: item.published_at, reverse=True)
+        curated.sort(key=lambda item: (item.author.lower(), item.published_at), reverse=True)
         return curated
 
     # If filtering is too strict, still remove excluded sources before sending to the model.
@@ -432,19 +436,32 @@ def select_fallback_items(items: list[FeedItem]) -> list[FeedItem]:
 def build_fallback_html(items: list[FeedItem]) -> str:
     today = datetime.now().strftime("%Y-%m-%d")
     selected_items = select_fallback_items(items)
-    sections: list[str] = []
+    groups: dict[str, list[FeedItem]] = {}
     for item in selected_items:
-        summary = strip_html_tags(item.summary)
-        if len(summary) > 320:
-            summary = summary[:317].rstrip() + "..."
+        groups.setdefault(item.author.strip() or item.source, []).append(item)
+
+    sections: list[str] = []
+    for author in sorted(groups):
+        cards: list[str] = []
+        for item in groups[author]:
+            summary = strip_html_tags(item.summary)
+            if len(summary) > 320:
+                summary = summary[:317].rstrip() + "..."
+            cards.append(
+                f"""
+        <article style="padding: 14px 0; border-top: 1px solid #eef2f7;">
+          <h3 style="font-size: 19px; margin: 0 0 8px;">
+            <a href="{escape(item.link)}" style="color: #111827; text-decoration: none;">{escape(item.title)}</a>
+          </h3>
+          <div style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">{escape(item.source)}</div>
+          <p style="font-size: 15px; line-height: 1.7; color: #374151; margin: 0;">{escape(summary or 'Open the article for details.')}</p>
+        </article>"""
+            )
         sections.append(
             f"""
-      <section style="padding: 18px 0; border-bottom: 1px solid #e5e7eb;">
-        <div style="font-size: 13px; color: #6b7280; margin-bottom: 6px;">{escape(item.author)} · {escape(item.source)}</div>
-        <h2 style="font-size: 20px; margin: 0 0 8px;">
-          <a href="{escape(item.link)}" style="color: #111827; text-decoration: none;">{escape(item.title)}</a>
-        </h2>
-        <p style="font-size: 15px; line-height: 1.7; color: #374151; margin: 0;">{escape(summary or 'Open the article for details.')}</p>
+      <section style="padding: 18px 0 6px;">
+        <h2 style="font-size: 24px; margin: 0 0 10px; color: #2563eb;">{escape(author)}</h2>
+        {''.join(cards)}
       </section>"""
         )
 
@@ -470,6 +487,7 @@ def generate_html(items: list[FeedItem]) -> str:
 
     provider = os.getenv("LLM_PROVIDER", "gemini").strip().lower()
     curated_items = curate_items(items)
+    curated_items.sort(key=lambda item: (item.author.lower(), item.published_at), reverse=True)
     prompt = build_user_prompt(curated_items)
 
     if provider == "gemini":
