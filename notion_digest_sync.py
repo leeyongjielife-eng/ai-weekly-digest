@@ -35,6 +35,7 @@ class DigestHTMLParser(HTMLParser):
         self.in_h2 = False
         self.in_h3 = False
         self.in_p = False
+        self.in_div = False
         self.in_a = False
         self.current_link = ""
         self.text_chunks: list[str] = []
@@ -51,7 +52,6 @@ class DigestHTMLParser(HTMLParser):
         elif tag == "h2":
             self.in_h2 = True
             self.text_chunks = []
-            self.current_entry = {"title": "", "summary": "", "link": "", "source": "", "author": self.current_author}
         elif tag == "h3":
             self.in_h3 = True
             self.text_chunks = []
@@ -59,22 +59,24 @@ class DigestHTMLParser(HTMLParser):
         elif tag == "p":
             self.in_p = True
             self.text_chunks = []
+        elif tag == "div":
+            self.in_div = True
+            self.text_chunks = []
         elif tag == "a":
             self.in_a = True
             self.current_link = attrs_map.get("href", "")
 
     def handle_endtag(self, tag: str) -> None:
         text = clean_text("".join(self.text_chunks))
+        should_reset_chunks = True
         if tag == "h1":
             self.in_h1 = False
             if text:
                 self.title = text
         elif tag == "h2":
             self.in_h2 = False
-            if self.current_entry is not None and text:
-                self.current_entry["title"] = text
-                if self.current_link:
-                    self.current_entry["link"] = self.current_link
+            if text:
+                self.current_author = text
             self.current_link = ""
         elif tag == "h3":
             self.in_h3 = False
@@ -89,17 +91,25 @@ class DigestHTMLParser(HTMLParser):
                 self.text_chunks = []
                 return
             if self.current_entry is not None:
-                if not self.current_entry.get("source") and len(text) < 80 and "·" in text:
+                if not self.current_entry.get("summary") and looks_like_source_line(text):
                     self.current_entry["source"] = text
                 elif not self.current_entry.get("summary"):
                     self.current_entry["summary"] = text
                     self._flush_entry()
+                else:
+                    self.current_entry["summary"] = f"{self.current_entry['summary']} {text}".strip()
+        elif tag == "div":
+            self.in_div = False
+            if text and self.current_entry is not None and not self.current_entry.get("source") and looks_like_source_line(text):
+                self.current_entry["source"] = text
         elif tag == "a":
             self.in_a = False
-        self.text_chunks = []
+            should_reset_chunks = False
+        if should_reset_chunks:
+            self.text_chunks = []
 
     def handle_data(self, data: str) -> None:
-        if self.in_h1 or self.in_h2 or self.in_h3 or self.in_p or self.in_a:
+        if self.in_h1 or self.in_h2 or self.in_h3 or self.in_p or self.in_div or self.in_a:
             self.text_chunks.append(data)
 
     def _flush_entry(self) -> None:
@@ -123,6 +133,15 @@ class DigestHTMLParser(HTMLParser):
 
 def clean_text(text: str) -> str:
     return re.sub(r"\s+", " ", html.unescape(text)).strip()
+
+
+def looks_like_source_line(text: str) -> bool:
+    text = clean_text(text)
+    if not text or len(text) > 80:
+        return False
+    if any(mark in text for mark in ".?!:"):
+        return False
+    return True
 
 
 def load_env() -> None:
@@ -228,9 +247,25 @@ def build_blocks(entries: list[DigestEntry]) -> list[dict]:
                 {
                     "object": "block",
                     "type": "heading_3",
-                    "heading_3": {"rich_text": split_rich_text(entry.title, entry.link)},
+                    "heading_3": {"rich_text": split_rich_text(entry.title)},
                 }
             )
+            if entry.link:
+                blocks.append(
+                    {
+                        "object": "block",
+                        "type": "paragraph",
+                        "paragraph": {
+                            "rich_text": [
+                                {
+                                    "type": "text",
+                                    "text": {"content": "Open original article", "link": {"url": entry.link}},
+                                    "annotations": {"bold": True},
+                                }
+                            ]
+                        },
+                    }
+                )
             meta = entry.source or author
             blocks.append(
                 {
