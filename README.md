@@ -91,11 +91,15 @@ python3 ai_digest.py --schedule
 - `EMAIL_TO`
 - `GMAIL_CREDENTIALS_JSON`
 - `GMAIL_TOKEN_JSON`
+- `NOTION_API_KEY`
+- `NOTION_PARENT_PAGE_ID`
 
 其中：
 
 - `GMAIL_CREDENTIALS_JSON` 填本地 `credentials.json` 的完整内容
 - `GMAIL_TOKEN_JSON` 填本地 `token.json` 的完整内容
+- `NOTION_API_KEY` 填你的 Notion integration token
+- `NOTION_PARENT_PAGE_ID` 填你要归档周报的 Notion 父页面 ID
 
 工作流文件已经放在：
 
@@ -106,6 +110,48 @@ python3 ai_digest.py --schedule
 - 北京时间每周一早上 `08:00`
 
 也支持在 GitHub 页面手动点击 `Run workflow` 立即执行一次。
+
+现在 GitHub Actions 默认会在发送邮箱后，自动把同一份周报归档到 Notion，不会额外调用 Gemini。
+
+## 4.1 同步到 Notion（不调用 Gemini）
+
+如果你已经有一份现成的周报内容，希望直接归档到 Notion，而不重新调用 Gemini，可以使用：
+
+```bash
+python3 notion_digest_sync.py --input path/to/digest.html
+```
+
+也支持纯文本输入：
+
+```bash
+python3 notion_digest_sync.py --input path/to/digest.txt
+```
+
+需要在 `.env` 中补充：
+
+- `NOTION_API_KEY`
+- `NOTION_PARENT_PAGE_ID`
+
+这个脚本会在指定的 Notion 页面下新建一篇子页面，并按作者分组写入周报内容。
+
+如果你想先检查解析效果，不上传：
+
+```bash
+python3 notion_digest_sync.py --input path/to/digest.txt --dry-run
+```
+
+如果你想在现有周报链路里保持“先发邮箱，再额外归档到 Notion”，只需要打开：
+
+```env
+ENABLE_NOTION_SYNC=1
+```
+
+这样 `ai_digest.py` 在生成并发送同一份周报后，会顺手创建一篇 Notion 页面，不会额外调用 Gemini。
+
+如果你是走 GitHub Actions，这个自动 Notion 归档已经在工作流里打开了；你只需要补齐：
+
+- `NOTION_API_KEY`
+- `NOTION_PARENT_PAGE_ID`
 
 ## 5. 和你原来的 n8n 流程对应关系
 

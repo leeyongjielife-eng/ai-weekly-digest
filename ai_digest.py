@@ -565,6 +565,20 @@ def send_email(html: str) -> None:
     service.users().messages().send(userId="me", body={"raw": raw_message}).execute()
 
 
+def sync_to_notion_if_enabled(html: str) -> None:
+    if os.getenv("ENABLE_NOTION_SYNC", "0").strip() != "1":
+        return
+
+    from notion_digest_sync import load_env as load_notion_env
+    from notion_digest_sync import sync_digest_content_to_notion
+
+    load_notion_env()
+    subject = os.getenv("EMAIL_SUBJECT_PREFIX", "AI Weekly Digest").strip()
+    today = datetime.now().strftime("%Y-%m-%d")
+    page = sync_digest_content_to_notion(html, f"{subject} - {today}")
+    print(f"Notion page created: {page.get('url', page.get('id', 'unknown'))}")
+
+
 def should_run_now(now: datetime, weekday: int, hour: int, minute: int) -> bool:
     return now.weekday() == weekday and now.hour == hour and now.minute == minute
 
@@ -581,6 +595,7 @@ def run_once(dry_run: bool = False, output_path: Path | None = None) -> None:
         return
 
     send_email(html)
+    sync_to_notion_if_enabled(html)
     print(f"Digest sent successfully with {len(items)} recent feed items.")
 
 

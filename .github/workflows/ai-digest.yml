@@ -58,6 +58,9 @@ jobs:
           DISABLE_SYSTEM_PROXY=1
           RSS_TIMEOUT_SECONDS=15
           INCLUDE_RESEARCH_FEEDS=0
+          ENABLE_NOTION_SYNC=1
+          NOTION_API_KEY=${{ secrets.NOTION_API_KEY }}
+          NOTION_PARENT_PAGE_ID=${{ secrets.NOTION_PARENT_PAGE_ID }}
           EOF
 
       - name: Send digest
