@@ -2,6 +2,14 @@
 .venv/
 __pycache__/
 *.pyc
-digest-preview.html
+.DS_Store
 credentials.json
 token.json
+projects/**/.env
+projects/**/.venv/
+projects/**/__pycache__/
+projects/**/credentials.json
+projects/**/token.json
+projects/**/data/*.json
+projects/**/data/*.html
+projects/**/data/*.log
