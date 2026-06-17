@@ -23,6 +23,7 @@ from dotenv import load_dotenv
 
 
 ROOT = Path(__file__).resolve().parent
+WORKSPACE_ROOT = ROOT.parent.parent
 GMAIL_SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
 DEFAULT_FEEDS = [
@@ -31,9 +32,8 @@ DEFAULT_FEEDS = [
     {"name": "Dan Shipper", "url": "https://every.to/chain-of-thought/feed"},
     {"name": "Lenny Rachitsky", "url": "https://www.lennysnewsletter.com/feed"},
     {"name": "Sequoia Capital", "url": "https://medium.com/feed/sequoia-capital"},
-    {"name": "a16z blog", "url": "https://rss.app/feeds/KLHRSbumZAMLqbVo.xml"},
     {"name": "TechCrunch AI", "url": "https://techcrunch.com/category/artificial-intelligence/feed/"},
-    {"name": "Addy Osmani", "url": "https://rss.app/feeds/1ZrksiAoRsZuDlpy.xml"},
+    {"name": "Addy Osmani", "url": "https://addyosmani.com/rss.xml"},
 ]
 
 OPTIONAL_RESEARCH_FEEDS = [
@@ -136,11 +136,15 @@ NEGATIVE_KEYWORDS = [
 
 
 def load_env() -> None:
-    env_path = ROOT / ".env"
-    if env_path.exists():
-        load_dotenv(env_path)
-    elif (ROOT / ".env.example").exists():
-        load_dotenv(ROOT / ".env.example")
+    for env_path in (
+        ROOT / ".env",
+        ROOT / ".env.example",
+        WORKSPACE_ROOT / ".env",
+        WORKSPACE_ROOT / ".env.example",
+    ):
+        if env_path.exists():
+            load_dotenv(env_path)
+            break
 
     # Some desktop environments inject SOCKS/HTTP proxy variables that break
     # library defaults. Clear them unless the user explicitly opts in.
@@ -169,6 +173,14 @@ def required_env(name: str) -> str:
     if not value:
         raise RuntimeError(f"Missing required environment variable: {name}")
     return value
+
+
+def resolve_runtime_file(name: str) -> Path:
+    local_path = ROOT / name
+    legacy_path = WORKSPACE_ROOT / name
+    if local_path.exists() or not legacy_path.exists():
+        return local_path
+    return legacy_path
 
 
 def parse_entry_datetime(entry: object) -> datetime | None:
@@ -517,8 +529,8 @@ def get_gmail_credentials():
     from google.oauth2.credentials import Credentials
     from google_auth_oauthlib.flow import InstalledAppFlow
 
-    token_path = ROOT / "token.json"
-    credentials_path = ROOT / "credentials.json"
+    token_path = resolve_runtime_file("token.json")
+    credentials_path = resolve_runtime_file("credentials.json")
     creds = None
 
     if token_path.exists():
@@ -538,6 +550,7 @@ def get_gmail_credentials():
         flow = InstalledAppFlow.from_client_secrets_file(str(credentials_path), GMAIL_SCOPES)
         creds = flow.run_local_server(port=0, open_browser=False)
 
+    token_path.parent.mkdir(parents=True, exist_ok=True)
     token_path.write_text(creds.to_json(), encoding="utf-8")
     return creds
 
@@ -588,6 +601,7 @@ def run_once(dry_run: bool = False, output_path: Path | None = None) -> None:
     html = generate_html(items)
 
     if output_path:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(html, encoding="utf-8")
 
     if dry_run:

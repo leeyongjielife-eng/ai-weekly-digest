@@ -5,11 +5,6 @@ __pycache__/
 .DS_Store
 credentials.json
 token.json
-projects/**/.env
-projects/**/.venv/
-projects/**/__pycache__/
-projects/**/credentials.json
-projects/**/token.json
-projects/**/data/*.json
-projects/**/data/*.html
-projects/**/data/*.log
+data/*.html
+data/*.json
+data/*.log

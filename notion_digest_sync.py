@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 
 
 ROOT = Path(__file__).resolve().parent
+WORKSPACE_ROOT = ROOT.parent.parent
 NOTION_VERSION = "2022-06-28"
 
 
@@ -31,12 +32,17 @@ class DigestEntry:
 class DigestHTMLParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
+        self.ignore_depth = 0
         self.in_h1 = False
         self.in_h2 = False
         self.in_h3 = False
         self.in_p = False
         self.in_div = False
         self.in_a = False
+        self.capture_author_name = False
+        self.capture_article_title = False
+        self.capture_summary = False
+        self.div_class_stack: list[str] = []
         self.current_link = ""
         self.text_chunks: list[str] = []
         self.title = ""
@@ -45,7 +51,14 @@ class DigestHTMLParser(HTMLParser):
         self.entries: list[DigestEntry] = []
 
     def handle_starttag(self, tag: str, attrs) -> None:
+        if tag in {"style", "script"}:
+            self.ignore_depth += 1
+            return
+        if self.ignore_depth:
+            return
+
         attrs_map = dict(attrs)
+        classes = set((attrs_map.get("class") or "").split())
         if tag == "h1":
             self.in_h1 = True
             self.text_chunks = []
@@ -61,12 +74,28 @@ class DigestHTMLParser(HTMLParser):
             self.text_chunks = []
         elif tag == "div":
             self.in_div = True
-            self.text_chunks = []
+            self.div_class_stack.append(attrs_map.get("class", ""))
+            if "author-name" in classes:
+                self.capture_author_name = True
+                self.text_chunks = []
+            elif "article-item" in classes:
+                self.current_entry = {"title": "", "summary": "", "link": "", "source": "", "author": self.current_author}
+            elif "article-title" in classes:
+                self.capture_article_title = True
+                self.text_chunks = []
+            elif "summary" in classes:
+                self.capture_summary = True
+                self.text_chunks = []
         elif tag == "a":
             self.in_a = True
             self.current_link = attrs_map.get("href", "")
 
     def handle_endtag(self, tag: str) -> None:
+        if self.ignore_depth:
+            if tag in {"style", "script"}:
+                self.ignore_depth -= 1
+            return
+
         text = clean_text("".join(self.text_chunks))
         should_reset_chunks = True
         if tag == "h1":
@@ -100,7 +129,28 @@ class DigestHTMLParser(HTMLParser):
                     self.current_entry["summary"] = f"{self.current_entry['summary']} {text}".strip()
         elif tag == "div":
             self.in_div = False
-            if text and self.current_entry is not None and not self.current_entry.get("source") and looks_like_source_line(text):
+            div_class = self.div_class_stack.pop() if self.div_class_stack else ""
+            classes = set(div_class.split())
+            if self.capture_author_name and "author-name" in classes:
+                self.capture_author_name = False
+                if text:
+                    self.current_author = text
+            elif self.capture_article_title and "article-title" in classes:
+                self.capture_article_title = False
+                if self.current_entry is not None and text:
+                    self.current_entry["title"] = text
+                    if self.current_link:
+                        self.current_entry["link"] = self.current_link
+            elif self.capture_summary and "summary" in classes:
+                self.capture_summary = False
+                if self.current_entry is not None and text:
+                    self.current_entry["summary"] = text
+            elif "article-item" in classes:
+                if self.current_entry is not None:
+                    if not self.current_entry.get("author"):
+                        self.current_entry["author"] = self.current_author
+                    self._flush_entry()
+            elif text and self.current_entry is not None and not self.current_entry.get("source") and looks_like_source_line(text):
                 self.current_entry["source"] = text
         elif tag == "a":
             self.in_a = False
@@ -109,7 +159,19 @@ class DigestHTMLParser(HTMLParser):
             self.text_chunks = []
 
     def handle_data(self, data: str) -> None:
-        if self.in_h1 or self.in_h2 or self.in_h3 or self.in_p or self.in_div or self.in_a:
+        if self.ignore_depth:
+            return
+        if (
+            self.in_h1
+            or self.in_h2
+            or self.in_h3
+            or self.in_p
+            or self.in_div
+            or self.in_a
+            or self.capture_author_name
+            or self.capture_article_title
+            or self.capture_summary
+        ):
             self.text_chunks.append(data)
 
     def _flush_entry(self) -> None:
@@ -145,11 +207,15 @@ def looks_like_source_line(text: str) -> bool:
 
 
 def load_env() -> None:
-    env_path = ROOT / ".env"
-    if env_path.exists():
-        load_dotenv(env_path)
-    elif (ROOT / ".env.example").exists():
-        load_dotenv(ROOT / ".env.example")
+    for env_path in (
+        ROOT / ".env",
+        ROOT / ".env.example",
+        WORKSPACE_ROOT / ".env",
+        WORKSPACE_ROOT / ".env.example",
+    ):
+        if env_path.exists():
+            load_dotenv(env_path)
+            break
 
 
 def required_env(name: str) -> str:
@@ -204,12 +270,56 @@ def parse_digest_file(path: Path) -> tuple[str, list[DigestEntry]]:
     return parse_digest_content(raw)
 
 
+def strip_tags(text: str) -> str:
+    return re.sub(r"<[^>]+>", " ", text)
+
+
+def parse_fragmented_html(raw: str) -> tuple[str, list[DigestEntry]]:
+    page_title = "AI Weekly Digest"
+    title_match = re.search(r"<h1[^>]*>(.*?)</h1>", raw, flags=re.IGNORECASE | re.DOTALL)
+    if title_match:
+        page_title = clean_text(strip_tags(title_match.group(1))) or page_title
+
+    token_pattern = re.compile(
+        r"<div\s+class=\"author-name\">(?P<author>.*?)</div>"
+        r"|<div\s+class=\"article-title\">\s*<a\s+href=\"(?P<link>[^\"]+)\"[^>]*>(?P<title>.*?)</a>\s*</div>\s*"
+        r"<div\s+class=\"summary\">(?P<summary>.*?)</div>",
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+
+    current_author = ""
+    entries: list[DigestEntry] = []
+    for match in token_pattern.finditer(raw):
+        if match.group("author") is not None:
+            current_author = clean_text(strip_tags(match.group("author")))
+            continue
+
+        title = clean_text(strip_tags(match.group("title") or ""))
+        summary = clean_text(strip_tags(match.group("summary") or ""))
+        link = clean_text(match.group("link") or "")
+        if title and summary:
+            entries.append(
+                DigestEntry(
+                    author=current_author or "Unknown Author",
+                    title=title,
+                    summary=summary,
+                    link=link,
+                    source=current_author or "",
+                )
+            )
+
+    return page_title, entries
+
+
 def parse_digest_content(raw: str) -> tuple[str, list[DigestEntry]]:
     if "<html" in raw.lower() or "<body" in raw.lower():
         parser = DigestHTMLParser()
         parser.feed(raw)
         if parser.entries:
             return parser.title or "AI Weekly Digest", parser.entries
+        page_title, entries = parse_fragmented_html(raw)
+        if entries:
+            return page_title, entries
     return parse_plain_text(raw)
 
 
