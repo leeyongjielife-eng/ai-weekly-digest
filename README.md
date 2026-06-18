@@ -180,24 +180,6 @@ RSS Sources
 - `.github/workflows/ai-digest.yml`
   GitHub Actions 自动调度配置
 
-## 这个项目目前已经处理过的真实问题
-
-这个项目不是理论设计，而是已经在真实使用中不断修过一轮的系统。已经处理过的问题包括：
-
-- Gmail OAuth token 过期或失效
-- Gemini 高峰期 `503 UNAVAILABLE`
-- 某些 RSS 源返回 `402 Payment Required`
-- RSS SSL 握手偶发失败
-- Notion 归档时把 HTML/CSS 模板错误写入正文
-- 项目从工作区根目录迁移到 `projects/ai-weekly-digest/` 后的兼容问题
-
-因此现在的代码里已经包含：
-
-- 重试
-- 超时控制
-- Fallback 兜底
-- 旧路径兼容
-- Notion 脏 HTML 清洗逻辑
 
 ## 仓库结构
 
