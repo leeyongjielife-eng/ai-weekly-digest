@@ -42,7 +42,9 @@ class DigestHTMLParser(HTMLParser):
         self.capture_author_name = False
         self.capture_article_title = False
         self.capture_summary = False
+        self.capture_source = False
         self.div_class_stack: list[str] = []
+        self.p_class_stack: list[str] = []
         self.current_link = ""
         self.text_chunks: list[str] = []
         self.title = ""
@@ -71,14 +73,19 @@ class DigestHTMLParser(HTMLParser):
             self.current_entry = {"title": "", "summary": "", "link": "", "source": "", "author": self.current_author}
         elif tag == "p":
             self.in_p = True
+            self.p_class_stack.append(attrs_map.get("class", ""))
             self.text_chunks = []
+            if "summary" in classes:
+                self.capture_summary = True
+            elif classes & {"source", "article-source", "article-meta"}:
+                self.capture_source = True
         elif tag == "div":
             self.in_div = True
             self.div_class_stack.append(attrs_map.get("class", ""))
             if "author-name" in classes:
                 self.capture_author_name = True
                 self.text_chunks = []
-            elif "article-item" in classes:
+            elif "article-item" in classes or "article" in classes:
                 self.current_entry = {"title": "", "summary": "", "link": "", "source": "", "author": self.current_author}
             elif "article-title" in classes:
                 self.capture_article_title = True
@@ -86,6 +93,11 @@ class DigestHTMLParser(HTMLParser):
             elif "summary" in classes:
                 self.capture_summary = True
                 self.text_chunks = []
+            elif classes & {"source", "article-source", "article-meta"}:
+                self.capture_source = True
+        elif tag == "article":
+            self.current_entry = {"title": "", "summary": "", "link": "", "source": "", "author": self.current_author}
+            self.text_chunks = []
         elif tag == "a":
             self.in_a = True
             self.current_link = attrs_map.get("href", "")
@@ -116,10 +128,20 @@ class DigestHTMLParser(HTMLParser):
             self.current_link = ""
         elif tag == "p":
             self.in_p = False
+            p_class = self.p_class_stack.pop() if self.p_class_stack else ""
+            classes = set(p_class.split())
             if not text:
+                if "summary" in classes:
+                    self.capture_summary = False
+                if classes & {"source", "article-source", "article-meta"}:
+                    self.capture_source = False
                 self.text_chunks = []
                 return
-            if self.current_entry is not None:
+            if self.current_entry is not None and (self.capture_source or classes & {"source", "article-source", "article-meta"}):
+                self.current_entry["source"] = text
+            elif self.current_entry is not None and (self.capture_summary or "summary" in classes):
+                self.current_entry["summary"] = text
+            elif self.current_entry is not None:
                 if not self.current_entry.get("summary") and looks_like_source_line(text):
                     self.current_entry["source"] = text
                 elif not self.current_entry.get("summary"):
@@ -127,6 +149,10 @@ class DigestHTMLParser(HTMLParser):
                     self._flush_entry()
                 else:
                     self.current_entry["summary"] = f"{self.current_entry['summary']} {text}".strip()
+            if "summary" in classes:
+                self.capture_summary = False
+            if classes & {"source", "article-source", "article-meta"}:
+                self.capture_source = False
         elif tag == "div":
             self.in_div = False
             div_class = self.div_class_stack.pop() if self.div_class_stack else ""
@@ -145,13 +171,22 @@ class DigestHTMLParser(HTMLParser):
                 self.capture_summary = False
                 if self.current_entry is not None and text:
                     self.current_entry["summary"] = text
-            elif "article-item" in classes:
+            elif self.capture_source and classes & {"source", "article-source", "article-meta"}:
+                self.capture_source = False
+                if self.current_entry is not None and text:
+                    self.current_entry["source"] = text
+            elif "article-item" in classes or "article" in classes:
                 if self.current_entry is not None:
                     if not self.current_entry.get("author"):
                         self.current_entry["author"] = self.current_author
                     self._flush_entry()
             elif text and self.current_entry is not None and not self.current_entry.get("source") and looks_like_source_line(text):
                 self.current_entry["source"] = text
+        elif tag == "article":
+            if self.current_entry is not None:
+                if not self.current_entry.get("author"):
+                    self.current_entry["author"] = self.current_author
+                self._flush_entry()
         elif tag == "a":
             self.in_a = False
             should_reset_chunks = False
@@ -206,6 +241,53 @@ def looks_like_source_line(text: str) -> bool:
     return True
 
 
+def normalize_markup(raw: str) -> str:
+    text = raw.strip()
+    text = re.sub(r"^```(?:html)?\s*", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\s*```$", "", text)
+    if "&lt;" in text and "<" not in text:
+        text = html.unescape(text)
+    return text
+
+
+def looks_like_html(raw: str) -> bool:
+    lowered = raw.lower()
+    html_markers = (
+        "<html",
+        "<body",
+        "<style",
+        "<div",
+        "<section",
+        "<article",
+        "<h1",
+        "<h2",
+        "<h3",
+        "<p",
+        "<a ",
+    )
+    return any(marker in lowered for marker in html_markers)
+
+
+def strip_css_noise(text: str) -> str:
+    cleaned_lines: list[str] = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if re.fullmatch(r"\.?[A-Za-z0-9_-]+\s*\{", stripped):
+            continue
+        if stripped == "}":
+            continue
+        if re.fullmatch(r"[A-Za-z-]+\s*:\s*[^;]+;?", stripped):
+            continue
+        if re.fullmatch(r"</?(?:div|section|article|span|style|body|html)[^>]*>", stripped, flags=re.IGNORECASE):
+            continue
+        if stripped.lower().startswith("<!doctype"):
+            continue
+        cleaned_lines.append(line)
+    return "\n".join(cleaned_lines)
+
+
 def load_env() -> None:
     for env_path in (
         ROOT / ".env",
@@ -234,8 +316,9 @@ def parse_args() -> argparse.Namespace:
 
 
 def parse_plain_text(text: str) -> tuple[str, list[DigestEntry]]:
-    lines = [line.rstrip() for line in text.splitlines()]
-    lines = [line for line in lines if line.strip()]
+    text = strip_css_noise(text)
+    lines = [clean_text(strip_tags(line)) for line in text.splitlines()]
+    lines = [line for line in lines if line]
     if not lines:
         raise RuntimeError("The input file is empty.")
 
@@ -281,9 +364,11 @@ def parse_fragmented_html(raw: str) -> tuple[str, list[DigestEntry]]:
         page_title = clean_text(strip_tags(title_match.group(1))) or page_title
 
     token_pattern = re.compile(
-        r"<div\s+class=\"author-name\">(?P<author>.*?)</div>"
-        r"|<div\s+class=\"article-title\">\s*<a\s+href=\"(?P<link>[^\"]+)\"[^>]*>(?P<title>.*?)</a>\s*</div>\s*"
-        r"<div\s+class=\"summary\">(?P<summary>.*?)</div>",
+        r"<(?:div|h2)\s+class=\"author-name\"[^>]*>(?P<author>.*?)</(?:div|h2)>"
+        r"|<h2[^>]*>(?P<heading_author>.*?)</h2>"
+        r"|<(?:div|h3)\s+class=\"article-title\"[^>]*>\s*<a\s+href=\"(?P<link>[^\"]+)\"[^>]*>(?P<title>.*?)</a>\s*</(?:div|h3)>\s*"
+        r"<(?:div|p)\s+class=\"summary\"[^>]*>(?P<summary>.*?)</(?:div|p)>"
+        r"|<h3[^>]*>\s*<a\s+href=\"(?P<h3_link>[^\"]+)\"[^>]*>(?P<h3_title>.*?)</a>\s*</h3>\s*(?:<(?:div|p)[^>]*>(?P<maybe_source>.*?)</(?:div|p)>\s*)?<p[^>]*>(?P<h3_summary>.*?)</p>",
         flags=re.IGNORECASE | re.DOTALL,
     )
 
@@ -293,10 +378,16 @@ def parse_fragmented_html(raw: str) -> tuple[str, list[DigestEntry]]:
         if match.group("author") is not None:
             current_author = clean_text(strip_tags(match.group("author")))
             continue
+        if match.group("heading_author") is not None:
+            current_author = clean_text(strip_tags(match.group("heading_author")))
+            continue
 
-        title = clean_text(strip_tags(match.group("title") or ""))
-        summary = clean_text(strip_tags(match.group("summary") or ""))
-        link = clean_text(match.group("link") or "")
+        title = clean_text(strip_tags(match.group("title") or match.group("h3_title") or ""))
+        summary = clean_text(strip_tags(match.group("summary") or match.group("h3_summary") or ""))
+        link = clean_text(match.group("link") or match.group("h3_link") or "")
+        source = clean_text(strip_tags(match.group("maybe_source") or ""))
+        if source and not looks_like_source_line(source):
+            source = ""
         if title and summary:
             entries.append(
                 DigestEntry(
@@ -304,7 +395,7 @@ def parse_fragmented_html(raw: str) -> tuple[str, list[DigestEntry]]:
                     title=title,
                     summary=summary,
                     link=link,
-                    source=current_author or "",
+                    source=source or current_author or "",
                 )
             )
 
@@ -312,7 +403,8 @@ def parse_fragmented_html(raw: str) -> tuple[str, list[DigestEntry]]:
 
 
 def parse_digest_content(raw: str) -> tuple[str, list[DigestEntry]]:
-    if "<html" in raw.lower() or "<body" in raw.lower():
+    raw = normalize_markup(raw)
+    if looks_like_html(raw):
         parser = DigestHTMLParser()
         parser.feed(raw)
         if parser.entries:
