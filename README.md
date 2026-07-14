@@ -171,10 +171,10 @@ RSS Sources
 
 ## 项目中的关键脚本
 
-- `projects/ai-weekly-digest/ai_digest.py`
+- `ai_digest.py`
   主流程脚本，负责抓 RSS、筛选、生成周报、发邮件
 
-- `projects/ai-weekly-digest/notion_digest_sync.py`
+- `notion_digest_sync.py`
   把周报内容转换成 Notion 结构化页面
 
 - `.github/workflows/ai-digest.yml`
@@ -184,24 +184,19 @@ RSS Sources
 ## 仓库结构
 
 ```text
-projects/
-  ai-weekly-digest/
-    ai_digest.py
-    notion_digest_sync.py
-    requirements.txt
-    .env.example
-    README.md
-    data/
-
-  job-tracker/
-    README.md
-
 .github/
   workflows/
+    ai-digest.yml
+data/
+  .gitkeep
+.env.example
+.gitignore
+README.md
+ai_digest.py
+notion_digest_sync.py
+requirements.txt
 ```
 
 ## 补充说明
 
-- 这个仓库根目录是一个工作区，主项目是 `AI Weekly Digest`
-- 如果只关心这个周报项目，重点看 `projects/ai-weekly-digest/`
 - 如果以后继续扩展来源、加更多归档平台，当前结构已经支持继续演进
