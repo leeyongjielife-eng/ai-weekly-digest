@@ -32,8 +32,21 @@ DEFAULT_FEEDS = [
     {"name": "Dan Shipper", "url": "https://every.to/chain-of-thought/feed"},
     {"name": "Lenny Rachitsky", "url": "https://www.lennysnewsletter.com/feed"},
     {"name": "Sequoia Capital", "url": "https://medium.com/feed/sequoia-capital"},
-    {"name": "TechCrunch AI", "url": "https://techcrunch.com/category/artificial-intelligence/feed/"},
+    {
+        "name": "TechCrunch AI",
+        "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+        "max_items": 3,
+    },
     {"name": "Addy Osmani", "url": "https://addyosmani.com/rss.xml"},
+    {
+        "name": "Simon Willison",
+        "url": "https://simonwillison.net/atom/everything/",
+        "max_items": 3,
+    },
+    {"name": "Import AI", "url": "https://jack-clark.net/feed/", "max_items": 2},
+    {"name": "Latent Space", "url": "https://www.latent.space/feed", "max_items": 3},
+    {"name": "GitHub AI & ML", "url": "https://github.blog/ai-and-ml/feed/", "max_items": 3},
+    {"name": "Cloudflare AI", "url": "https://blog.cloudflare.com/tag/ai/rss/", "max_items": 3},
 ]
 
 OPTIONAL_RESEARCH_FEEDS = [
@@ -60,6 +73,7 @@ Your job:
    - A clean, readable layout
 
 Be comprehensive across the last 7 days, but prioritize items that are most helpful for understanding the latest AI news, product changes, AI agents, workflows, business moves, and how AI is changing work.
+Maintain source diversity: when similarly relevant items are available, do not let any single source dominate the digest.
 Do not include research-paper style content unless it is a major industry-relevant development.
 Output only the final HTML - no explanation, no preamble."""
 
@@ -266,6 +280,14 @@ def get_excluded_sources(env_name: str, default: str) -> set[str]:
     return {source.strip().lower() for source in os.getenv(env_name, default).split(",") if source.strip()}
 
 
+def get_source_item_limit(source: str, default_limit: int) -> int:
+    source_key = source.strip().lower()
+    for feed in [*DEFAULT_FEEDS, *OPTIONAL_RESEARCH_FEEDS]:
+        if feed["name"].strip().lower() == source_key:
+            return min(default_limit, int(feed.get("max_items", default_limit)))
+    return default_limit
+
+
 def relevance_score(item: FeedItem) -> int:
     haystack = f"{item.title} {strip_html_tags(item.summary)}".lower()
     score = 0
@@ -297,7 +319,7 @@ def curate_items(items: list[FeedItem]) -> list[FeedItem]:
         if relevance_score(item) < min_score:
             continue
         count = source_counts.get(source_key, 0)
-        if count >= per_source_limit:
+        if count >= get_source_item_limit(item.source, per_source_limit):
             continue
         curated.append(item)
         source_counts[source_key] = count + 1
@@ -417,7 +439,7 @@ def select_fallback_items(items: list[FeedItem]) -> list[FeedItem]:
             continue
 
         count = source_counts.get(source_key, 0)
-        if count >= per_source_limit:
+        if count >= get_source_item_limit(item.source, per_source_limit):
             continue
 
         filtered.append(item)
@@ -436,7 +458,7 @@ def select_fallback_items(items: list[FeedItem]) -> list[FeedItem]:
         if source_key in excluded_sources:
             continue
         count = source_counts.get(source_key, 0)
-        if count >= per_source_limit:
+        if count >= get_source_item_limit(item.source, per_source_limit):
             continue
         backup.append(item)
         source_counts[source_key] = count + 1

@@ -41,6 +41,18 @@
   来源：官方 RSS
   主题：AI 编程、开发者工作流、前端与产品实践
 
+- `Simon Willison`
+  来源：个人博客
+  主题：模型与工具实测、开源生态、Prompt Injection 与技术风险
+
+- `Import AI`
+  来源：Jack Clark 的研究与政策通讯
+  主题：重要 AI 研究、政策与产业信号；作者具有 Anthropic 关联背景
+
+- `Latent Space`
+  来源：AI Engineer Newsletter
+  主题：AI 工程、开发者生态、Agent 框架与产品工程化
+
 ### 机构 / 媒体
 
 - `Sequoia Capital`
@@ -48,6 +60,12 @@
 
 - `TechCrunch AI`
   主题：AI 公司动态、模型发布、监管、融资、并购、产品新闻
+
+- `GitHub AI & ML`
+  主题：AI 编程、Copilot、开发者工作流与开源生态的一手实践
+
+- `Cloudflare AI`
+  主题：AI 基础设施、推理、Agent 运行环境、网络与安全的一手实践
 
 ### 可选研究源
 
@@ -66,6 +84,7 @@
 - 开发者工具与实际使用案例
 - AI 对职业、工作结构、组织方式的影响
 - AI 商业化、平台竞争、融资、监管和市场动态
+- 来源多样性；高频媒体与厂商工程源设有较低单源上限
 
 默认弱化：
 
