@@ -6,6 +6,10 @@ on:
     # 08:00 Monday Asia/Shanghai == 00:00 Monday UTC
     - cron: "0 0 * * 1"
 
+concurrency:
+  group: ai-weekly-digest
+  cancel-in-progress: false
+
 jobs:
   send-digest:
     runs-on: ubuntu-latest
@@ -54,7 +58,7 @@ jobs:
           EMAIL_USERNAME=${{ secrets.EMAIL_USERNAME }}
           EMAIL_FROM=${{ secrets.EMAIL_FROM }}
           EMAIL_TO=${{ secrets.EMAIL_TO }}
-          EMAIL_SUBJECT_PREFIX=AI Weekly Digest
+          EMAIL_SUBJECT_PREFIX=${{ github.event_name == 'workflow_dispatch' && format('AI Weekly Digest Test run-{0}', github.run_id) || 'AI Weekly Digest' }}
           DISABLE_SYSTEM_PROXY=1
           RSS_TIMEOUT_SECONDS=15
           INCLUDE_RESEARCH_FEEDS=0
