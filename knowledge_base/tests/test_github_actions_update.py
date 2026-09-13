@@ -26,6 +26,8 @@ def main() -> int:
         "contents: write",
         "pages: write",
         "id-token: write",
+        "secrets.KB_GMAIL_CREDENTIALS_JSON",
+        "secrets.KB_GMAIL_TOKEN_JSON",
         "knowledge_base/secrets/gmail-readonly-credentials.json",
         "knowledge_base/secrets/gmail-readonly-token.json",
         "knowledge_base/scripts/import_articles_json.py --data knowledge_base/data/articles.export.json --replace",
@@ -41,6 +43,7 @@ def main() -> int:
         "EMAIL_USERNAME",
         "EMAIL_TO",
         "EMAIL_SUBJECT_PREFIX",
+        "secrets.GMAIL_TOKEN_JSON",
         "python ai_digest.py",
     ]
     for snippet in forbidden_snippets:

@@ -37,11 +37,12 @@ jobs:
 
       - name: Restore private runtime files
         run: |
-          test -n '${{ secrets.GMAIL_CREDENTIALS_JSON }}'
-          test -n '${{ secrets.GMAIL_TOKEN_JSON }}'
+          test -n '${{ secrets.KB_GMAIL_CREDENTIALS_JSON }}'
+          test -n '${{ secrets.KB_GMAIL_TOKEN_JSON }}'
+          test -n '${{ secrets.GOOGLE_API_KEY }}${{ secrets.OPENAI_API_KEY }}${{ secrets.DEEPSEEK_API_KEY }}'
           mkdir -p knowledge_base/secrets knowledge_base/data/private
-          printf '%s' '${{ secrets.GMAIL_CREDENTIALS_JSON }}' > knowledge_base/secrets/gmail-readonly-credentials.json
-          printf '%s' '${{ secrets.GMAIL_TOKEN_JSON }}' > knowledge_base/secrets/gmail-readonly-token.json
+          printf '%s' '${{ secrets.KB_GMAIL_CREDENTIALS_JSON }}' > knowledge_base/secrets/gmail-readonly-credentials.json
+          printf '%s' '${{ secrets.KB_GMAIL_TOKEN_JSON }}' > knowledge_base/secrets/gmail-readonly-token.json
           cat > knowledge_base/secrets/summary.env <<EOF
           AI_SUMMARY_PROVIDER=auto
           GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}

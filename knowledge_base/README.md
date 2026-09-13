@@ -54,11 +54,13 @@ knowledge_base/.venv/bin/python -B knowledge_base/scripts/run_scheduled_update.p
 
 需要在 GitHub Secrets 中配置：
 
-- `GMAIL_CREDENTIALS_JSON`
-- `GMAIL_TOKEN_JSON`
+- `KB_GMAIL_CREDENTIALS_JSON`
+- `KB_GMAIL_TOKEN_JSON`
 - `GOOGLE_API_KEY`
 
 `OPENAI_API_KEY` 和 `DEEPSEEK_API_KEY` 是可选备用项。
+
+注意：知识库读取邮件需要 Gmail readonly scope，不能复用发邮件 workflow 的 gmail.send token。
 
 ## 隐私原则
 
