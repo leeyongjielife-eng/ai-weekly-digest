@@ -88,7 +88,9 @@
 - workflow 会提交公开快照与静态站点变化，并通过 GitHub Pages 部署 `knowledge_base/site`；
 - 已新增离线测试，验证 workflow 调度、权限、知识库专用 Gmail readonly Secrets、隐私边界、状态 artifact、部署步骤和公开快照未被忽略。
 - 已手动触发 GitHub workflow 并完成端到端验证：更新、回归测试、公开产物提交、Pages 部署全部通过；
-- 当前 GitHub Pages 站点可访问，云端自动更新后文章数为 84 篇、日期页为 5 个、分类页为 8 个。
+- 端到端验证中发现 GitHub Actions 通知邮件被 Gmail 搜索误命中，已补充真实邮件 `Subject` 二次过滤，只接受标题以 `AI Weekly Digest` 开头的邮件；
+- 已从干净本地 SQLite 重新导出公开快照并重建站点，误导入的 2026-09-13 GitHub 通知文章已移除；
+- 当前公开站点恢复为 69 篇文章、4 个日期页、8 个分类页和 69 个详情页。
 
 ## 完成条件
 

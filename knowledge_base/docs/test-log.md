@@ -2265,6 +2265,27 @@
 - 结论：PASS
 - 关联问题：ISSUE-KB-001
 
+### RUN-F-018C-2-004
+
+- 时间：2026-09-13
+- 任务：`F-018C-2` 误导入 GitHub 通知邮件修复
+- 测试数据：`DATA-F-001-001`
+- 触发反馈：用户指出 2026-09-13 没有 Digest 邮件，但网页出现 2026-09-13 日期分类。
+- 调整措施：确认 2026-09-13 页面来自 GitHub Actions 通知邮件误导入；在 `export_gmail_month_articles.py` 中增加 Gmail 搜索后的真实 `Subject` 二次过滤，只接受标题以 `AI Weekly Digest` 开头的邮件；测试加入仓库通知邮件样例，验证其会被拒绝；静态站点生成器增加 stale HTML 清理，避免数据回滚后旧日期页和旧详情页残留；从本地干净 SQLite 重新导出 `articles.export.json` 并重建站点。
+- 执行命令：
+  - `sqlite3 knowledge_base/data/private/knowledge_base.sqlite "select count(*), min(email_received_at), max(email_received_at) from articles; select substr(email_received_at,1,10), count(*) from articles group by 1 order by 1;"`
+  - `python3 -B knowledge_base/scripts/export_articles_json.py`
+  - `python3 -B knowledge_base/scripts/build_static_site.py --data knowledge_base/data/articles.export.json`
+  - `python3 -B knowledge_base/tests/test_static_site.py --data knowledge_base/data/articles.export.json`
+  - `python3 -B knowledge_base/tests/test_gmail_month_export.py`
+  - `python3 -B knowledge_base/tests/test_github_actions_update.py`
+  - `python3 -B knowledge_base/tests/test_article_data.py --data knowledge_base/data/articles.export.json`
+  - `python3 -B knowledge_base/tests/test_incremental_update.py`
+  - `python3 -m py_compile knowledge_base/scripts/export_gmail_month_articles.py knowledge_base/tests/test_gmail_month_export.py knowledge_base/scripts/build_static_site.py knowledge_base/tests/test_github_actions_update.py`
+- 实际结果：本地私有 SQLite 确认仍为 69 篇，仅包含 2026-08-17、2026-08-24、2026-08-31、2026-09-07 四期。公开快照和站点已恢复为 69 篇、4 个日期页、8 个分类页、69 个详情页；站点内已搜不到 `2026-09-13`、`View workflow run` 或 `Manage your GitHub Actions notifications`。
+- 结论：PASS
+- 关联问题：ISSUE-KB-002
+
 ## ISSUE-KB-001 GitHub Actions 首次端到端验证失败
 
 - 状态：已修复
@@ -2294,6 +2315,26 @@
 - 原因假设：该 meta 文件被本地 `.gitignore` 忽略，GitHub runner 上不存在；`build_static_site.py` 默认仍要求该文件存在。
 - 调整措施：在 workflow 的基线还原步骤中创建最小 `{}` meta 运行时文件，并更新 workflow 测试覆盖该路径。
 - 调整结果：本地 workflow 测试通过，待推送后重新触发 GitHub 端验证。
+
+## ISSUE-KB-002 GitHub Actions 通知邮件误导入为文章
+
+- 状态：已修复
+- 关联任务：`F-018C-2`
+- 首次发现：2026-09-13
+- 最后出现：2026-09-13
+- 出现次数：1
+- 稳定复现步骤：GitHub Actions workflow 发送通知邮件后，再运行知识库 Gmail 月份更新；首页出现 2026-09-13 日期页，详情页包含 `View workflow run`、`Manage your GitHub Actions notifications` 等 GitHub 通知链接。
+- 当前结论：Gmail 查询 `subject:"AI Weekly Digest"` 会误命中仓库名 `ai-weekly-digest` 出现在主题里的 GitHub 通知邮件。已增加真实邮件 `Subject` 二次过滤，并清理已生成的错误公开页面。
+
+### 第 1 次出现
+
+- 关联测试：用户人工检查 GitHub Pages/本地站点日期入口。
+- 输入和环境：GitHub Actions 通知邮件进入同一个 Gmail 邮箱；知识库 workflow 使用 Gmail month export 读取 2026-09 邮件。
+- 预期结果：只导入真正的 AI Weekly Digest 邮件文章。
+- 实际结果：误导入 15 个 GitHub 通知链接，生成 2026-09-13 日期页。
+- 原因假设：Gmail 搜索阶段只按 subject 查询，未对返回邮件的真实标题做严格前缀校验。
+- 调整措施：`export_gmail_month_articles.py` 增加 `is_digest_message()`，只处理 `Subject` 以 `AI Weekly Digest` 开头的邮件；测试加入 GitHub 通知邮件样例；`build_static_site.py` 增加 stale HTML 清理；用本地干净 SQLite 重建公开快照和站点。
+- 调整结果：公开快照恢复为 69 篇，站点恢复为 4 个日期页；相关测试通过。
 
 ## 问题记录模板
 

@@ -18,10 +18,14 @@ def encoded(value: str) -> str:
     return base64.urlsafe_b64encode(value.encode("utf-8")).decode("ascii").rstrip("=")
 
 
-def fake_message(received_at: datetime, html: str) -> dict:
+def fake_message(received_at: datetime, html: str, subject: str = "AI Weekly Digest") -> dict:
     return {
         "internalDate": str(int(received_at.timestamp() * 1000)),
         "payload": {
+            "headers": [
+                {"name": "Subject", "value": subject},
+                {"name": "From", "value": "Digest Sender <digest@example.com>"},
+            ],
             "parts": [
                 {
                     "mimeType": "text/html",
@@ -54,6 +58,12 @@ def main() -> int:
             datetime(2026, 8, 31, 1, 0, tzinfo=UTC),
             '<a href="https://example.com/august">August article</a>',
         ),
+        fake_message(
+            datetime(2026, 9, 13, 6, 30, tzinfo=UTC),
+            '<a href="https://github.com/leeyongjielife-eng/ai-weekly-digest/actions/runs/1">View workflow run</a>'
+            '<a href="https://github.com/settings/notifications">Manage your GitHub Actions notifications</a>',
+            subject="[leeyongjielife-eng/ai-weekly-digest] Run failed",
+        ),
     ]
     articles, meta = export_articles_from_messages(
         messages,
@@ -68,6 +78,8 @@ def main() -> int:
         errors.append(f"Unexpected canonical URL: {articles[0]['canonical_url']}")
     if meta["selected_message_count"] != 1:
         errors.append(f"Expected one selected September message, got {meta['selected_message_count']}.")
+    if meta["rejected_message_count"] != 1:
+        errors.append(f"Expected one rejected non-digest message, got {meta['rejected_message_count']}.")
     if meta["duplicate_link_count"] != 1:
         errors.append(f"Expected one duplicate link, got {meta['duplicate_link_count']}.")
     if meta["skipped_existing_count"] != 1:

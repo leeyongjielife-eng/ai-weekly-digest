@@ -1984,6 +1984,13 @@ a {
 """
 
 
+def remove_stale_html(directory: Path, expected_paths: set[Path]) -> None:
+    expected = {path.resolve() for path in expected_paths}
+    for path in directory.glob("*.html"):
+        if path.resolve() not in expected:
+            path.unlink()
+
+
 def main() -> int:
     args = parse_args()
     articles = load_json(args.data)
@@ -2014,12 +2021,18 @@ def main() -> int:
     all_categories = ordered_categories(Counter({category: len(category_articles) for category, category_articles in categories.items()}))
     issue_counts = {date: len(date_articles) for date, date_articles in groups.items()}
     category_counts = {category: len(category_articles) for category, category_articles in categories.items()}
+    expected_issue_paths = {args.issue_dir / f"{date}.html" for date in all_dates}
+    expected_category_paths = {args.category_dir / f"{category_slug(category)}.html" for category in all_categories}
+    expected_detail_paths = {args.detail_dir / detail_filename(article) for article in articles}
     for date in all_dates:
         (args.issue_dir / f"{date}.html").write_text(render_issue_page(date, groups[date], all_dates, issue_counts), encoding="utf-8")
     for category in all_categories:
         (args.category_dir / f"{category_slug(category)}.html").write_text(render_category_page(category, categories[category], all_categories, category_counts), encoding="utf-8")
     for article in articles:
         (args.detail_dir / detail_filename(article)).write_text(render_detail_page(article), encoding="utf-8")
+    remove_stale_html(args.issue_dir, expected_issue_paths)
+    remove_stale_html(args.category_dir, expected_category_paths)
+    remove_stale_html(args.detail_dir, expected_detail_paths)
 
     print(
         f"PASS: generated {args.html}, {len(groups)} issue pages, "

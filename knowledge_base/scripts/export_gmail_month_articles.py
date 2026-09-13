@@ -76,6 +76,18 @@ def existing_canonical_urls(db_path: Path) -> set[str]:
     return {str(row["canonical_url"]) for row in rows}
 
 
+def header_value(message: dict, name: str) -> str:
+    for header in message.get("payload", {}).get("headers", []) or []:
+        if str(header.get("name", "")).lower() == name.lower():
+            return normalize_text(str(header.get("value", "")))
+    return ""
+
+
+def is_digest_message(message: dict) -> bool:
+    subject = header_value(message, "Subject")
+    return subject.startswith("AI Weekly Digest")
+
+
 def build_record(url: str, title: str, received_at: datetime, month: str) -> dict:
     source = source_from_url(url)
     clean_title = title or source
@@ -107,6 +119,7 @@ def export_articles_from_messages(
     start, end = month_bounds(month, timezone)
     articles_by_url: dict[str, dict] = {}
     selected_message_count = 0
+    rejected_message_count = 0
     extracted_link_count = 0
     excluded_link_count = 0
     duplicate_link_count = 0
@@ -116,6 +129,9 @@ def export_articles_from_messages(
         received_at = message_received_at(message)
         local_received_at = received_at.astimezone(start.tzinfo)
         if not start <= local_received_at < end:
+            continue
+        if not is_digest_message(message):
+            rejected_message_count += 1
             continue
         selected_message_count += 1
         body = extract_message_body(message.get("payload", {}))
@@ -139,6 +155,7 @@ def export_articles_from_messages(
         "month": month,
         "timezone": timezone,
         "selected_message_count": selected_message_count,
+        "rejected_message_count": rejected_message_count,
         "included_article_count": len(articles),
         "extracted_link_count": extracted_link_count,
         "excluded_link_count": excluded_link_count,
