@@ -1,0 +1,40 @@
+[
+  {
+    "id": "art_structured_complete",
+    "url": "HTTPS://Example.com:443/complete?utm_source=newsletter#top",
+    "email_received_at": "2026-09-12T09:00:00+08:00",
+    "title": "A complete structured article",
+    "source": "Example",
+    "source_type": "Newsletter",
+    "summary_zh": "这篇文章说明了如何把已有邮件项目的文章摘要复用到个人知识库中，避免重复调用 AI。",
+    "key_points": [
+      "网站应优先复用上游已经生成的文章级结构化结果。",
+      "只有摘要、关键观点或主分类缺失时，才进入补齐流程。"
+    ],
+    "primary_category": "Agent 与自动化",
+    "confidence": 0.91
+  },
+  {
+    "id": "art_structured_missing",
+    "url": "https://example.com/missing?utm_medium=email",
+    "email_received_at": "2026-09-12T09:00:00+08:00",
+    "title": "Missing structured fields",
+    "source": "Example",
+    "source_type": "Newsletter"
+  },
+  {
+    "id": "art_structured_low_confidence",
+    "url": "https://example.com/low-confidence",
+    "email_received_at": "2026-09-12T09:00:00+08:00",
+    "title": "Low confidence structured fields",
+    "source": "Example",
+    "source_type": "Newsletter",
+    "summary_zh": "这篇文章已有摘要和关键观点，但上游分类置信度不足，需要后续人工确认或基于原文复核。",
+    "key_points": [
+      "低置信度文章不能直接当作完整结构化结果。",
+      "网站可以保留已有摘要，同时把主分类设为待人工确认。"
+    ],
+    "primary_category": "模型与平台",
+    "confidence": 0.4
+  }
+]

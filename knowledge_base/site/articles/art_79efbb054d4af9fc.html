@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Qwen 3.8 27B is excellent, but it defaults to wildly overthinking things · Winking Digest</title>
+    <link rel="stylesheet" href="../assets/app.css">
+  </head>
+  <body>
+    <header class="detail-topbar">
+      <nav class="site-nav" aria-label="页面导航"><a href="../index.html">Home</a></nav>
+      <a class="detail-home-link" href="../index.html" data-return-to-list>返回列表</a>
+      <div class="detail-heading" data-article-id="art_79efbb054d4af9fc">
+        <h1>Qwen 3.8 27B is excellent, but it defaults to wildly overthinking things</h1>
+        <div class="detail-meta-chips" aria-label="文章元信息">
+          <span class="detail-chip">来源：simonwillison.net</span>
+          <span class="detail-chip">主分类：模型与平台</span>
+          <span class="detail-chip">收录日期：2026-08-17 01:39</span>
+        </div>
+      </div>
+
+    </header>
+    <main class="detail-page">
+      <article class="detail-card" data-article-id="art_79efbb054d4af9fc">
+        <section class="detail-section hero-section">
+          <h2>文章概要</h2>
+          <p class="detail-summary">Qwen 3.8 27B模型在本地硬件上表现出色，但默认的“xhigh”推理设置会导致过度思考，建议用户改用低推理或无推理模式以获得更佳体验。该模型在生成SVG图像、边界框标注和驱动编码代理等任务上表现优异，但需注意其默认设置可能影响效率。</p>
+        </section>
+        <section class="detail-section">
+          <h2>关键观点</h2>
+          <ul><li>Qwen 3.8 27B 默认 reasoning_effort 为 xhigh，导致在消费级硬件上严重过度思考：简单提示词也会消耗数万推理 token，例如画一个圆生成了复杂动画，画鹈鹕骑自行车耗时 21 分钟、消耗 22,276 推理 token。</li><li>作者建议忽略默认设置，初次使用时应将 reasoning 调至 low 或关闭；关闭推理后同一鹈鹕 SVG 任务仅需 137 秒、3,715 token，但复杂工具生成任务（如边界框标注 HTML 页面）关闭推理后会出现坐标错位，说明推理在编码类任务中仍有价值。</li><li>该模型在视觉任务上表现突出：能准确返回 0-1000 尺度的鹈鹕边界框 JSON，并能根据单条提示词生成完整的边界框可视化 HTML 工具，甚至自行添加了未要求的演示场景。</li><li>本地 27B 模型已具备驱动编码 Agent 的能力：作者用 Pi 配置 LM Studio 上的 Qwen 3.8 27B，成功完成代码库问答和 JSONL 转 Markdown 脚本的编写与测试，但生成速度仅 15-30 token/秒，远慢于托管 API 模型（如 OpenAI 5.6 Sol 的 74 token/秒）。</li></ul>
+        </section>
+        <section class="detail-section">
+          <details class="personal-note-panel">
+            <summary>个人观点</summary>
+            <label class="sr-only" for="personal-note-art_79efbb054d4af9fc">个人观点</label>
+            <textarea id="personal-note-art_79efbb054d4af9fc" class="personal-note-input" data-personal-note="art_79efbb054d4af9fc" rows="4"></textarea>
+            <p class="personal-note-status" data-personal-note-status="art_79efbb054d4af9fc"></p>
+          </details>
+        </section>
+      </article>
+      <aside class="detail-sidebar" data-article-id="art_79efbb054d4af9fc" aria-label="文章状态与链接">
+        <div class="sidebar-panel">
+          <p class="sidebar-label">Archive Mark</p>
+
+              <div class="article-actions" data-user-state-controls data-state-article-id="art_79efbb054d4af9fc">
+                <span class="state-label">阅读状态：</span>
+                <button class="state-button knowledge-button" type="button" data-toggle-knowledge aria-pressed="false" title="标记是否已入知识库">入库</button>
+                <button class="state-button read-button" type="button" data-toggle-read aria-pressed="false" title="标记是否已读">已读</button>
+                <button class="state-button favorite-button" type="button" data-toggle-favorite aria-pressed="false" title="收藏这篇文章">收藏</button>
+              </div>
+          <a class="original-link" href="https://simonwillison.net/2026/Aug/16/qwen-38-27b/" target="_blank" rel="noopener noreferrer">打开原文</a>
+        </div>
+        <div class="sidebar-panel">
+          <p class="sidebar-label">Tags</p>
+          <div class="tags"><span class="tag">模型与平台</span><span class="tag">simonwillison.net</span></div>
+        </div>
+      </aside>
+    </main>
+    <script>
+      (() => {
+        const returnLink = document.querySelector("[data-return-to-list]");
+        if (!returnLink) {
+          return;
+        }
+        returnLink.addEventListener("click", (event) => {
+          let savedState = null;
+          try {
+            savedState = window.sessionStorage ? JSON.parse(window.sessionStorage.getItem("ai-weekly-digest:return-state") || "null") : null;
+          } catch (error) {
+            savedState = null;
+          }
+          const matchesCurrentDetail = Boolean(savedState && savedState.detailPath === window.location.pathname);
+          if (matchesCurrentDetail && window.sessionStorage) {
+            event.preventDefault();
+            try {
+              window.sessionStorage.setItem("ai-weekly-digest:restore-list-state", "1");
+            } catch (error) {
+              // Fall through to the saved list URL even if the restore flag cannot be written.
+            }
+            window.location.href = savedState.listHref || returnLink.href;
+          }
+        });
+      })();
+    </script>
+    <script>
+      (() => {
+        const storageKey = "ai-weekly-digest:user-state:v1";
+        const controls = Array.from(document.querySelectorAll("[data-user-state-controls]"));
+        const personalNotes = Array.from(document.querySelectorAll("[data-personal-note]"));
+        const noteStatuses = Array.from(document.querySelectorAll("[data-personal-note-status]"));
+        if (!controls.length && !personalNotes.length) {
+          return;
+        }
+
+        function readStateStore() {
+          try {
+            const raw = window.localStorage ? window.localStorage.getItem(storageKey) : null;
+            const parsed = raw ? JSON.parse(raw) : {};
+            return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+          } catch (error) {
+            return {};
+          }
+        }
+
+        function writeStateStore(store) {
+          try {
+            if (window.localStorage) {
+              window.localStorage.setItem(storageKey, JSON.stringify(store));
+            }
+          } catch (error) {
+            // User state is a local demo enhancement; the page remains readable if storage is unavailable.
+          }
+        }
+
+        function articleState(store, articleId) {
+          const state = store[articleId] || {};
+          return {
+            is_in_knowledge_base: Boolean(state.is_in_knowledge_base),
+            is_read: Boolean(state.is_read),
+            is_favorite: Boolean(state.is_favorite),
+            personal_note: typeof state.personal_note === "string" ? state.personal_note : "",
+            updated_at: state.updated_at || "",
+          };
+        }
+
+        function updateState(articleId, patch) {
+          const store = readStateStore();
+          const current = articleState(store, articleId);
+          store[articleId] = {
+            ...current,
+            ...patch,
+            updated_at: new Date().toISOString(),
+          };
+          writeStateStore(store);
+          renderUserState();
+        }
+
+        function renderUserState() {
+          const store = readStateStore();
+          controls.forEach((control) => {
+            const articleId = control.dataset.stateArticleId || "";
+            const state = articleState(store, articleId);
+            const knowledgeButton = control.querySelector("[data-toggle-knowledge]");
+            const readButton = control.querySelector("[data-toggle-read]");
+            const favoriteButton = control.querySelector("[data-toggle-favorite]");
+            const stateTargets = Array.from(document.querySelectorAll("[data-article-id]")).filter((element) => element.dataset.articleId === articleId);
+            if (knowledgeButton) {
+              knowledgeButton.textContent = "入库";
+              knowledgeButton.setAttribute("aria-pressed", state.is_in_knowledge_base ? "true" : "false");
+              knowledgeButton.classList.toggle("is-active", state.is_in_knowledge_base);
+              knowledgeButton.setAttribute("aria-label", state.is_in_knowledge_base ? "知识库状态：已入知识库，点击取消" : "知识库状态：未入知识库，点击标为已入知识库");
+            }
+            if (readButton) {
+              readButton.textContent = "已读";
+              readButton.setAttribute("aria-pressed", state.is_read ? "true" : "false");
+              readButton.classList.toggle("is-active", state.is_read);
+              readButton.setAttribute("aria-label", state.is_read ? "阅读状态：已读，点击取消" : "阅读状态：未读，点击标为已读");
+            }
+            if (favoriteButton) {
+              favoriteButton.textContent = "收藏";
+              favoriteButton.setAttribute("aria-pressed", state.is_favorite ? "true" : "false");
+              favoriteButton.classList.toggle("is-active", state.is_favorite);
+              favoriteButton.setAttribute("aria-label", state.is_favorite ? "收藏状态：已收藏，点击取消" : "收藏状态：未收藏，点击收藏");
+            }
+            stateTargets.forEach((card) => {
+              card.classList.toggle("is-in-knowledge-base", state.is_in_knowledge_base);
+              card.classList.toggle("is-read", state.is_read);
+              card.classList.toggle("is-favorite", state.is_favorite);
+              card.classList.toggle("has-personal-note", Boolean(state.personal_note.trim()));
+              card.dataset.knowledgeState = state.is_in_knowledge_base ? "in-knowledge-base" : "";
+              card.dataset.readState = state.is_read ? "read" : "unread";
+              card.dataset.favoriteState = state.is_favorite ? "favorite" : "";
+              const noteMarker = card.querySelector("[data-note-marker]");
+              if (noteMarker) {
+                noteMarker.hidden = !state.personal_note.trim();
+              }
+            });
+          });
+          personalNotes.forEach((note) => {
+            const articleId = note.dataset.personalNote || "";
+            const state = articleState(store, articleId);
+            if (note.value !== state.personal_note) {
+              note.value = state.personal_note;
+            }
+          });
+        }
+
+        controls.forEach((control) => {
+          const articleId = control.dataset.stateArticleId || "";
+          const knowledgeButton = control.querySelector("[data-toggle-knowledge]");
+          const readButton = control.querySelector("[data-toggle-read]");
+          const favoriteButton = control.querySelector("[data-toggle-favorite]");
+          if (knowledgeButton) {
+            knowledgeButton.addEventListener("click", () => {
+              const nextKnowledgeState = knowledgeButton.getAttribute("aria-pressed") !== "true";
+              updateState(articleId, { is_in_knowledge_base: nextKnowledgeState });
+            });
+          }
+          if (readButton) {
+            readButton.addEventListener("click", () => {
+              const nextRead = readButton.getAttribute("aria-pressed") !== "true";
+              updateState(articleId, { is_read: nextRead });
+            });
+          }
+          if (favoriteButton) {
+            favoriteButton.addEventListener("click", () => {
+              const nextFavorite = favoriteButton.getAttribute("aria-pressed") !== "true";
+              updateState(articleId, { is_favorite: nextFavorite });
+            });
+          }
+        });
+
+        personalNotes.forEach((note) => {
+          const articleId = note.dataset.personalNote || "";
+          note.addEventListener("input", () => {
+            updateState(articleId, { personal_note: note.value });
+            noteStatuses.forEach((status) => {
+              if (status.dataset.personalNoteStatus === articleId) {
+                status.textContent = note.value.trim() ? "已保存" : "";
+              }
+            });
+          });
+        });
+
+        window.addEventListener("pageshow", renderUserState);
+        window.addEventListener("storage", (event) => {
+          if (event.key === storageKey) {
+            renderUserState();
+          }
+        });
+        renderUserState();
+      })();
+    </script>
+  </body>
+</html>

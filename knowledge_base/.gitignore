@@ -1,0 +1,18 @@
+# Local real email-derived test data.
+data/test-articles.json
+data/test-articles.meta.json
+data/*.export.json
+data/*.sqlite
+data/*.sqlite-*
+data/*.db
+data/private/
+data/backups/
+
+# Separate read-only Gmail OAuth files for the knowledge base.
+secrets/
+
+# Local Python noise.
+.venv/
+__pycache__/
+*.pyc
+.DS_Store

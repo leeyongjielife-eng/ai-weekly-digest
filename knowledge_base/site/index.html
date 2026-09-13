@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Winking Digest</title>
+    <link rel="stylesheet" href="assets/app.css">
+  </head>
+  <body>
+    <header class="home-hero" data-hero-stage>
+      <h1 class="hero-title">
+        <span class="hero-title-link" data-hero-brand aria-label="Winking Digest">
+          <span>Winking</span>
+          <span>Digest</span>
+        </span>
+      </h1>
+      <nav class="home-choices" aria-label="知识库入口">
+        <div class="home-choice home-choice-issue">
+          <div class="home-choice-trigger">DATE</div>
+          <div class="home-choice-list">
+
+            <a class="home-choice-row" href="issues/2026-09-07.html">
+              <span>2026-09-07</span>
+              <strong>18</strong>
+            </a>
+
+            <a class="home-choice-row" href="issues/2026-08-31.html">
+              <span>2026-08-31</span>
+              <strong>15</strong>
+            </a>
+
+            <a class="home-choice-row" href="issues/2026-08-24.html">
+              <span>2026-08-24</span>
+              <strong>17</strong>
+            </a>
+
+            <a class="home-choice-row" href="issues/2026-08-17.html">
+              <span>2026-08-17</span>
+              <strong>19</strong>
+            </a>
+          </div>
+        </div>
+        <div class="home-choice home-choice-category">
+          <div class="home-choice-trigger">CATEGORY</div>
+          <div class="home-choice-list">
+
+            <a class="home-choice-row" href="categories/models-and-platforms.html">
+              <span>模型与平台</span>
+              <strong>16</strong>
+            </a>
+
+            <a class="home-choice-row" href="categories/agents-and-automation.html">
+              <span>Agent 与自动化</span>
+              <strong>13</strong>
+            </a>
+
+            <a class="home-choice-row" href="categories/ai-products-and-tools.html">
+              <span>AI 产品与工具</span>
+              <strong>11</strong>
+            </a>
+
+            <a class="home-choice-row" href="categories/business-startups-investing.html">
+              <span>商业、创业与投资</span>
+              <strong>7</strong>
+            </a>
+
+            <a class="home-choice-row" href="categories/work-and-careers.html">
+              <span>工作方式与职业变化</span>
+              <strong>5</strong>
+            </a>
+
+            <a class="home-choice-row" href="categories/engineering-infra-security.html">
+              <span>工程、基础设施与安全</span>
+              <strong>7</strong>
+            </a>
+
+            <a class="home-choice-row" href="categories/research-policy-trends.html">
+              <span>研究、政策与行业趋势</span>
+              <strong>9</strong>
+            </a>
+
+            <a class="home-choice-row" href="categories/manual-review.html">
+              <span>待人工确认</span>
+              <strong>1</strong>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <script>
+      (() => {
+        const heroStage = document.querySelector("[data-hero-stage]");
+        const heroBrand = document.querySelector("[data-hero-brand]");
+        if (!heroStage || !heroBrand) {
+          return;
+        }
+        heroStage.addEventListener("pointermove", (event) => {
+          const rect = heroStage.getBoundingClientRect();
+          const x = ((event.clientX - rect.left) / rect.width) * 100;
+          const y = ((event.clientY - rect.top) / rect.height) * 100;
+          heroStage.style.setProperty("--spot-x", `${x}%`);
+          heroStage.style.setProperty("--spot-y", `${y}%`);
+          heroStage.classList.add("is-pointer-lit");
+        });
+        heroStage.addEventListener("pointerleave", () => {
+          heroStage.classList.remove("is-pointer-lit");
+          heroStage.classList.remove("is-title-lit");
+        });
+        heroBrand.addEventListener("pointerenter", () => heroStage.classList.add("is-title-lit"));
+        heroBrand.addEventListener("pointerleave", () => heroStage.classList.remove("is-title-lit"));
+      })();
+    </script>
+  </body>
+</html>
