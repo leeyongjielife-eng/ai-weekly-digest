@@ -2241,6 +2241,30 @@
 - 结论：PASS
 - 关联问题：ISSUE-KB-001
 
+### RUN-F-018C-2-003
+
+- 时间：2026-09-13
+- 任务：`F-018C-2` GitHub Actions 端到端验证通过
+- 测试数据：`DATA-F-001-001`
+- 触发反馈：启用 GitHub Pages 后，重新手动触发 `Knowledge Base Site Update` workflow。
+- 调整措施：通过 GitHub API 启用 Pages workflow 部署模式；重新触发 workflow；同步 GitHub Actions 自动生成的公开站点更新提交到本地；验证 GitHub Pages URL 可访问。
+- 执行命令：
+  - `gh api repos/leeyongjielife-eng/ai-weekly-digest/pages -X POST -f build_type=workflow`
+  - `gh workflow run "Knowledge Base Site Update" --ref main`
+  - `gh run watch 34743477623 --exit-status`
+  - `gh run view 34743477623 --json status,conclusion,url,createdAt,updatedAt,headSha`
+  - `gh api repos/leeyongjielife-eng/ai-weekly-digest/pages`
+  - `gh run download 34743477623 -n knowledge-base-update-status -D /private/tmp/kb-gh-status-34743477623`
+  - `git fetch origin main`
+  - `git pull --ff-only origin main`
+  - `python3 -B knowledge_base/tests/test_article_data.py --data knowledge_base/data/articles.export.json`
+  - `python3 -B knowledge_base/tests/test_static_site.py --data knowledge_base/data/articles.export.json`
+  - `python3 -B knowledge_base/tests/test_github_actions_update.py`
+  - `curl -I https://leeyongjielife-eng.github.io/ai-weekly-digest/`
+- 实际结果：GitHub Actions run `34743477623` 成功完成；状态 artifact 显示 `status=success`、`before_count=81`、`after_count=84`、`new_articles=3`、`content_fetch=3/3`、`ai=2/2`、`skipped=1`、`provider=gemini`。GitHub Pages 返回 HTTP 200，地址为 `https://leeyongjielife-eng.github.io/ai-weekly-digest/`。本地同步后回归测试通过：84 篇文章、5 个日期页、8 个分类页、84 个详情页。
+- 结论：PASS
+- 关联问题：ISSUE-KB-001
+
 ## ISSUE-KB-001 GitHub Actions 首次端到端验证失败
 
 - 状态：已修复

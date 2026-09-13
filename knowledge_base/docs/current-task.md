@@ -87,6 +87,8 @@
 - workflow 更新完成后会校验正式数据、静态站点、定时包装和增量逻辑；
 - workflow 会提交公开快照与静态站点变化，并通过 GitHub Pages 部署 `knowledge_base/site`；
 - 已新增离线测试，验证 workflow 调度、权限、知识库专用 Gmail readonly Secrets、隐私边界、状态 artifact、部署步骤和公开快照未被忽略。
+- 已手动触发 GitHub workflow 并完成端到端验证：更新、回归测试、公开产物提交、Pages 部署全部通过；
+- 当前 GitHub Pages 站点可访问，云端自动更新后文章数为 84 篇、日期页为 5 个、分类页为 8 个。
 
 ## 完成条件
 
@@ -97,6 +99,8 @@
 - [x] private/secrets/.venv 仍被忽略；
 - [x] workflow 状态 artifact 可查；
 - [x] GitHub Pages 部署步骤存在；
+- [x] GitHub 端到端手动验证通过；
+- [x] GitHub Pages URL 可访问；
 - [x] 离线测试和相关回归测试通过；
 - [x] 测试结果写入 `test-log.md`；
 - [ ] 用户完成人工验收。
