@@ -2215,6 +2215,62 @@
 - 结论：PASS
 - 关联问题：无
 
+### RUN-F-018C-2-002
+
+- 时间：2026-09-13
+- 任务：`F-018C-2` GitHub Actions 端到端验证修正
+- 测试数据：`DATA-F-001-001`
+- 触发反馈：手动触发 GitHub workflow 后，首次失败于 Gmail token scope，第二次失败于云端缺少被本地忽略的 `test-articles.meta.json`。
+- 调整措施：将知识库 workflow 的 Gmail Secrets 改为 `KB_GMAIL_CREDENTIALS_JSON` 和 `KB_GMAIL_TOKEN_JSON`，避免复用邮件发送 workflow 的 `gmail.send` token；已通过 GitHub CLI 写入知识库专用 readonly Secrets；在 workflow 中生成最小 `knowledge_base/data/test-articles.meta.json` 运行时文件；更新 README、当前任务和 workflow 测试。
+- 执行命令：
+  - `gh workflow run "Knowledge Base Site Update" --ref main`
+  - `gh run watch 34742886019 --exit-status`
+  - `gh run view 34742886019 --log-failed`
+  - `gh run download 34742886019 -n knowledge-base-update-status -D /private/tmp/kb-gh-status-34742886019`
+  - `gh secret set KB_GMAIL_CREDENTIALS_JSON < knowledge_base/secrets/gmail-readonly-credentials.json`
+  - `gh secret set KB_GMAIL_TOKEN_JSON < knowledge_base/secrets/gmail-readonly-token.json`
+  - `gh secret list`
+  - `gh workflow run "Knowledge Base Site Update" --ref main`
+  - `gh run watch 34743180607 --exit-status`
+  - `gh run view 34743180607 --log-failed`
+  - `gh run download 34743180607 -n knowledge-base-update-status -D /private/tmp/kb-gh-status-34743180607`
+  - `python3 -B knowledge_base/tests/test_github_actions_update.py`
+  - `python3 -B knowledge_base/tests/test_static_site.py --data knowledge_base/data/articles.export.json`
+  - `python3 -m py_compile knowledge_base/tests/test_github_actions_update.py`
+- 实际结果：GitHub Secrets 名称已分离且存在；第二次 GitHub run 已通过 Gmail readonly 读取阶段，失败点收敛为缺少运行时 meta 文件；本地 workflow 测试和静态站点测试通过。待推送 meta 修正后重新触发验证。
+- 结论：PASS
+- 关联问题：ISSUE-KB-001
+
+## ISSUE-KB-001 GitHub Actions 首次端到端验证失败
+
+- 状态：已修复
+- 关联任务：`F-018C-2`
+- 首次发现：2026-09-13
+- 最后出现：2026-09-13
+- 出现次数：2
+- 稳定复现步骤：手动触发 `Knowledge Base Site Update` workflow，查看 `Run scheduled update` 步骤和 `knowledge-base-update-status` artifact。
+- 当前结论：第一次失败因为知识库读取 Gmail 不能复用发邮件用的 `gmail.send` token；第二次失败因为 GitHub runner 缺少被本地 `.gitignore` 忽略的测试 meta 文件。已将知识库 Gmail Secrets 独立为 readonly token，并在 workflow 运行时生成最小 meta 文件。
+
+### 第 1 次出现
+
+- 关联测试：GitHub Actions run `34742886019`
+- 输入和环境：GitHub hosted runner，workflow 使用 `GMAIL_CREDENTIALS_JSON` 和 `GMAIL_TOKEN_JSON` 还原知识库 Gmail 读取凭证。
+- 预期结果：`run_scheduled_update.py --provider auto` 成功读取当月 Digest 文章源。
+- 实际结果：`google.auth.exceptions.RefreshError: invalid_scope`。
+- 原因假设：现有 `GMAIL_TOKEN_JSON` 是邮件发送 workflow 使用的 `gmail.send` token，不具备知识库读取所需 `gmail.readonly` scope。
+- 调整措施：workflow 改用 `KB_GMAIL_CREDENTIALS_JSON` 和 `KB_GMAIL_TOKEN_JSON`；通过 GitHub CLI 写入本地 readonly 凭证到对应 Secrets。
+- 调整结果：第二次运行已通过 Gmail token scope 阶段。
+
+### 第 2 次出现
+
+- 关联测试：GitHub Actions run `34743180607`
+- 输入和环境：GitHub hosted runner，已使用知识库专用 Gmail readonly Secrets。
+- 预期结果：增量更新后重新生成静态站点。
+- 实际结果：站点生成失败：缺少 `knowledge_base/data/test-articles.meta.json`。
+- 原因假设：该 meta 文件被本地 `.gitignore` 忽略，GitHub runner 上不存在；`build_static_site.py` 默认仍要求该文件存在。
+- 调整措施：在 workflow 的基线还原步骤中创建最小 `{}` meta 运行时文件，并更新 workflow 测试覆盖该路径。
+- 调整结果：本地 workflow 测试通过，待推送后重新触发 GitHub 端验证。
+
 ## 问题记录模板
 
 新问题必须使用稳定编号，并按发生次数追加，不覆盖历史。

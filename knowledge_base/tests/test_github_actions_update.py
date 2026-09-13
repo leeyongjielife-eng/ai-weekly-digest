@@ -30,6 +30,7 @@ def main() -> int:
         "secrets.KB_GMAIL_TOKEN_JSON",
         "knowledge_base/secrets/gmail-readonly-credentials.json",
         "knowledge_base/secrets/gmail-readonly-token.json",
+        "knowledge_base/data/test-articles.meta.json",
         "knowledge_base/scripts/import_articles_json.py --data knowledge_base/data/articles.export.json --replace",
         "knowledge_base/scripts/run_scheduled_update.py --provider auto",
         "actions/deploy-pages@v4",

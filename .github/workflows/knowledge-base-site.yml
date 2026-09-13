@@ -51,7 +51,9 @@ jobs:
           EOF
 
       - name: Seed SQLite from public article snapshot
-        run: python -B knowledge_base/scripts/import_articles_json.py --data knowledge_base/data/articles.export.json --replace
+        run: |
+          printf '{}\n' > knowledge_base/data/test-articles.meta.json
+          python -B knowledge_base/scripts/import_articles_json.py --data knowledge_base/data/articles.export.json --replace
 
       - name: Run scheduled update
         run: python -B knowledge_base/scripts/run_scheduled_update.py --provider auto

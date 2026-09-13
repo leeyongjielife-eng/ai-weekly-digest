@@ -82,6 +82,8 @@
 - workflow 与现有 `.github/workflows/ai-digest.yml` 分离，不发送邮件、不配置邮件输出；
 - 已允许 `knowledge_base/data/articles.export.json` 进入 Git，作为云端临时 SQLite 的历史基线；
 - workflow 会从 `KB_GMAIL_CREDENTIALS_JSON`、`KB_GMAIL_TOKEN_JSON` 和 AI key Secrets 还原 `knowledge_base/secrets/` 运行时文件，不提交本地 token 或密钥；
+- 已在 GitHub Secrets 写入知识库专用 Gmail readonly 凭证：`KB_GMAIL_CREDENTIALS_JSON`、`KB_GMAIL_TOKEN_JSON`；
+- workflow 会在云端生成最小 `test-articles.meta.json` 运行时文件，避免依赖本地忽略的旧测试 meta；
 - workflow 更新完成后会校验正式数据、静态站点、定时包装和增量逻辑；
 - workflow 会提交公开快照与静态站点变化，并通过 GitHub Pages 部署 `knowledge_base/site`；
 - 已新增离线测试，验证 workflow 调度、权限、知识库专用 Gmail readonly Secrets、隐私边界、状态 artifact、部署步骤和公开快照未被忽略。
