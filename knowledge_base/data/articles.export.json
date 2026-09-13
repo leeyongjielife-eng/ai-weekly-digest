@@ -1,11 +1,36 @@
 [
   {
-    "id": "art_bc2f6dc7c808cac2",
-    "email_received_at": "2026-09-13T06:38:19+00:00",
-    "canonical_url": "http://www.w3.org/1999/xhtml",
-    "title": "w3.org",
+    "id": "art_8e9a4c83ae734247",
+    "email_received_at": "2026-09-13T06:43:03+00:00",
+    "canonical_url": "https://github.com/leeyongjielife-eng/ai-weekly-digest/actions/runs/34743371475?email_source=notifications&email_token=BV74ANRY6YMKOV7M2IQ52HD5OY6XPA5CNFSNUACCM5UWIORPF5TWS5BNNB2WEL2DNBSWG22TOVUXIZKFOZSW45CON52GSZTJMNQXI2LPNYXTSNBRGAYDENRUG42TAJJTIIYTOOBZGI4DCNZWGOTHEZLBONXW5IFFMV3GK3TUWVRXGX3XN5ZGWZTMN53V64TVNZPWG3DJMNVQ",
+    "title": "View workflow run",
     "author": null,
-    "source": "w3.org",
+    "source": "github.com",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "该页面显示了一个GitHub Actions工作流运行日志，记录了一次名为“Knowledge Base Site Update”的知识库站点更新任务失败。主要错误表明GitHub Pages未被找到或未正确配置，导致部署未能完成。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "github.com"
+    ],
+    "key_points": [
+      "自动化部署的配置关键：自动化部署知识库（或其他静态站点）时，需确保目标托管服务（如GitHub Pages）已正确启用并配置，错误日志中`HttpError: Not Found`常指向此类基础配置问题。",
+      "CI/CD行动参数优化：GitHub Actions配置部署失败时，应关注错误提示，如本例中提到的检查仓库的Pages启用状态及构建配置，或探索`enablement`等参数，这是优化CI/CD工作流的关键。",
+      "工具链版本维护的重要性：工作流日志中Node.js版本（Node.js 20已弃用，强制运行于Node.js 24）的警告提醒，保持CI/CD环境和相关Action依赖更新对避免兼容性问题、确保自动化流程稳定运行至关重要。",
+      "个人知识库自动化潜力：尽管本次更新失败，但该记录展示了利用GitHub Actions等自动化工具来定期更新和部署个人知识库网站的实践，这对于追求效率和系统化的个人知识管理而言具有借鉴意义。"
+    ]
+  },
+  {
+    "id": "art_fdb46cb1c82b86ae",
+    "email_received_at": "2026-09-13T06:43:03+00:00",
+    "canonical_url": "https://github.com/settings/notifications?email_source=notifications&email_token=BV74ANQLXZTXZOFW4GEYOGD5OY6XPA5CNFSNUACCM5UWIORPF5TWS5BNNB2WEL2DNBSWG22TOVUXIZKFOZSW45CON52GSZTJMNQXI2LPNYXTSNBRGAYDENRUG42TAJJTIIYTOOBZGI4DCNZWGOTHEZLBONXW5IFFMV3GK3TUWFRXGX3TMV2HI2LOM5ZV6Y3MNFRWW",
+    "title": "Manage your GitHub Actions notifications",
+    "author": null,
+    "source": "github.com",
     "source_type": "其他",
     "published_at": null,
     "summary_zh": "待补全：来自 2026-09 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
@@ -15,9 +40,33 @@
     "content_status": "email_only",
     "tags": [
       "待人工确认",
-      "w3.org"
+      "github.com"
     ],
     "key_points": []
+  },
+  {
+    "id": "art_60c16c5550d913f6",
+    "email_received_at": "2026-09-13T06:43:03+00:00",
+    "canonical_url": "https://github.com/leeyongjielife-eng/ai-weekly-digest/actions/runs/34743371475?email_source=notifications&email_token=BV74ANSIV7L5FNQ43VMMBSD5OY6XPA5CNFSNUACCM5UWIORPF5TWS5BNNB2WEL2DNBSWG22TOVUXIZKFOZSW45CON52GSZTJMNQXI2LPNYXTSNBRGAYDENRUG42TAJJTIIYTOOBZGI4DCNZWGOTHEZLBONXW5IFFMV3GK3TUWRRXGX3BNZXG65DBORUW63TTL5RWY2LDNM",
+    "title": "3",
+    "author": null,
+    "source": "github.com",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "这是一个GitHub Actions工作流的运行日志，显示名为“Knowledge Base Site Update”的作业执行失败。失败原因主要涉及GitHub Pages配置不正确以及构建环境中Node.js版本已弃用。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "github.com"
+    ],
+    "key_points": [
+      "在自动化部署知识库或其他网站时，需要确保GitHub Pages等托管服务已正确启用，并且其构建方式（例如通过GitHub Actions）已精确配置，否则可能导致部署流程失败。",
+      "CI/CD工作流（如GitHub Actions）中的构建环境依赖项（例如Node.js版本）需要定期维护和更新，以避免因旧版本弃用而导致的运行错误和任务中断。",
+      "利用GitHub Actions自动化更新和部署个人或团队知识库是一种提升效率的工作流设计，但实施时需特别关注详细的技术配置和依赖项管理以确保成功运行。"
+    ]
   },
   {
     "id": "art_4383090cb5235ac4",
@@ -40,12 +89,12 @@
     "key_points": []
   },
   {
-    "id": "art_e055c274d280da65",
+    "id": "art_bc2f6dc7c808cac2",
     "email_received_at": "2026-09-13T06:38:19+00:00",
-    "canonical_url": "https://github.githubassets.com/assets/report-gray-d5f2721544ee.png",
-    "title": "github.githubassets.com",
+    "canonical_url": "http://www.w3.org/1999/xhtml",
+    "title": "w3.org",
     "author": null,
-    "source": "github.githubassets.com",
+    "source": "w3.org",
     "source_type": "其他",
     "published_at": null,
     "summary_zh": "待补全：来自 2026-09 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
@@ -55,14 +104,14 @@
     "content_status": "email_only",
     "tags": [
       "待人工确认",
-      "github.githubassets.com"
+      "w3.org"
     ],
     "key_points": []
   },
   {
-    "id": "art_6c9b603935cc8e4c",
+    "id": "art_dd6603e26c8c49a2",
     "email_received_at": "2026-09-13T06:38:19+00:00",
-    "canonical_url": "https://github.githubassets.com/assets/x-circle-fill-red-153d16960fc8.png",
+    "canonical_url": "https://github.githubassets.com/assets/octocat-logo-805b5c3e249f.png",
     "title": "github.githubassets.com",
     "author": null,
     "source": "github.githubassets.com",
@@ -100,9 +149,29 @@
     "key_points": []
   },
   {
-    "id": "art_dd6603e26c8c49a2",
+    "id": "art_6c9b603935cc8e4c",
     "email_received_at": "2026-09-13T06:38:19+00:00",
-    "canonical_url": "https://github.githubassets.com/assets/octocat-logo-805b5c3e249f.png",
+    "canonical_url": "https://github.githubassets.com/assets/x-circle-fill-red-153d16960fc8.png",
+    "title": "github.githubassets.com",
+    "author": null,
+    "source": "github.githubassets.com",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-09 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "github.githubassets.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_e055c274d280da65",
+    "email_received_at": "2026-09-13T06:38:19+00:00",
+    "canonical_url": "https://github.githubassets.com/assets/report-gray-d5f2721544ee.png",
     "title": "github.githubassets.com",
     "author": null,
     "source": "github.githubassets.com",
