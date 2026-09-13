@@ -16,16 +16,16 @@ AI 内容知识库是一个个人阅读工具，用来把邮件中值得保留�
 
 ## 当前状态
 
-项目已建立初始化文档，并已生成最近三周 3 封周报邮件的真实文章测试数据。
+项目已进入正式阶段，当前静态站点包含 69 篇文章、4 个日期页、8 个分类页和 69 个详情页。
 
-当前提供一个按邮件接收日期浏览文章的本地静态页面。
+本地已支持一键增量更新和每周一定时更新；GitHub Actions 已准备独立的知识库自动更新与 Pages 部署流程。
 
 ## 本地浏览
 
 生成页面：
 
 ```bash
-python3 -B knowledge_base/scripts/build_static_site.py
+python3 -B knowledge_base/scripts/build_static_site.py --data knowledge_base/data/articles.export.json
 ```
 
 打开页面：
@@ -34,7 +34,31 @@ python3 -B knowledge_base/scripts/build_static_site.py
 knowledge_base/site/index.html
 ```
 
-当前页面只展示邮件链接级数据。标记为“仅邮件链接”的文章尚未进行网页正文抓取或 AI 深度摘要。
+运行本地增量更新：
+
+```bash
+knowledge_base/.venv/bin/python -B knowledge_base/scripts/run_scheduled_update.py --provider auto
+```
+
+最近一次本地运行状态在 `knowledge_base/data/private/last-scheduled-update.json`，历史运行摘要在 `knowledge_base/data/private/scheduled-update.log`。这两个文件是本地私有文件，不提交到 Git。
+
+## GitHub 自动更新
+
+知识库自动更新 workflow 位于 `.github/workflows/knowledge-base-site.yml`。
+
+- 运行时间：每周一 17:00（Asia/Shanghai），也就是每周一 09:00 UTC；
+- 也可以在 GitHub Actions 页面手动运行；
+- 云端运行会先用 `knowledge_base/data/articles.export.json` 重建临时 SQLite，再读取当月 Digest 新文章；
+- 更新完成后会提交公开文章快照和 `knowledge_base/site/` 静态站点，并部署到 GitHub Pages；
+- 最近一次云端状态可在 workflow run 的 `knowledge-base-update-status` artifact 中查看。
+
+需要在 GitHub Secrets 中配置：
+
+- `GMAIL_CREDENTIALS_JSON`
+- `GMAIL_TOKEN_JSON`
+- `GOOGLE_API_KEY`
+
+`OPENAI_API_KEY` 和 `DEEPSEEK_API_KEY` 是可选备用项。
 
 ## 隐私原则
 
@@ -43,7 +67,8 @@ knowledge_base/site/index.html
 - 不保存真实邮件正文；
 - 不保存邮件主题、发件人或邮件 ID；
 - 邮件相关数据只保留邮件接收日期；
-- 默认不把个人知识库公开部署到互联网。
+- `knowledge_base/data/private/`、`knowledge_base/secrets/` 和 `.venv/` 不提交到 Git；
+- GitHub Pages 只部署已经生成的公开静态站点。
 
 ## 文档说明
 

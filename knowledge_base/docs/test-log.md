@@ -2195,6 +2195,26 @@
 - 结论：PASS
 - 关联问题：无
 
+### RUN-F-018C-2-001
+
+- 时间：2026-09-13
+- 任务：`F-018C-2` GitHub Actions 自动更新与部署
+- 测试数据：`DATA-F-001-001`
+- 触发反馈：用户开始 `F-018C-2 GitHub Actions 自动更新与部署`。
+- 调整措施：新增 `.github/workflows/knowledge-base-site.yml`，建立独立知识库更新与 GitHub Pages 部署 workflow；每周一 09:00 UTC 运行，对应 17:00 Asia/Shanghai；workflow 先用公开 `articles.export.json` 重建临时 SQLite，再运行 `run_scheduled_update.py --provider auto`；更新后校验数据和站点，只提交公开文章快照和 `knowledge_base/site/`；状态文件作为 workflow artifact 保留。更新 `.gitignore`，继续忽略 private/secrets/.venv，同时允许 `data/articles.export.json` 作为公开状态基线进入 Git；更新 README 和当前任务登记。
+- 执行命令：
+  - `python3 -B knowledge_base/tests/test_github_actions_update.py`
+  - `python3 -B knowledge_base/tests/test_scheduled_update.py`
+  - `python3 -B knowledge_base/tests/test_incremental_update.py`
+  - `python3 -B knowledge_base/tests/test_article_data.py --data knowledge_base/data/articles.export.json`
+  - `python3 -B knowledge_base/tests/test_static_site.py --data knowledge_base/data/articles.export.json`
+  - `python3 -B knowledge_base/tests/test_data_store.py`
+  - `python3 -m py_compile knowledge_base/scripts/run_scheduled_update.py knowledge_base/tests/test_github_actions_update.py knowledge_base/tests/test_scheduled_update.py knowledge_base/scripts/update_from_digest.py`
+  - `git check-ignore -v knowledge_base/data/articles.export.json knowledge_base/data/private/last-scheduled-update.json knowledge_base/secrets/gmail-readonly-token.json knowledge_base/.venv/bin/python`
+- 实际结果：GitHub Actions workflow 离线测试通过；定时包装、增量更新、正式文章数据、静态站点和 SQLite 回归测试均通过；公开快照 `articles.export.json` 可提交，private/secrets/.venv 仍被忽略。未修改现有邮件发送 workflow。
+- 结论：PASS
+- 关联问题：无
+
 ## 问题记录模板
 
 新问题必须使用稳定编号，并按发生次数追加，不覆盖历史。

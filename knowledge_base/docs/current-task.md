@@ -35,8 +35,8 @@
 任务编号：`F-018C-2`  
 任务名称：GitHub Actions 自动更新与部署  
 阶段：正式阶段 / 云端自动化  
-状态：待执行  
-确认日期：待确认
+状态：待人工验收  
+确认日期：2026-09-13
 
 ## 目标
 
@@ -51,13 +51,53 @@
 
 ## 输出
 
-- 待确认后补充。
+- `.github/workflows/knowledge-base-site.yml`：独立知识库自动更新与 GitHub Pages 部署 workflow；
+- `knowledge_base/data/articles.export.json`：公开文章快照，作为 GitHub runner 的历史基线；
+- `knowledge_base/.gitignore`：保留 private/secrets 忽略，同时允许公开文章快照入 Git；
+- `knowledge_base/tests/test_github_actions_update.py`：离线验证 workflow 调度、隐私边界、状态 artifact 和部署步骤；
+- `knowledge_base/README.md`：补充 GitHub 自动更新、Secrets 和状态查看说明；
+- `knowledge_base/docs/test-log.md`：记录 F-018C-2 实施和测试结果。
 
 ## 不包含
 
-- 本次上传当前成果不实现 GitHub Actions；
 - 不提交本地私有状态、数据库、Gmail token 或 AI key；
 - 不修改邮件发送脚本或工作流。
+
+## 处理策略
+
+| 项目 | 方案 |
+|---|---|
+| 运行时间 | 每周一 09:00 UTC，即 17:00 Asia/Shanghai |
+| workflow 边界 | 新建知识库 workflow，不改现有邮件发送 workflow |
+| 云端状态基线 | 提交公开 `articles.export.json`，runner 先从它重建临时 SQLite |
+| 私有配置 | Gmail OAuth JSON/token 与 AI key 只来自 GitHub Secrets |
+| 更新命令 | 先 `import_articles_json.py --replace` 还原基线，再运行 `run_scheduled_update.py --provider auto` |
+| 输出提交 | 只提交 `knowledge_base/data/articles.export.json` 和 `knowledge_base/site/` 的公开变化 |
+| 部署方式 | 使用 GitHub Pages artifact 部署 `knowledge_base/site` |
+| 状态查看 | GitHub Actions run 详情、Pages deployment、`knowledge-base-update-status` artifact |
+
+## 实施结果
+
+- 已新增 `.github/workflows/knowledge-base-site.yml`，支持手动运行和每周一 09:00 UTC 定时运行；
+- workflow 与现有 `.github/workflows/ai-digest.yml` 分离，不发送邮件、不配置邮件输出；
+- 已允许 `knowledge_base/data/articles.export.json` 进入 Git，作为云端临时 SQLite 的历史基线；
+- workflow 会从 GitHub Secrets 还原 `knowledge_base/secrets/` 运行时文件，不提交本地 token 或密钥；
+- workflow 更新完成后会校验正式数据、静态站点、定时包装和增量逻辑；
+- workflow 会提交公开快照与静态站点变化，并通过 GitHub Pages 部署 `knowledge_base/site`；
+- 已新增离线测试，验证 workflow 调度、权限、隐私边界、状态 artifact、部署步骤和公开快照未被忽略。
+
+## 完成条件
+
+- [x] GitHub Actions workflow 创建完成；
+- [x] 定时频率为每周一 17:00（Asia/Shanghai）；
+- [x] 与邮件发送 workflow 分离；
+- [x] 公开文章快照可作为云端状态基线；
+- [x] private/secrets/.venv 仍被忽略；
+- [x] workflow 状态 artifact 可查；
+- [x] GitHub Pages 部署步骤存在；
+- [x] 离线测试和相关回归测试通过；
+- [x] 测试结果写入 `test-log.md`；
+- [ ] 用户完成人工验收。
 
 ## 最近完成任务
 

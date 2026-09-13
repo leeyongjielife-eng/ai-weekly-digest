@@ -1,0 +1,99 @@
+name: Knowledge Base Site Update
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 17:00 Monday Asia/Shanghai == 09:00 Monday UTC
+    - cron: "0 9 * * 1"
+
+concurrency:
+  group: knowledge-base-site-update
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Restore private runtime files
+        run: |
+          test -n '${{ secrets.GMAIL_CREDENTIALS_JSON }}'
+          test -n '${{ secrets.GMAIL_TOKEN_JSON }}'
+          mkdir -p knowledge_base/secrets knowledge_base/data/private
+          printf '%s' '${{ secrets.GMAIL_CREDENTIALS_JSON }}' > knowledge_base/secrets/gmail-readonly-credentials.json
+          printf '%s' '${{ secrets.GMAIL_TOKEN_JSON }}' > knowledge_base/secrets/gmail-readonly-token.json
+          cat > knowledge_base/secrets/summary.env <<EOF
+          AI_SUMMARY_PROVIDER=auto
+          GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}
+          OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+          DEEPSEEK_API_KEY=${{ secrets.DEEPSEEK_API_KEY }}
+          EOF
+
+      - name: Seed SQLite from public article snapshot
+        run: python -B knowledge_base/scripts/import_articles_json.py --data knowledge_base/data/articles.export.json --replace
+
+      - name: Run scheduled update
+        run: python -B knowledge_base/scripts/run_scheduled_update.py --provider auto
+
+      - name: Validate updated data and site
+        run: |
+          python -B knowledge_base/tests/test_article_data.py --data knowledge_base/data/articles.export.json
+          python -B knowledge_base/tests/test_static_site.py --data knowledge_base/data/articles.export.json
+          python -B knowledge_base/tests/test_scheduled_update.py
+          python -B knowledge_base/tests/test_incremental_update.py
+
+      - name: Commit updated public site artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add knowledge_base/data/articles.export.json knowledge_base/site
+          if git diff --cached --quiet; then
+            echo "No public site changes to commit."
+          else
+            git commit -m "chore: update knowledge base site"
+            git push
+          fi
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: knowledge_base/site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Upload update status artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: knowledge-base-update-status
+          path: |
+            knowledge_base/data/private/last-scheduled-update.json
+            knowledge_base/data/private/last-incremental-update.json
+            knowledge_base/data/private/scheduled-update.log
+          if-no-files-found: ignore
+          retention-days: 14

@@ -2,6 +2,7 @@
 data/test-articles.json
 data/test-articles.meta.json
 data/*.export.json
+!data/articles.export.json
 data/*.sqlite
 data/*.sqlite-*
 data/*.db
