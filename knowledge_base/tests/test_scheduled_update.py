@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -17,6 +18,7 @@ SUCCESS_FAKE = """
 from __future__ import annotations
 import argparse
 import json
+import os
 from pathlib import Path
 
 parser = argparse.ArgumentParser()
@@ -34,6 +36,7 @@ report = {
     "content_fetch": {"selected": 1, "success": 1, "failed": 0},
     "ai_completion": {"candidates": 1, "processable": 1, "skipped": 0, "success": 1, "failed": 0, "provider": args.provider},
     "site_html": "knowledge_base/site/index.html",
+    "proxy_env": {key: os.environ.get(key, "") for key in ("HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "http_proxy", "https_proxy", "all_proxy")},
 }
 Path(args.report_out).parent.mkdir(parents=True, exist_ok=True)
 Path(args.report_out).write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
@@ -55,6 +58,9 @@ def write_fake(path: Path, content: str) -> None:
 
 
 def run_scheduled(temp_path: Path, fake_script: Path) -> subprocess.CompletedProcess[str]:
+    test_env = os.environ.copy()
+    for key in ("HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "http_proxy", "https_proxy", "all_proxy"):
+        test_env[key] = "http://127.0.0.1:7897"
     return subprocess.run(
         [
             sys.executable,
@@ -81,6 +87,7 @@ def run_scheduled(temp_path: Path, fake_script: Path) -> subprocess.CompletedPro
         capture_output=True,
         text=True,
         check=False,
+        env=test_env,
     )
 
 
@@ -110,6 +117,8 @@ def main() -> int:
                 errors.append(f"Scheduled command should call update_from_digest for the target month: {status['command']}.")
             if status["update_summary"]["new_articles"] != 1 or status["update_summary"]["after_count"] != 70:
                 errors.append(f"Unexpected update summary: {status['update_summary']}.")
+            if any(status.get("proxy_env", {}).values()):
+                errors.append(f"Scheduled child process inherited system proxy variables: {status['proxy_env']}.")
             log_entries = [json.loads(line) for line in log_path.read_text(encoding="utf-8").splitlines() if line.strip()]
             if not log_entries or log_entries[-1]["status"] != "success":
                 errors.append(f"Expected appended success log entry, got {log_entries}.")

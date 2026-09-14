@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from datetime import UTC, datetime
@@ -18,6 +19,14 @@ STATUS_PATH = ROOT / "data" / "private" / "last-scheduled-update.json"
 LOG_PATH = ROOT / "data" / "private" / "scheduled-update.log"
 INCREMENTAL_REPORT_PATH = ROOT / "data" / "private" / "last-incremental-update.json"
 SCHEDULE_TEXT = "每周一 17:00 Asia/Shanghai"
+SYSTEM_PROXY_KEYS = (
+    "HTTP_PROXY",
+    "HTTPS_PROXY",
+    "ALL_PROXY",
+    "http_proxy",
+    "https_proxy",
+    "all_proxy",
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -146,8 +155,17 @@ def append_log(path: Path, payload: dict[str, Any]) -> None:
     path.open("a", encoding="utf-8").write(json.dumps(payload, ensure_ascii=False) + "\n")
 
 
+def clear_system_proxy() -> None:
+    # Desktop proxy variables can break Gmail OAuth refresh in local automations.
+    if os.getenv("DISABLE_SYSTEM_PROXY", "1").strip() != "1":
+        return
+    for key in SYSTEM_PROXY_KEYS:
+        os.environ.pop(key, None)
+
+
 def main() -> int:
     args = parse_args()
+    clear_system_proxy()
     started_at = datetime.now(UTC).isoformat()
     month = target_month(args.month, args.timezone)
     command = build_command(args, month)

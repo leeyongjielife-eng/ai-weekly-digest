@@ -2363,3 +2363,42 @@
 ```
 
 同一问题第二次出现时必须比较证据；第三次出现时必须暂停实施并复审技术方向。
+
+## RUN-F-018C-2-005
+
+- 时间：2026-09-14
+- 任务：`F-018C-2` 当日邮件更新与本地定时任务故障修复验证
+- 测试数据：`DATA-F-001-001`
+- 触发反馈：用户指出网页没有更新当天收到的 Digest 邮件。
+- 调查结果：当天 17:00 的本地定时任务已触发，但在 Gmail OAuth 刷新阶段失败；失败原因是桌面环境注入的 `127.0.0.1:7897` 代理不可用。该失败发生在读取邮件之前，因此公开站点仍停留在 69 篇。
+- 调整措施：`run_scheduled_update.py` 默认清理大小写两组 HTTP/HTTPS/ALL proxy 环境变量；保留 `DISABLE_SYSTEM_PROXY=0` 作为明确启用代理的选项；补充定时包装回归测试，确保子进程不会继承系统代理。
+- 执行命令：
+  - `knowledge_base/.venv/bin/python -B knowledge_base/scripts/run_scheduled_update.py --provider auto`
+  - `python3 -B knowledge_base/tests/test_scheduled_update.py`
+  - `python3 -B knowledge_base/tests/test_article_data.py --data knowledge_base/data/articles.export.json`
+  - `python3 -B knowledge_base/tests/test_static_site.py --data knowledge_base/data/articles.export.json`
+  - `python3 -B knowledge_base/tests/test_github_actions_update.py`
+  - `python3 -m py_compile knowledge_base/scripts/run_scheduled_update.py knowledge_base/tests/test_scheduled_update.py`
+- 实际结果：真实定时命令成功读取 2 封 Digest 邮件和 33 个文章链接，新增 15 篇、已有 18 篇；15 篇正文抓取全部成功，9 篇 AI 补齐成功，最终为 84 篇文章、5 个日期页、8 个分类页和 84 个详情页。所有回归测试通过，公开产物中没有 GitHub 通知链接或 `2026-09-13`。
+- 结论：PASS
+- 关联问题：ISSUE-KB-013
+
+## ISSUE-KB-013 本地定时更新继承失效系统代理
+
+- 状态：已修复
+- 关联任务：`F-018C-1`、`F-018C-2`
+- 首次发现：2026-09-14
+- 最后出现：2026-09-14
+- 出现次数：1
+- 稳定复现步骤：在桌面环境保留 `HTTP_PROXY`、`HTTPS_PROXY`、`ALL_PROXY` 及小写对应变量，运行本地每周更新任务。
+- 当前结论：本地定时包装没有处理桌面环境代理变量，导致 Google OAuth 刷新请求连接本机不可用代理并失败。已增加默认清理逻辑，并用带代理变量的测试环境和真实 Gmail 更新分别验证通过。
+
+### 第 1 次出现
+
+- 关联测试：`RUN-F-018C-2-005`
+- 输入和环境：macOS 本地定时任务，系统环境含 `http://127.0.0.1:7897` 和 `socks5://127.0.0.1:7897` 代理变量。
+- 预期结果：成功读取当月 AI Weekly Digest 邮件，增量更新站点并写入成功状态。
+- 实际结果：Gmail OAuth token refresh 失败，站点没有新增当天邮件内容。
+- 原因假设：桌面环境注入的代理地址当前不可用；与 Gmail 凭证本身无关。
+- 调整措施：定时包装默认清理系统代理变量，并增加回归测试覆盖代理继承边界。
+- 调整结果：真实重跑成功，新增 15 篇；后续带代理变量运行也成功完成且可重复运行。

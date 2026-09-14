@@ -51,6 +51,7 @@ knowledge_base/.venv/bin/python -B knowledge_base/scripts/run_scheduled_update.p
 - 云端运行会先用 `knowledge_base/data/articles.export.json` 重建临时 SQLite，再读取当月 Digest 新文章；
 - 更新完成后会提交公开文章快照和 `knowledge_base/site/` 静态站点，并部署到 GitHub Pages；
 - 最近一次云端状态可在 workflow run 的 `knowledge-base-update-status` artifact 中查看。
+- 本地定时任务默认忽略桌面环境注入的 HTTP/SOCKS 代理变量，以避免 Gmail OAuth 刷新失败；如确实需要代理，可设置 `DISABLE_SYSTEM_PROXY=0`。
 
 需要在 GitHub Secrets 中配置：
 
