@@ -1,5 +1,384 @@
 [
   {
+    "id": "art_e9fb69bee8901e60",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/how-i-ai-how-two-spacexai-designers",
+    "title": "🎙️ How I AI: How two SpaceXAI designers use Grok Bot to do their jobs",
+    "author": null,
+    "source": "lennysnewsletter.com",
+    "source_type": "Newsletter",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-09 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "工作方式与职业变化",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "工作方式与职业变化",
+      "lennysnewsletter.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_f9d4182cc1e12525",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://simonwillison.net/2026/Sep/20/llm-keys-ui/",
+    "title": "llm-keys-ui 0.1",
+    "author": null,
+    "source": "simonwillison.net",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "llm-keys-ui 0.1 是一个为 LLM 项目提供安全 API 密钥设置的 Web UI 插件，尤其解决在使用远程编码代理时避免直接粘贴密钥的问题。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "simonwillison.net"
+    ],
+    "key_points": [
+      "llm-keys-ui 插件旨在解决在远程机器上运行 LLM 项目或编码代理时，安全配置 API 密钥的问题，避免直接在应用或代理会话中粘贴敏感信息。",
+      "该插件提供一个 Web UI 界面，用户可以通过指定 URL（包括本地网络或 Tailscale IP）来保存和管理 API 密钥。",
+      "代理可以通过命令行工具（如 `llm keys get anthropic`）安全地检索所需的 API 密钥，集成到其 shell 命令工作流中，提升自动化流程的安全性。"
+    ]
+  },
+  {
+    "id": "art_896933b41785afa3",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://blog.cloudflare.com/client-side-security-finds-4-malicious-campaigns/",
+    "title": "When scanners miss the attack: how Cloudflare Client-Side Security protects storefronts",
+    "author": null,
+    "source": "blog.cloudflare.com",
+    "source_type": "个人博客",
+    "published_at": null,
+    "summary_zh": "Cloudflare客户端安全利用机器学习（包括GNN和LLM）有效识别并阻止了传统安全扫描工具无法发现的四种复杂客户端JavaScript恶意攻击，这些攻击旨在窃取佣金、劫持搜索和篡改分析数据。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "工程、基础设施与安全",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "工程、基础设施与安全",
+      "blog.cloudflare.com"
+    ],
+    "key_points": [
+      "传统签名式安全扫描工具难以检测复杂且多态的客户端JavaScript恶意软件；机器学习（特别是图神经网络GNN结合大型语言模型LLM）能通过代码行为和结构分析，有效识别出条件触发、动态注入或隐藏的攻击。",
+      "现代客户端攻击利用高级规避技术（如设备/时间/referrer检测、动态元素拦截、隐形iframe、冷却机制和控制台混淆），这要求防御系统具备持续的浏览器可见性和行为分析能力，而非依赖一次性页面检查。",
+      "采用多模型AI策略，如结合GNN进行初步代码结构分析，LLM提供第二意见，并利用前沿模型组成“教师”系统进行深度分析，能显著提高复杂威胁检测的准确性并降低误报率。",
+      "将人类审查结果和模型间的分歧（视为信号）反馈到AI模型（如GNN）的训练中，可以形成一个持续学习的闭环，使系统能够识别更细微和不断演变的攻击模式，这对AI产品持续优化至关重要。"
+    ]
+  },
+  {
+    "id": "art_0510586cc5b5039d",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://www.latent.space/p/aiuc",
+    "title": "Underwriting Superintelligence: Backing Agents you can Sue — Rune Kvist, AIUC",
+    "author": null,
+    "source": "latent.space",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-09 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "Agent 与自动化",
+      "latent.space"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_e76b74dfee528394",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://www.oneusefulthing.org/p/the-overhang",
+    "title": "The Overhang",
+    "author": null,
+    "source": "oneusefulthing.org",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "文章指出，当前AI模型（如GPT-6 Astra和Fable 5.1）已具备巨大变革能力，但其潜能远未被充分利用，存在巨大的“能力过剩”。作者提出，个人应发挥深度知识、广度知识、品味和能动性四项人类优势，与AI协作以实现超越单体的成就，而非与AI竞争产出。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "工作方式与职业变化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "工作方式与职业变化",
+      "oneusefulthing.org"
+    ],
+    "key_points": [
+      "AI的当前能力被严重低估和未充分利用：现有AI模型（如GPT-6 Astra, Fable 5.1）已展现出操作复杂软件、自主判断和创造的变革性能力，能完成数周的人类工作，但其潜力远未被大多数人发掘。",
+      "深度知识是有效驾驭AI并获取优质产出的基础：具备专业领域深度知识的个体，更能理解AI的局限和优势，从而指导AI产出高质量成果，并能从“执行者”转变为“管理者”。",
+      "广度知识促进创新工作流和精准指令：广泛涉猎不同领域和知识体系有助于用户知道如何向AI提出恰当问题，理解AI的隐性模式（如设计偏好），并能将AI的不同功能（如用Blender动画作为视频故事板）进行创造性结合。",
+      "品味和能动性是个人利用AI脱颖而出的核心优势：在AI能快速生成海量内容的时代，个人独特的品味决定了对AI产出的筛选、优化与重构，而敢于探索AI边界的能动性（agency）则能发现AI的未映射潜力，是创造卓越而非平庸作品的关键。"
+    ]
+  },
+  {
+    "id": "art_18bdedfb0c5ed6fd",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://github.blog/ai-and-ml/should-you-read-the-code-is-rag-dead-and-did-skills-kill-mcp/",
+    "title": "Should you read the code, is RAG dead, and did Skills kill MCP?",
+    "author": null,
+    "source": "github.blog",
+    "source_type": "公司或工程博客",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-09 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "github.blog"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_020e19c8ae7238f6",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/muse-review-the-personal-ai-agent",
+    "title": "Muse review: The personal AI agent that gets consumer UX right",
+    "author": null,
+    "source": "lennysnewsletter.com",
+    "source_type": "Newsletter",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-09 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "Agent 与自动化",
+      "lennysnewsletter.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_02ea023ead6b345e",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://github.blog/ai-and-ml/generative-ai/migrating-the-github-copilot-runtime-to-rust-using-copilot/",
+    "title": "Migrating the GitHub Copilot runtime to Rust, using Copilot",
+    "author": null,
+    "source": "github.blog",
+    "source_type": "公司或工程博客",
+    "published_at": null,
+    "summary_zh": "GitHub Copilot的运行时从TypeScript/Node.js成功迁移至Rust，涉及超过80万行代码，其中大部分由AI agent生成，将原本需团队耗时一两年的工作量，由一位开发者在数月内完成，同时显著提升了运行时性能。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "AI 产品与工具",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "AI 产品与工具",
+      "github.blog"
+    ],
+    "key_points": [
+      "AI Agent在大型代码重构中的应用：GitHub Copilot利用AI agent完成了运行时到Rust的大规模代码迁移，展示了AI agent在处理80万行生产代码重写、加速开发周期和提高效率方面的巨大潜力。",
+      "架构选择对产品性能和扩展性的影响：文章揭示了早期为快速发布而导致的TUI与运行时紧密耦合，引发了性能、内存消耗和可靠性问题，强调了在产品开发中进行合理分层和架构决策的重要性。",
+      "Rust作为高性能嵌入式运行时语言的优势：选择Rust是因为它具有最小的依赖和开销、易于进程内嵌入、卓越的性能、可伸缩性、可靠性，以及通过FFI机制与多语言SDK良好互操作，这对于需要高性能、低资源消耗且跨平台嵌入的AI运行时至关重要。",
+      "高速迭代背景下代码迁移的动态挑战：尽管有初步的代码量预估，但由于持续的功能开发、新代码的涌入和需求变更，实际迁移的代码量远超预期，并使得项目进度难以追踪，反映了在快速发展的产品环境中进行大规模重构的复杂性。"
+    ]
+  },
+  {
+    "id": "art_14493e4306617c79",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/how-grok-bot-designers-use-ai-agents",
+    "title": "How Grok Bot designers use AI agents to build personal sites and product prototypes | John Bai & Peng Zheng",
+    "author": null,
+    "source": "lennysnewsletter.com",
+    "source_type": "Newsletter",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-09 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "Agent 与自动化",
+      "lennysnewsletter.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_a7565059b22e4fb4",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://blog.cloudflare.com/accountable-mixed-use-ai-crawlers/",
+    "title": "Have it both ways: stay discoverable in search while disallowing AI training",
+    "author": null,
+    "source": "blog.cloudflare.com",
+    "source_type": "个人博客",
+    "published_at": null,
+    "summary_zh": "Cloudflare推出“禁止AI训练”新设置，让网站所有者既能保持内容在搜索中被发现，又能阻止其内容被用于AI模型训练，解决了以往混合用途爬虫带来的两难困境。Apple、Google和Microsoft已承诺遵守此设置。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "AI 产品与工具",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "AI 产品与工具",
+      "blog.cloudflare.com"
+    ],
+    "key_points": [
+      "传统上，网站所有者面临一个难题：要么允许内容用于AI训练（同时保持搜索可见性），要么拒绝AI训练（但可能失去搜索可见性），这是因为部分大型机构使用同时服务于搜索和AI训练的混合用途爬虫。",
+      "Cloudflare的“禁止AI训练”新功能允许网站所有者发布一个偏好设置，既能保持在搜索中的索引，又能阻止Accountable（负责任的）混合用途爬虫使用其内容进行AI训练，解决了这一核心矛盾。",
+      "Cloudflare不仅仅依靠robots.txt指令，而是通过网络层面识别爬虫身份、分类爬取目的，并拦截那些不遵守偏好的爬虫，同时报告其行为，从而提供比传统方法更强、更可信赖的控制能力。",
+      "未来，Cloudflare的目标是让网站所有者对AI摘要中的内容呈现拥有更细粒度的控制权，而不仅仅是简单的允许或拒绝，这预示着内容创作者将拥有更多能力来管理其知识资产在AI生态系统中的使用方式。"
+    ]
+  },
+  {
+    "id": "art_e0b8e6e014e2a30e",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://techcrunch.com/2026/09/19/googles-gemini-is-the-latest-ai-model-to-hack-other-companies/",
+    "title": "Google’s Gemini is the latest AI model to hack other companies",
+    "author": null,
+    "source": "techcrunch.com",
+    "source_type": "媒体",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-09 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "模型与平台",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "模型与平台",
+      "techcrunch.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_219c439494be37ce",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://simonwillison.net/2026/Sep/15/gemini-live/",
+    "title": "Gemini Live audio",
+    "author": null,
+    "source": "simonwillison.net",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "谷歌发布了Gemini 3.8 Live及扩展思考版本，这是两款新的语音到语音模型；作者Simon Willison利用GPT-6 Astra Extra High构建了一个Web UI，用户可通过浏览器与模型进行可打断的语音对话。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "模型与平台",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "模型与平台",
+      "simonwillison.net"
+    ],
+    "key_points": [
+      "作者利用AI（GPT-6 Astra Extra High）迅速构建了测试Google新语音到语音模型（Gemini 3.8 Live）的Web UI，展示了AI在加速AI产品原型开发和工具集成方面的潜力。",
+      "Google Gemini 3.8 Live等新模型提供语音到语音交互及打断功能，这对于设计更流畅、自然且具备代理（Agent）特性的AI对话系统至关重要，可提升用户交互体验和效率。",
+      "该Web UI的实现无需外部库，直接通过WebSockets API与Google生成式AI服务连接，并使用Web Audio API进行音频处理，为开发者提供了集成新兴AI模型的一种精简高效的技术路径参考。",
+      "Google发布与OpenAI GPT-Live系列相似的语音到语音模型，显示实时、可打断的AI语音交互是当前LLM领域的重要发展方向和产品竞争焦点，值得关注AI产品和Agent开发者持续追踪。"
+    ]
+  },
+  {
+    "id": "art_bc4ce9d50d9b33de",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://simonwillison.net/2026/Sep/16/one-claude/",
+    "title": "Claude Cowork and chat are now one Claude",
+    "author": null,
+    "source": "simonwillison.net",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "Anthropic已将其Claude Cowork和chat功能合并为一个统一的Claude产品，旨在简化用户体验并解决此前不同版本间的混淆。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "模型与平台",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "模型与平台",
+      "simonwillison.net"
+    ],
+    "key_points": [
+      "AI产品整合趋势：Claude将Cowork和chat功能合并，体现了AI工具向多功能集成和通用代理化发展的趋势，旨在提升用户体验并简化产品线。",
+      "通用代理能力：合并后的Claude被设计为一个能够处理从快速提问到复杂报告交付的通用智能体，并支持用户关闭设备后仍能持续工作，展现了AI代理在自动化工作流中的潜力。",
+      "行业发展共性：Claude的此次产品整合与OpenAI将Codex桌面应用更名为ChatGPT的做法类似，表明头部AI公司在产品发展策略上趋向于集成和通用化。",
+      "用户体验优化：产品通过消除不同版本间的界限，降低了用户使用门槛和学习成本，对AI产品设计者和个人知识管理工具的选择有借鉴意义。"
+    ]
+  },
+  {
+    "id": "art_eb64bf46642bd168",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://www.latent.space/p/good-start-labs",
+    "title": "Can Skills Learned in Games Transfer to Real-World Work?",
+    "author": null,
+    "source": "latent.space",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-09 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "工作方式与职业变化",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "工作方式与职业变化",
+      "latent.space"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_891b0674775700c0",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://techcrunch.com/2026/09/18/anthropic-is-operating-a-lab-that-conducts-biology-experiments/",
+    "title": "Anthropic is operating a lab that conducts biology experiments",
+    "author": null,
+    "source": "techcrunch.com",
+    "source_type": "媒体",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-09 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "模型与平台",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "模型与平台",
+      "techcrunch.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_e3e0524cc29a68a0",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://www.latent.space/p/ainews-aef-1-standard-emerges-for",
+    "title": "AEF-1 standard emerges for Third Party Evaluators, as Xai, OpenAI, and Anthropic all cosign",
+    "author": null,
+    "source": "latent.space",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "AEF-1标准正成为第三方AI评估机构的新规范，获得Xai、OpenAI和Anthropic等主要AI公司认可，标志着AI安全与治理的标准化进程加速。同时，关于AI发展速度的辩论仍在进行，且Agent编排和成本效益型开源模型的进步正重塑AI产品开发。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "模型与平台",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "模型与平台",
+      "latent.space"
+    ],
+    "key_points": [
+      "AI安全与治理标准化：随着AEF-1标准和嵌入式评估员制度的出现，AI安全与治理正在走向规范化，要求AI公司对安全实践、模型对齐及训练流程进行可验证的第三方评估，这对于关注AI产品合规性与风险的开发者和创业者至关重要。",
+      "Agent编排与工作流设计：\"Harness工程\"正成为构建AI Agent的关键学科，强调通过精心设计的推理、工具、循环、内存和验证器等系统组件，提升Agent产品的可靠性、降低成本，并优化复杂任务的执行效率。",
+      "模型质量与系统编排的平衡：实践证明，AI系统在生产环境中的性能提升，更多地取决于高效的上下文处理、文件格式优化、工具使用和验证器设计等编排策略，而非单纯依赖原始模型能力，提示AI产品开发应更侧重整体架构与工作流设计。",
+      "开源模型成本效益提升：DeepSeek-V4.1-Flash等模型展现出在接近顶级性能的同时大幅降低任务成本的潜力，这为AI产品开发者和初创企业提供了更经济高效的AI能力选择，有助于加速创新和降低开发门槛。"
+    ]
+  },
+  {
+    "id": "art_8401e8e9e2ed3c17",
+    "email_received_at": "2026-09-21T04:21:03+00:00",
+    "canonical_url": "https://techcrunch.com/2026/09/18/a-startup-that-builds-other-startups-raised-100m-and-is-all-in-on-physical-ai/",
+    "title": "A startup that builds other startups raised $100M and is all-in on physical AI",
+    "author": null,
+    "source": "techcrunch.com",
+    "source_type": "媒体",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-09 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "商业、创业与投资",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "商业、创业与投资",
+      "techcrunch.com"
+    ],
+    "key_points": []
+  },
+  {
     "id": "art_5c2e2b8f987b7f8d",
     "email_received_at": "2026-09-14T04:20:57+00:00",
     "canonical_url": "https://www.lennysnewsletter.com/p/community-wisdom-ai-basketball-coaching",
