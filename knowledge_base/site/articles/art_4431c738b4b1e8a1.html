@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI-powered fuzzing with the GitHub Security Lab Taskflow Agent · Winking Digest</title>
+    <link rel="stylesheet" href="../assets/app.css">
+  </head>
+  <body>
+    <header class="detail-topbar">
+      <nav class="site-nav" aria-label="页面导航"><a href="../index.html">Home</a></nav>
+      <a class="detail-home-link" href="../index.html" data-return-to-list>返回列表</a>
+      <div class="detail-heading" data-article-id="art_4431c738b4b1e8a1">
+        <h1>AI-powered fuzzing with the GitHub Security Lab Taskflow Agent</h1>
+        <div class="detail-meta-chips" aria-label="文章元信息">
+          <span class="detail-chip">来源：github.blog</span>
+          <span class="detail-chip">主分类：Agent 与自动化</span>
+          <span class="detail-chip">收录日期：2026-09-28 04:46</span>
+        </div>
+      </div>
+
+    </header>
+    <main class="detail-page">
+      <article class="detail-card" data-article-id="art_4431c738b4b1e8a1">
+        <section class="detail-section hero-section">
+          <h2>文章概要</h2>
+          <p class="detail-summary">本文介绍了GitHub Security Lab推出的Fuzzing Taskflow，这是一个基于LLM Agent的自主模糊测试管道，旨在自动化C/C++项目的安全测试工作。它能处理从识别入口点、编写测试用例到执行模糊测试、分析覆盖率、分类崩溃并生成漏洞报告等一系列复杂任务，显著减少了人工干预的需求。</p>
+        </section>
+        <section class="detail-section">
+          <h2>关键观点</h2>
+          <ul><li>AI Agent能够接管传统上需人工大量参与的迭代和复杂任务，如安全漏洞挖掘中的模糊测试用例编写、覆盖率提升和崩溃分析，从而实现高度自动化，释放人力资源。</li><li>该模糊测试代理采用模块化架构，将LLM Agent的决策能力与独立工具的执行能力分离，即Agent负责策略制定，工具负责具体操作，这种设计提升了系统的灵活性、可维护性和功能组合能力。</li><li>系统内嵌了一个自适应的覆盖率反馈循环，Agent能根据实时覆盖率报告动态调整测试策略，例如添加新的种子、修改测试用例或丰富字典，并通过“高原检测”机制智能地判断何时停止，优化资源使用效率。</li><li>为处理复杂结构化输入，该AI驱动的模糊测试管道结合了多项创新机制，包括基于格式的预置字典与自定义变异器、从源代码动态提取字典、通过覆盖率反馈实时丰富字典，以及语料库拼接操作，显著增强了发现深层漏洞的能力。</li></ul>
+        </section>
+        <section class="detail-section">
+          <details class="personal-note-panel">
+            <summary>个人观点</summary>
+            <label class="sr-only" for="personal-note-art_4431c738b4b1e8a1">个人观点</label>
+            <textarea id="personal-note-art_4431c738b4b1e8a1" class="personal-note-input" data-personal-note="art_4431c738b4b1e8a1" rows="4"></textarea>
+            <p class="personal-note-status" data-personal-note-status="art_4431c738b4b1e8a1"></p>
+          </details>
+        </section>
+      </article>
+      <aside class="detail-sidebar" data-article-id="art_4431c738b4b1e8a1" aria-label="文章状态与链接">
+        <div class="sidebar-panel">
+          <p class="sidebar-label">Archive Mark</p>
+
+              <div class="article-actions" data-user-state-controls data-state-article-id="art_4431c738b4b1e8a1">
+                <span class="state-label">阅读状态：</span>
+                <button class="state-button knowledge-button" type="button" data-toggle-knowledge aria-pressed="false" title="标记是否已入知识库">入库</button>
+                <button class="state-button read-button" type="button" data-toggle-read aria-pressed="false" title="标记是否已读">已读</button>
+                <button class="state-button favorite-button" type="button" data-toggle-favorite aria-pressed="false" title="收藏这篇文章">收藏</button>
+              </div>
+          <a class="original-link" href="https://github.blog/security/application-security/ai-powered-fuzzing-with-the-github-security-lab-taskflow-agent/" target="_blank" rel="noopener noreferrer">打开原文</a>
+        </div>
+        <div class="sidebar-panel">
+          <p class="sidebar-label">Tags</p>
+          <div class="tags"><span class="tag">Agent 与自动化</span><span class="tag">github.blog</span></div>
+        </div>
+      </aside>
+    </main>
+    <script>
+      (() => {
+        const returnLink = document.querySelector("[data-return-to-list]");
+        if (!returnLink) {
+          return;
+        }
+        returnLink.addEventListener("click", (event) => {
+          let savedState = null;
+          try {
+            savedState = window.sessionStorage ? JSON.parse(window.sessionStorage.getItem("ai-weekly-digest:return-state") || "null") : null;
+          } catch (error) {
+            savedState = null;
+          }
+          const matchesCurrentDetail = Boolean(savedState && savedState.detailPath === window.location.pathname);
+          if (matchesCurrentDetail && window.sessionStorage) {
+            event.preventDefault();
+            try {
+              window.sessionStorage.setItem("ai-weekly-digest:restore-list-state", "1");
+            } catch (error) {
+              // Fall through to the saved list URL even if the restore flag cannot be written.
+            }
+            window.location.href = savedState.listHref || returnLink.href;
+          }
+        });
+      })();
+    </script>
+    <script>
+      (() => {
+        const storageKey = "ai-weekly-digest:user-state:v1";
+        const controls = Array.from(document.querySelectorAll("[data-user-state-controls]"));
+        const personalNotes = Array.from(document.querySelectorAll("[data-personal-note]"));
+        const noteStatuses = Array.from(document.querySelectorAll("[data-personal-note-status]"));
+        if (!controls.length && !personalNotes.length) {
+          return;
+        }
+
+        function readStateStore() {
+          try {
+            const raw = window.localStorage ? window.localStorage.getItem(storageKey) : null;
+            const parsed = raw ? JSON.parse(raw) : {};
+            return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+          } catch (error) {
+            return {};
+          }
+        }
+
+        function writeStateStore(store) {
+          try {
+            if (window.localStorage) {
+              window.localStorage.setItem(storageKey, JSON.stringify(store));
+            }
+          } catch (error) {
+            // User state is a local demo enhancement; the page remains readable if storage is unavailable.
+          }
+        }
+
+        function articleState(store, articleId) {
+          const state = store[articleId] || {};
+          return {
+            is_in_knowledge_base: Boolean(state.is_in_knowledge_base),
+            is_read: Boolean(state.is_read),
+            is_favorite: Boolean(state.is_favorite),
+            personal_note: typeof state.personal_note === "string" ? state.personal_note : "",
+            updated_at: state.updated_at || "",
+          };
+        }
+
+        function updateState(articleId, patch) {
+          const store = readStateStore();
+          const current = articleState(store, articleId);
+          store[articleId] = {
+            ...current,
+            ...patch,
+            updated_at: new Date().toISOString(),
+          };
+          writeStateStore(store);
+          renderUserState();
+        }
+
+        function renderUserState() {
+          const store = readStateStore();
+          controls.forEach((control) => {
+            const articleId = control.dataset.stateArticleId || "";
+            const state = articleState(store, articleId);
+            const knowledgeButton = control.querySelector("[data-toggle-knowledge]");
+            const readButton = control.querySelector("[data-toggle-read]");
+            const favoriteButton = control.querySelector("[data-toggle-favorite]");
+            const stateTargets = Array.from(document.querySelectorAll("[data-article-id]")).filter((element) => element.dataset.articleId === articleId);
+            if (knowledgeButton) {
+              knowledgeButton.textContent = "入库";
+              knowledgeButton.setAttribute("aria-pressed", state.is_in_knowledge_base ? "true" : "false");
+              knowledgeButton.classList.toggle("is-active", state.is_in_knowledge_base);
+              knowledgeButton.setAttribute("aria-label", state.is_in_knowledge_base ? "知识库状态：已入知识库，点击取消" : "知识库状态：未入知识库，点击标为已入知识库");
+            }
+            if (readButton) {
+              readButton.textContent = "已读";
+              readButton.setAttribute("aria-pressed", state.is_read ? "true" : "false");
+              readButton.classList.toggle("is-active", state.is_read);
+              readButton.setAttribute("aria-label", state.is_read ? "阅读状态：已读，点击取消" : "阅读状态：未读，点击标为已读");
+            }
+            if (favoriteButton) {
+              favoriteButton.textContent = "收藏";
+              favoriteButton.setAttribute("aria-pressed", state.is_favorite ? "true" : "false");
+              favoriteButton.classList.toggle("is-active", state.is_favorite);
+              favoriteButton.setAttribute("aria-label", state.is_favorite ? "收藏状态：已收藏，点击取消" : "收藏状态：未收藏，点击收藏");
+            }
+            stateTargets.forEach((card) => {
+              card.classList.toggle("is-in-knowledge-base", state.is_in_knowledge_base);
+              card.classList.toggle("is-read", state.is_read);
+              card.classList.toggle("is-favorite", state.is_favorite);
+              card.classList.toggle("has-personal-note", Boolean(state.personal_note.trim()));
+              card.dataset.knowledgeState = state.is_in_knowledge_base ? "in-knowledge-base" : "";
+              card.dataset.readState = state.is_read ? "read" : "unread";
+              card.dataset.favoriteState = state.is_favorite ? "favorite" : "";
+              const noteMarker = card.querySelector("[data-note-marker]");
+              if (noteMarker) {
+                noteMarker.hidden = !state.personal_note.trim();
+              }
+            });
+          });
+          personalNotes.forEach((note) => {
+            const articleId = note.dataset.personalNote || "";
+            const state = articleState(store, articleId);
+            if (note.value !== state.personal_note) {
+              note.value = state.personal_note;
+            }
+          });
+        }
+
+        controls.forEach((control) => {
+          const articleId = control.dataset.stateArticleId || "";
+          const knowledgeButton = control.querySelector("[data-toggle-knowledge]");
+          const readButton = control.querySelector("[data-toggle-read]");
+          const favoriteButton = control.querySelector("[data-toggle-favorite]");
+          if (knowledgeButton) {
+            knowledgeButton.addEventListener("click", () => {
+              const nextKnowledgeState = knowledgeButton.getAttribute("aria-pressed") !== "true";
+              updateState(articleId, { is_in_knowledge_base: nextKnowledgeState });
+            });
+          }
+          if (readButton) {
+            readButton.addEventListener("click", () => {
+              const nextRead = readButton.getAttribute("aria-pressed") !== "true";
+              updateState(articleId, { is_read: nextRead });
+            });
+          }
+          if (favoriteButton) {
+            favoriteButton.addEventListener("click", () => {
+              const nextFavorite = favoriteButton.getAttribute("aria-pressed") !== "true";
+              updateState(articleId, { is_favorite: nextFavorite });
+            });
+          }
+        });
+
+        personalNotes.forEach((note) => {
+          const articleId = note.dataset.personalNote || "";
+          note.addEventListener("input", () => {
+            updateState(articleId, { personal_note: note.value });
+            noteStatuses.forEach((status) => {
+              if (status.dataset.personalNoteStatus === articleId) {
+                status.textContent = note.value.trim() ? "已保存" : "";
+              }
+            });
+          });
+        });
+
+        window.addEventListener("pageshow", renderUserState);
+        window.addEventListener("storage", (event) => {
+          if (event.key === storageKey) {
+            renderUserState();
+          }
+        });
+        renderUserState();
+      })();
+    </script>
+  </body>
+</html>
