@@ -46,7 +46,8 @@ knowledge_base/.venv/bin/python -B knowledge_base/scripts/run_scheduled_update.p
 
 知识库自动更新 workflow 位于 `.github/workflows/knowledge-base-site.yml`。
 
-- 运行时间：每周一 17:00（Asia/Shanghai），也就是每周一 09:00 UTC；
+- 周一 08:00（Asia/Shanghai）的周报邮件工作流成功结束后，知识库更新即自动启动；手动发送的测试邮件不会触发知识库更新；
+- 每周一 17:00（Asia/Shanghai，即 09:00 UTC）的调度保留为后备，GitHub 定时触发可能延迟；
 - 也可以在 GitHub Actions 页面手动运行；
 - 云端运行会先用 `knowledge_base/data/articles.export.json` 重建临时 SQLite，再读取当月 Digest 新文章；
 - 更新完成后会提交公开文章快照和 `knowledge_base/site/` 静态站点，并部署到 GitHub Pages；
@@ -62,6 +63,8 @@ knowledge_base/.venv/bin/python -B knowledge_base/scripts/run_scheduled_update.p
 `OPENAI_API_KEY` 和 `DEEPSEEK_API_KEY` 是可选备用项。
 
 注意：知识库读取邮件需要 Gmail readonly scope，不能复用发邮件 workflow 的 gmail.send token。
+
+两个 Gmail OAuth 客户端都需要在 Google Auth Platform 的 **Audience** 页面设为 **In production**。如果仍是 Testing，Gmail scope 的 refresh token 通常在授权七天后失效。发布后检查 `GMAIL_CREDENTIALS_JSON`、`KB_GMAIL_CREDENTIALS_JSON` 是否对应已发布的客户端；若原 token 已失效，分别用 `gmail.send` 和 `gmail.readonly` 重新授权，并更新 `GMAIL_TOKEN_JSON`、`KB_GMAIL_TOKEN_JSON`。不要把凭证或 token 提交到仓库。
 
 ## 隐私原则
 

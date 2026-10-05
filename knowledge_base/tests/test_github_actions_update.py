@@ -22,6 +22,12 @@ def main() -> int:
     required_snippets = [
         'cron: "0 9 * * 1"',
         "workflow_dispatch:",
+        "workflow_run:",
+        'workflows: ["AI Weekly Digest"]',
+        "types: [completed]",
+        "branches: [main]",
+        "github.event.workflow_run.conclusion == 'success'",
+        "github.event.workflow_run.event == 'schedule'",
         "permissions:",
         "contents: write",
         "pages: write",
@@ -81,7 +87,7 @@ def main() -> int:
     if errors:
         print("\n".join(errors), file=sys.stderr)
         return 1
-    print("PASS: GitHub Actions knowledge-base workflow is scheduled, stateful, and privacy-bounded.")
+    print("PASS: GitHub Actions knowledge-base workflow follows a successful scheduled digest, keeps a fallback schedule, and is privacy-bounded.")
     return 0
 
 

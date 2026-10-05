@@ -2,8 +2,12 @@ name: Knowledge Base Site Update
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ["AI Weekly Digest"]
+    types: [completed]
+    branches: [main]
   schedule:
-    # 17:00 Monday Asia/Shanghai == 09:00 Monday UTC
+    # 17:00 Monday Asia/Shanghai == 09:00 Monday UTC; fallback for missed workflow_run events
     - cron: "0 9 * * 1"
 
 concurrency:
@@ -17,6 +21,10 @@ permissions:
 
 jobs:
   update-and-deploy:
+    # Manual digest runs send test mail and should not update the public site.
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'schedule')
     runs-on: ubuntu-latest
     env:
       TZ: Asia/Shanghai
