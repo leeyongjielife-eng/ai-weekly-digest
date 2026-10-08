@@ -171,6 +171,7 @@
 | `RUN-F-018A-UI-002` | `F-018A-UI` 人工验收 | `DATA-F-001-001` | PASS | 无 |
 | `RUN-F-018B-001` | `F-018B` 增量更新流程实现与回归验证 | `DATA-F-001-001` | PASS | 无 |
 | `RUN-UI-20261008-001` | 首页移除背景图片 | `articles.export.json` | PASS | 无 |
+| `RUN-UI-20261008-002` | 手动静态站点发布分支验证 | `articles.export.json` | PASS | Gmail OAuth token 过期 |
 
 ## 问题索引
 
@@ -2435,3 +2436,12 @@
 - 执行命令：`python3 -B knowledge_base/tests/test_static_site.py --data knowledge_base/data/articles.export.json --meta /tmp/ai-weekly-digest-home-meta.json`
 - 实际结果：静态站点校验通过，包含 8 个日期页、8 个分类页和 139 个详情页；本地浏览器预览确认首页无背景图片。
 - 结论：PASS。
+
+## RUN-UI-20261008-002
+
+- 时间：2026-10-08
+- 任务：为已通过视觉验收的首页改动发布静态站点
+- 触发情况：现有手动工作流在 Gmail 更新步骤因 `invalid_grant` 中止，Pages 部署步骤未执行；当前任务 `F-018C-3` 仍需处理 OAuth 生产配置。
+- 调整措施：在原有知识库工作流增加显式 `deploy_only` 手动选项。仅在该选项为真时跳过 Gmail、AI 和公开产物提交，先校验已提交的 139 篇公开快照与静态页面，再使用原 Pages 步骤部署。定时和正常手动更新行为不变。
+- 验证：`test_github_actions_update.py`、`test_article_data.py`、`test_static_site.py`、YAML 解析与 `git diff --check` 均通过。
+- 结论：PASS（本地发布路径验证）。

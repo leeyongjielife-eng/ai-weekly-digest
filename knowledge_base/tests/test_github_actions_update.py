@@ -46,6 +46,33 @@ def main() -> int:
         if snippet not in workflow:
             errors.append(f"Workflow missing required snippet: {snippet}")
 
+    def step_block(name: str) -> str:
+        marker = f"      - name: {name}\n"
+        start = workflow.find(marker)
+        if start < 0:
+            return ""
+        end = workflow.find("\n      - name: ", start + len(marker))
+        return workflow[start:end if end >= 0 else None]
+
+    if "deploy_only:" not in workflow or "type: boolean" not in workflow or "default: false" not in workflow:
+        errors.append("Manual static-site deployment must be an opt-in workflow_dispatch input.")
+    update_guard = "if: ${{ github.event_name != 'workflow_dispatch' || inputs.deploy_only != true }}"
+    for name in (
+        "Install dependencies",
+        "Restore private runtime files",
+        "Seed SQLite from public article snapshot",
+        "Run scheduled update",
+        "Validate updated data and site",
+        "Commit updated public site artifacts",
+    ):
+        if update_guard not in step_block(name):
+            errors.append(f"Deploy-only runs must skip the update step: {name}")
+    static_validation = step_block("Validate committed static site")
+    if "inputs.deploy_only == true" not in static_validation or "test_static_site.py --data knowledge_base/data/articles.export.json" not in static_validation:
+        errors.append("Deploy-only runs must validate the committed static site before publication.")
+    if not step_block("Configure GitHub Pages") or not step_block("Upload Pages artifact") or not step_block("Deploy to GitHub Pages"):
+        errors.append("Both workflow modes must use the existing GitHub Pages deployment steps.")
+
     forbidden_snippets = [
         "EMAIL_USERNAME",
         "EMAIL_TO",
