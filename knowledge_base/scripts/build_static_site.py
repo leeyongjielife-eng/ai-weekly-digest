@@ -460,32 +460,6 @@ def list_state_script() -> str:
     </script>"""
 
 
-def hero_script() -> str:
-    return """    <script>
-      (() => {
-        const heroStage = document.querySelector("[data-hero-stage]");
-        const heroBrand = document.querySelector("[data-hero-brand]");
-        if (!heroStage || !heroBrand) {
-          return;
-        }
-        heroStage.addEventListener("pointermove", (event) => {
-          const rect = heroStage.getBoundingClientRect();
-          const x = ((event.clientX - rect.left) / rect.width) * 100;
-          const y = ((event.clientY - rect.top) / rect.height) * 100;
-          heroStage.style.setProperty("--spot-x", `${x}%`);
-          heroStage.style.setProperty("--spot-y", `${y}%`);
-          heroStage.classList.add("is-pointer-lit");
-        });
-        heroStage.addEventListener("pointerleave", () => {
-          heroStage.classList.remove("is-pointer-lit");
-          heroStage.classList.remove("is-title-lit");
-        });
-        heroBrand.addEventListener("pointerenter", () => heroStage.classList.add("is-title-lit"));
-        heroBrand.addEventListener("pointerleave", () => heroStage.classList.remove("is-title-lit"));
-      })();
-    </script>"""
-
-
 def detail_return_script() -> str:
     return """    <script>
       (() => {
@@ -547,9 +521,9 @@ def render_home_page(articles: list[dict]) -> str:
     <link rel="stylesheet" href="{css_href(0)}">
   </head>
   <body>
-    <header class="home-hero" data-hero-stage>
+    <header class="home-hero">
       <h1 class="hero-title">
-        <span class="hero-title-link" data-hero-brand aria-label="Winking Digest">
+        <span class="hero-title-link" aria-label="Winking Digest">
           <span>Winking</span>
           <span>Digest</span>
         </span>
@@ -569,7 +543,6 @@ def render_home_page(articles: list[dict]) -> str:
         </div>
       </nav>
     </header>
-{hero_script()}
   </body>
 </html>
 """
@@ -961,58 +934,11 @@ a {
 .home-hero {
   position: relative;
   display: grid;
-  --spot-x: 50%;
-  --spot-y: 46%;
   min-height: 100svh;
   overflow: hidden;
-  isolation: isolate;
   align-content: center;
   justify-items: center;
   background: #fbfaf5;
-}
-
-.home-hero::before {
-  position: absolute;
-  inset: 0;
-  z-index: -4;
-  content: "";
-  background: url("home-classical-crayon-archive-book.png") center / cover no-repeat;
-  filter: brightness(1.03) contrast(1.02) saturate(0.94);
-  transform: scale(1.006);
-  transition: filter 900ms ease, transform 1200ms ease;
-  animation: paintingWake 1200ms ease 800ms forwards;
-}
-
-.home-hero::after {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  content: "";
-  background:
-    radial-gradient(circle at var(--spot-x) var(--spot-y), rgba(255, 255, 248, 0.72), rgba(255, 241, 190, 0.24) 11%, transparent 24%),
-    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 250, 0.38), transparent 34%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 260ms ease;
-  animation: topGlow 1400ms ease 800ms forwards;
-}
-
-.home-hero:hover::before {
-  filter: brightness(1.07) contrast(1.02) saturate(0.96);
-  transform: scale(1.003);
-}
-
-.home-hero:hover::after {
-  opacity: 0.22;
-}
-
-.home-hero.is-title-lit::before {
-  filter: brightness(1.12) contrast(1.02) saturate(0.98);
-}
-
-.home-hero.is-title-lit::after,
-.home-hero.is-pointer-lit::after {
-  opacity: 0.38;
 }
 
 .hero-title {
@@ -1843,18 +1769,6 @@ a {
   font-size: 13px;
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
-}
-
-@keyframes paintingWake {
-  to {
-    filter: brightness(1.05) contrast(1.02) saturate(0.95);
-  }
-}
-
-@keyframes topGlow {
-  to {
-    opacity: 0.12;
-  }
 }
 
 @media (max-width: 1100px) {

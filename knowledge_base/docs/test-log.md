@@ -170,6 +170,7 @@
 | `RUN-F-018A-UI-001` | `F-018A-UI` 首页筛选入口长列表适配 | `DATA-F-001-001` | PASS | 无 |
 | `RUN-F-018A-UI-002` | `F-018A-UI` 人工验收 | `DATA-F-001-001` | PASS | 无 |
 | `RUN-F-018B-001` | `F-018B` 增量更新流程实现与回归验证 | `DATA-F-001-001` | PASS | 无 |
+| `RUN-UI-20261008-001` | 首页移除背景图片 | `articles.export.json` | PASS | 无 |
 
 ## 问题索引
 
@@ -2424,3 +2425,13 @@
 - 实际结果：`test_github_actions_update.py`、`test_scheduled_update.py` 和 `git diff --check` 通过。OAuth 发布状态仍需在 Google Auth Platform 完成。
 - 结论：PASS（触发配置离线验证）
 - 关联问题：无
+
+## RUN-UI-20261008-001
+
+- 时间：2026-10-08
+- 任务：按用户要求移除首页背景图片
+- 测试数据：当前公开快照 `articles.export.json`（139 篇）
+- 调整措施：移除首页封面图及配套鼠标光效，保留暖白底色、标题和 DATE／CATEGORY 入口；同步更新生成脚本、静态页面与校验规则。
+- 执行命令：`python3 -B knowledge_base/tests/test_static_site.py --data knowledge_base/data/articles.export.json --meta /tmp/ai-weekly-digest-home-meta.json`
+- 实际结果：静态站点校验通过，包含 8 个日期页、8 个分类页和 139 个详情页；本地浏览器预览确认首页无背景图片。
+- 结论：PASS。

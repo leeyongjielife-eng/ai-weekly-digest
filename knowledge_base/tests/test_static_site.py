@@ -107,8 +107,10 @@ def main() -> int:
 
     if (args.html.parent / "archive.html").exists():
         errors.append("Homepage must contain the entry choices directly; stale archive.html should not be generated.")
-    if "home-classical-crayon-archive-book.png" not in css or ".home-hero" not in css:
-        errors.append("Homepage must use the classical crayon archive cover image and hero layout.")
+    if ".home-hero" not in css or "background: #fbfaf5;" not in css:
+        errors.append("Homepage must retain the plain, warm white hero layout.")
+    if "home-classical-crayon-archive-book.png" in css or "data-hero-stage" in html:
+        errors.append("Homepage must not restore the cover image or its pointer lighting effect.")
     if "home-choices" not in html or ">DATE<" not in html or ">CATEGORY<" not in html:
         errors.append("Homepage must present DATE and CATEGORY choices directly.")
     if "By Issue" in html or "By Category" in html:
@@ -151,8 +153,8 @@ def main() -> int:
         errors.append("Homepage must not link through an intermediate archive/index page.")
     if "article-card" in html or "data-search-input" in html:
         errors.append("Homepage must not directly show article rows or search before a choice is made.")
-    if "is-pointer-lit" not in html or "--spot-x" not in css or "radial-gradient(circle at var(--spot-x) var(--spot-y)" not in css:
-        errors.append("Homepage must include pointer light interaction.")
+    if "is-pointer-lit" in html or "--spot-x" in css or "radial-gradient(circle at var(--spot-x) var(--spot-y)" in css:
+        errors.append("Homepage must not keep the pointer light effect from the cover image.")
     if "hero-motion-layer" in html or "is-left-motion" in html or "paintedSway" in css:
         errors.append("Homepage must not keep the old cover-region motion layers.")
     if "font-size: clamp(4.6rem, 11.8vw, 12.2rem);" not in css or "transform: translateY(clamp(-34px, -3.5vh, -18px));" not in css:
@@ -438,7 +440,7 @@ def main() -> int:
         print("\n".join(errors), file=sys.stderr)
         return 1
     print(
-        f"PASS: static site contains interactive cover, {len(dates)} issue pages, "
+        f"PASS: static site contains a plain homepage, {len(dates)} issue pages, "
         f"{len(categories)} category pages, and {len(articles)} detail pages."
     )
     return 0

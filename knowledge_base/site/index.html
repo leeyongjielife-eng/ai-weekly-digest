@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="assets/app.css">
   </head>
   <body>
-    <header class="home-hero" data-hero-stage>
+    <header class="home-hero">
       <h1 class="hero-title">
-        <span class="hero-title-link" data-hero-brand aria-label="Winking Digest">
+        <span class="hero-title-link" aria-label="Winking Digest">
           <span>Winking</span>
           <span>Digest</span>
         </span>
@@ -107,28 +107,5 @@
         </div>
       </nav>
     </header>
-    <script>
-      (() => {
-        const heroStage = document.querySelector("[data-hero-stage]");
-        const heroBrand = document.querySelector("[data-hero-brand]");
-        if (!heroStage || !heroBrand) {
-          return;
-        }
-        heroStage.addEventListener("pointermove", (event) => {
-          const rect = heroStage.getBoundingClientRect();
-          const x = ((event.clientX - rect.left) / rect.width) * 100;
-          const y = ((event.clientY - rect.top) / rect.height) * 100;
-          heroStage.style.setProperty("--spot-x", `${x}%`);
-          heroStage.style.setProperty("--spot-y", `${y}%`);
-          heroStage.classList.add("is-pointer-lit");
-        });
-        heroStage.addEventListener("pointerleave", () => {
-          heroStage.classList.remove("is-pointer-lit");
-          heroStage.classList.remove("is-title-lit");
-        });
-        heroBrand.addEventListener("pointerenter", () => heroStage.classList.add("is-title-lit"));
-        heroBrand.addEventListener("pointerleave", () => heroStage.classList.remove("is-title-lit"));
-      })();
-    </script>
   </body>
 </html>
