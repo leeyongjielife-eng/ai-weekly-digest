@@ -518,9 +518,6 @@ def home_choice_script() -> str:
             }
           });
         });
-        document.addEventListener("pointerdown", (event) => {
-          if (!event.target.closest(".home-choice")) closeChoices();
-        });
         document.addEventListener("keydown", (event) => {
           if (event.key !== "Escape") return;
           const openTrigger = document.querySelector(".home-choice.is-open .home-choice-trigger");
