@@ -172,6 +172,7 @@
 | `RUN-F-018B-001` | `F-018B` 增量更新流程实现与回归验证 | `DATA-F-001-001` | PASS | 无 |
 | `RUN-UI-20261008-001` | 首页移除背景图片 | `articles.export.json` | PASS | 无 |
 | `RUN-UI-20261008-002` | 手动静态站点发布分支验证 | `articles.export.json` | PASS | Gmail OAuth token 过期 |
+| `RUN-UI-20261013-001` | 首页日期与分类入口触屏点击修复 | `articles.export.json` | PASS | 无 |
 
 ## 问题索引
 
@@ -2445,3 +2446,12 @@
 - 调整措施：在原有知识库工作流增加显式 `deploy_only` 手动选项。仅在该选项为真时跳过 Gmail、AI 和公开产物提交，先校验已提交的 139 篇公开快照与静态页面，再使用原 Pages 步骤部署。定时和正常手动更新行为不变。
 - 验证：`test_github_actions_update.py`、`test_article_data.py`、`test_static_site.py`、YAML 解析与 `git diff --check` 均通过。
 - 结论：PASS（本地发布路径验证）。
+
+## RUN-UI-20261013-001
+
+- 时间：2026-10-13
+- 任务：修复手机和平板无法点击首页日期、分类链接
+- 根因：首页列表只依赖 `:hover` 展开，默认 `pointer-events: none`；触屏设备没有稳定的鼠标悬停状态。
+- 调整措施：DATE／CATEGORY 改为带 `aria-expanded` 的按钮；点击时只展开一个列表，点页面空白处或按 Escape 可关闭。触屏样式让展开列表进入页面布局并启用链接点击，桌面悬停行为继续保留。
+- 验证：`test_static_site.py` 通过（139 篇、8 个日期页、8 个分类页）；390×844 和 820×1180 浏览器视口中，点击 DATE／CATEGORY 后的链接分别成功进入日期页与分类页；生成后的首页和 CSS 与生成脚本一致。
+- 结论：PASS（本地验证）。

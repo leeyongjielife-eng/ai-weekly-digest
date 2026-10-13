@@ -117,14 +117,20 @@ def main() -> int:
         errors.append("Homepage entry labels must use date/category without the old By prefix.")
     if "home-choice-list" not in html or "home-choice-row" not in html:
         errors.append("Homepage choices must reveal issue/category lists on hover or tap.")
+    if 'aria-controls="home-issue-list"' not in html or 'aria-controls="home-category-list"' not in html:
+        errors.append("Homepage entry buttons must identify their date and category lists.")
+    if html.count('class="home-choice-trigger" type="button" aria-expanded="false"') != 2:
+        errors.append("Homepage entry labels must be tappable buttons with an accessible expanded state.")
+    if 'trigger.addEventListener("click"' not in html or 'choice.classList.add("is-open")' not in html:
+        errors.append("Homepage entry buttons must open their lists on tap or click.")
     if '<button type="button" aria-expanded="false">By Issue</button>' in html or '<button type="button" aria-expanded="false">By Category</button>' in html:
         errors.append("Homepage entry labels must not be click-to-open buttons.")
     if 'content: "Open";' in css:
         errors.append("Homepage entry labels must not show the old OPEN hint.")
     if "border-bottom: 1px solid rgba(25, 25, 25, 0.32);" in css or "border-bottom-color: rgba(25, 25, 25, 0.72);" in css:
         errors.append("Homepage entry labels must not show underline rules.")
-    if ".home-choice:hover .home-choice-list" not in css or ".home-choice:focus-within .home-choice-list" in css:
-        errors.append("Homepage entry lists should open from hover, not from click/focus state.")
+    if ".home-choice:hover .home-choice-list" not in css or ".home-choice.is-open .home-choice-list" not in css:
+        errors.append("Homepage entry lists must open from desktop hover and explicit click state.")
     if ".home-choice-list" not in css or "scrollbar-width: thin;" not in css or ".home-choice-list::-webkit-scrollbar-thumb" not in css:
         errors.append("Homepage entry lists must expose subtle scroll affordance for long lists.")
     if "max-height: min(34vh, 320px);" not in css or "-webkit-overflow-scrolling: touch;" not in css:
@@ -145,8 +151,11 @@ def main() -> int:
         errors.append("Homepage entry drawers need an invisible hover bridge so lists stay clickable.")
     if ".home-choices:has(.home-choice:hover) .home-choice:not(:hover)" not in css:
         errors.append("Homepage must use the single-open-drawer effect so the other entry recedes.")
-    if "opacity: 1;\n    pointer-events: auto;\n    transform: none;" in css:
-        errors.append("Homepage entry lists must not be fully displayed by the small-screen rules.")
+    touch_styles = css.split("@media (hover: none), (pointer: coarse) {", 1)
+    if len(touch_styles) != 2 or "display: none;" not in touch_styles[1] or ".home-choice.is-open .home-choice-list" not in touch_styles[1] or "display: block;" not in touch_styles[1]:
+        errors.append("Touch layouts must reveal only the list opened by a tap.")
+    if "pointer-events: auto;" not in touch_styles[-1] or "position: static;" not in touch_styles[-1]:
+        errors.append("Touch entry lists must have clickable links in the page flow.")
     if re.search(r'class="hero-title-link"[^>]+href=', html):
         errors.append("Homepage title should be atmospheric text only; navigation belongs to the two entry choices.")
     if 'href="archive.html"' in html or 'href="#index"' in html:

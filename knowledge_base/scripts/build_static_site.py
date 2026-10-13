@@ -497,6 +497,40 @@ def render_home_choice(href: str, label: str, count: int) -> str:
             </a>"""
 
 
+def home_choice_script() -> str:
+    return """    <script>
+      (() => {
+        const choices = [...document.querySelectorAll(".home-choice")];
+        const closeChoices = () => {
+          choices.forEach((choice) => {
+            choice.classList.remove("is-open");
+            choice.querySelector(".home-choice-trigger").setAttribute("aria-expanded", "false");
+          });
+        };
+        choices.forEach((choice) => {
+          const trigger = choice.querySelector(".home-choice-trigger");
+          trigger.addEventListener("click", () => {
+            const shouldOpen = !choice.classList.contains("is-open");
+            closeChoices();
+            if (shouldOpen) {
+              choice.classList.add("is-open");
+              trigger.setAttribute("aria-expanded", "true");
+            }
+          });
+        });
+        document.addEventListener("pointerdown", (event) => {
+          if (!event.target.closest(".home-choice")) closeChoices();
+        });
+        document.addEventListener("keydown", (event) => {
+          if (event.key !== "Escape") return;
+          const openTrigger = document.querySelector(".home-choice.is-open .home-choice-trigger");
+          closeChoices();
+          if (openTrigger) openTrigger.focus();
+        });
+      })();
+    </script>"""
+
+
 def render_home_page(articles: list[dict]) -> str:
     groups: dict[str, list[dict]] = defaultdict(list)
     for article in articles:
@@ -530,19 +564,20 @@ def render_home_page(articles: list[dict]) -> str:
       </h1>
       <nav class="home-choices" aria-label="知识库入口">
         <div class="home-choice home-choice-issue">
-          <div class="home-choice-trigger">DATE</div>
-          <div class="home-choice-list">
+          <button class="home-choice-trigger" type="button" aria-expanded="false" aria-controls="home-issue-list">DATE</button>
+          <div class="home-choice-list" id="home-issue-list">
 {issue_rows}
           </div>
         </div>
         <div class="home-choice home-choice-category">
-          <div class="home-choice-trigger">CATEGORY</div>
-          <div class="home-choice-list">
+          <button class="home-choice-trigger" type="button" aria-expanded="false" aria-controls="home-category-list">CATEGORY</button>
+          <div class="home-choice-list" id="home-category-list">
 {category_rows}
           </div>
         </div>
       </nav>
     </header>
+{home_choice_script()}
   </body>
 </html>
 """
@@ -990,7 +1025,8 @@ a {
   transition: opacity 220ms ease, transform 260ms ease;
 }
 
-.home-choice:hover {
+.home-choice:hover,
+.home-choice.is-open {
   z-index: 4;
 }
 
@@ -1011,9 +1047,11 @@ a {
 
 .home-choice-trigger {
   width: 100%;
+  min-height: 44px;
   padding: 0 0 13px;
   border: 0;
   background: transparent;
+  appearance: none;
   color: inherit;
   font-family: var(--display-font);
   font-size: 18px;
@@ -1021,9 +1059,17 @@ a {
   letter-spacing: 0.03em;
   text-align: center;
   text-transform: none;
+  cursor: pointer;
+  touch-action: manipulation;
 }
 
-.home-choice:hover .home-choice-trigger {
+.home-choice-trigger:focus-visible {
+  outline: 1px solid var(--strong-line);
+  outline-offset: 4px;
+}
+
+.home-choice:hover .home-choice-trigger,
+.home-choice.is-open .home-choice-trigger {
   color: var(--ink);
 }
 
@@ -1068,7 +1114,8 @@ a {
   background: rgba(25, 25, 25, 0.24);
 }
 
-.home-choice:hover .home-choice-list {
+.home-choice:hover .home-choice-list,
+.home-choice.is-open .home-choice-list {
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, 0);
@@ -1082,7 +1129,8 @@ a {
   transform: translate(-50%, 8px);
 }
 
-.home-choice-category:hover .home-choice-list {
+.home-choice-category:hover .home-choice-list,
+.home-choice-category.is-open .home-choice-list {
   transform: translate(-50%, 0);
 }
 
@@ -1801,7 +1849,8 @@ a {
     transform: translate(-50%, 8px);
   }
 
-  .home-choice-category:hover .home-choice-list {
+  .home-choice-category:hover .home-choice-list,
+  .home-choice-category.is-open .home-choice-list {
     transform: translate(-50%, 0);
   }
 
@@ -1870,7 +1919,9 @@ a {
   }
 
   .home-choice:hover .home-choice-list,
-  .home-choice-category:hover .home-choice-list {
+  .home-choice-category:hover .home-choice-list,
+  .home-choice.is-open .home-choice-list,
+  .home-choice-category.is-open .home-choice-list {
     transform: translateY(0);
   }
 
@@ -1893,6 +1944,47 @@ a {
 
   .article-card-footer {
     display: grid;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .home-hero {
+    overflow: visible;
+    align-content: safe center;
+    padding: 36px 0 56px;
+  }
+
+  .home-choices {
+    align-items: start;
+  }
+
+  .home-choice::after {
+    display: none;
+  }
+
+  .home-choices:has(.home-choice:hover) .home-choice:not(:hover) {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  .home-choice-list,
+  .home-choice-category .home-choice-list {
+    position: static;
+    display: none;
+    width: 100%;
+    max-height: min(42vh, 360px);
+    margin-top: 4px;
+    padding-top: 16px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  .home-choice.is-open .home-choice-list,
+  .home-choice-category.is-open .home-choice-list {
+    display: block;
+    transform: none;
   }
 }
 """
