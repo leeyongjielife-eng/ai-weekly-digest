@@ -622,6 +622,26 @@ def run_once(dry_run: bool = False, output_path: Path | None = None) -> None:
     items = fetch_recent_items(days=7)
     html = generate_html(items)
 
+    article_output = os.getenv("DIGEST_ARTICLES_OUTPUT", "").strip()
+    if article_output:
+        curated_items = curate_items(items)
+        received_at = datetime.now().astimezone().isoformat(timespec="seconds")
+        records = [
+            {
+                "email_received_at": received_at,
+                "title": item.title,
+                "url": item.link,
+                "author": item.author,
+                "source": item.source,
+                "published_at": item.published_at,
+                "summary": item.summary,
+            }
+            for item in curated_items
+        ]
+        article_path = Path(article_output)
+        article_path.parent.mkdir(parents=True, exist_ok=True)
+        article_path.write_text(json.dumps(records, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
     if output_path:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(html, encoding="utf-8")

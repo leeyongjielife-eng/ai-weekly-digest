@@ -20,12 +20,13 @@ def main() -> int:
     gitignore = GITIGNORE.read_text(encoding="utf-8")
 
     required_snippets = [
-        'cron: "0 9 * * 1"',
+        'cron: "17 9 * * 1"',
         "workflow_dispatch:",
         "workflow_run:",
         'workflows: ["AI Weekly Digest"]',
         "types: [completed]",
         "branches: [main]",
+        "actions: read",
         "github.event.workflow_run.conclusion == 'success'",
         "github.event.workflow_run.event == 'schedule'",
         "permissions:",
@@ -39,6 +40,9 @@ def main() -> int:
         "knowledge_base/data/test-articles.meta.json",
         "knowledge_base/scripts/import_articles_json.py --data knowledge_base/data/articles.export.json --replace",
         "knowledge_base/scripts/run_scheduled_update.py --provider auto",
+        "actions/upload-artifact@v4",
+        "gh run download '${{ github.event.workflow_run.id }}'",
+        "--input knowledge_base/data/private/digest-articles/knowledge_base-input.json",
         "actions/deploy-pages@v4",
         "knowledge_base/data/private/last-scheduled-update.json",
     ]
@@ -84,7 +88,12 @@ def main() -> int:
         if snippet in workflow:
             errors.append(f"Knowledge-base workflow should not send email or configure email output: {snippet}")
 
-    if 'cron: "0 0 * * 1"' not in mail_workflow or "python ai_digest.py" not in mail_workflow:
+    if (
+        'cron: "17 0 * * 1"' not in mail_workflow
+        or "python ai_digest.py" not in mail_workflow
+        or "name: digest-articles" not in mail_workflow
+        or "DIGEST_ARTICLES_OUTPUT: knowledge_base-input.json" not in mail_workflow
+    ):
         errors.append("Existing mail digest workflow no longer matches the expected Monday morning sender shape.")
 
     if "!data/articles.export.json" not in gitignore:

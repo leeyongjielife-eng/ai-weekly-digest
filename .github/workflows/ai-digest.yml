@@ -3,8 +3,8 @@ name: AI Weekly Digest
 on:
   workflow_dispatch:
   schedule:
-    # 08:00 Monday Asia/Shanghai == 00:00 Monday UTC
-    - cron: "0 0 * * 1"
+    # 08:17 Monday Asia/Shanghai == 00:17 Monday UTC; avoid GitHub's busy top-of-hour window
+    - cron: "17 0 * * 1"
 
 concurrency:
   group: ai-weekly-digest
@@ -68,4 +68,13 @@ jobs:
           EOF
 
       - name: Send digest
+        env:
+          DIGEST_ARTICLES_OUTPUT: knowledge_base-input.json
         run: python ai_digest.py
+
+      - name: Upload knowledge base input
+        uses: actions/upload-artifact@v4
+        with:
+          name: digest-articles
+          path: knowledge_base-input.json
+          retention-days: 14

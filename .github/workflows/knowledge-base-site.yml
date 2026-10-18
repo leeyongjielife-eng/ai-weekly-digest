@@ -12,14 +12,15 @@ on:
     types: [completed]
     branches: [main]
   schedule:
-    # 17:00 Monday Asia/Shanghai == 09:00 Monday UTC; fallback for missed workflow_run events
-    - cron: "0 9 * * 1"
+    # 17:17 Monday Asia/Shanghai == 09:17 Monday UTC; fallback for missed workflow_run events
+    - cron: "17 9 * * 1"
 
 concurrency:
   group: knowledge-base-site-update
   cancel-in-progress: false
 
 permissions:
+  actions: read
   contents: write
   pages: write
   id-token: write
@@ -52,18 +53,30 @@ jobs:
       - name: Restore private runtime files
         if: ${{ github.event_name != 'workflow_dispatch' || inputs.deploy_only != true }}
         run: |
-          test -n '${{ secrets.KB_GMAIL_CREDENTIALS_JSON }}'
-          test -n '${{ secrets.KB_GMAIL_TOKEN_JSON }}'
           test -n '${{ secrets.GOOGLE_API_KEY }}${{ secrets.OPENAI_API_KEY }}${{ secrets.DEEPSEEK_API_KEY }}'
           mkdir -p knowledge_base/secrets knowledge_base/data/private
-          printf '%s' '${{ secrets.KB_GMAIL_CREDENTIALS_JSON }}' > knowledge_base/secrets/gmail-readonly-credentials.json
-          printf '%s' '${{ secrets.KB_GMAIL_TOKEN_JSON }}' > knowledge_base/secrets/gmail-readonly-token.json
+          if [ "$GITHUB_EVENT_NAME" != "workflow_run" ]; then
+            test -n '${{ secrets.KB_GMAIL_CREDENTIALS_JSON }}'
+            test -n '${{ secrets.KB_GMAIL_TOKEN_JSON }}'
+            printf '%s' '${{ secrets.KB_GMAIL_CREDENTIALS_JSON }}' > knowledge_base/secrets/gmail-readonly-credentials.json
+            printf '%s' '${{ secrets.KB_GMAIL_TOKEN_JSON }}' > knowledge_base/secrets/gmail-readonly-token.json
+          fi
           cat > knowledge_base/secrets/summary.env <<EOF
           AI_SUMMARY_PROVIDER=auto
           GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}
           OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
           DEEPSEEK_API_KEY=${{ secrets.DEEPSEEK_API_KEY }}
           EOF
+
+      - name: Download sent digest articles
+        if: github.event_name == 'workflow_run'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download '${{ github.event.workflow_run.id }}' \
+            --repo "$GITHUB_REPOSITORY" \
+            --name digest-articles \
+            --dir knowledge_base/data/private/digest-articles
 
       - name: Seed SQLite from public article snapshot
         if: ${{ github.event_name != 'workflow_dispatch' || inputs.deploy_only != true }}
@@ -72,8 +85,15 @@ jobs:
           python -B knowledge_base/scripts/import_articles_json.py --data knowledge_base/data/articles.export.json --replace
 
       - name: Run scheduled update
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.deploy_only != true }}
+        if: ${{ github.event_name != 'workflow_run' && (github.event_name != 'workflow_dispatch' || inputs.deploy_only != true) }}
         run: python -B knowledge_base/scripts/run_scheduled_update.py --provider auto
+
+      - name: Update from sent digest
+        if: github.event_name == 'workflow_run'
+        run: >-
+          python -B knowledge_base/scripts/update_from_digest.py
+          --input knowledge_base/data/private/digest-articles/knowledge_base-input.json
+          --provider auto
 
       - name: Validate updated data and site
         if: ${{ github.event_name != 'workflow_dispatch' || inputs.deploy_only != true }}
