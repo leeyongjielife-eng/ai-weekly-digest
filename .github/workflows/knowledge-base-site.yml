@@ -55,7 +55,7 @@ jobs:
         run: |
           test -n '${{ secrets.GOOGLE_API_KEY }}${{ secrets.OPENAI_API_KEY }}${{ secrets.DEEPSEEK_API_KEY }}'
           mkdir -p knowledge_base/secrets knowledge_base/data/private
-          if [ "$GITHUB_EVENT_NAME" != "workflow_run" ]; then
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
             test -n '${{ secrets.KB_GMAIL_CREDENTIALS_JSON }}'
             test -n '${{ secrets.KB_GMAIL_TOKEN_JSON }}'
             printf '%s' '${{ secrets.KB_GMAIL_CREDENTIALS_JSON }}' > knowledge_base/secrets/gmail-readonly-credentials.json
@@ -69,11 +69,25 @@ jobs:
           EOF
 
       - name: Download sent digest articles
-        if: github.event_name == 'workflow_run'
+        if: github.event_name == 'workflow_run' || github.event_name == 'schedule'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh run download '${{ github.event.workflow_run.id }}' \
+          if [ "$GITHUB_EVENT_NAME" = "workflow_run" ]; then
+            digest_run_id='${{ github.event.workflow_run.id }}'
+          else
+            week_start="$(date -u -d 'monday this week' +%Y-%m-%dT00:00:00Z)"
+            digest_run_id="$(gh run list \
+              --workflow ai-digest.yml \
+              --event schedule \
+              --status success \
+              --limit 10 \
+              --json databaseId,createdAt \
+              | jq -r --arg cutoff "$week_start" '.[] | select(.createdAt >= $cutoff) | .databaseId' \
+              | head -n 1)"
+          fi
+          test -n "$digest_run_id"
+          gh run download "$digest_run_id" \
             --repo "$GITHUB_REPOSITORY" \
             --name digest-articles \
             --dir knowledge_base/data/private/digest-articles
@@ -85,11 +99,11 @@ jobs:
           python -B knowledge_base/scripts/import_articles_json.py --data knowledge_base/data/articles.export.json --replace
 
       - name: Run scheduled update
-        if: ${{ github.event_name != 'workflow_run' && (github.event_name != 'workflow_dispatch' || inputs.deploy_only != true) }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy_only != true }}
         run: python -B knowledge_base/scripts/run_scheduled_update.py --provider auto
 
       - name: Update from sent digest
-        if: github.event_name == 'workflow_run'
+        if: github.event_name == 'workflow_run' || github.event_name == 'schedule'
         run: >-
           python -B knowledge_base/scripts/update_from_digest.py
           --input knowledge_base/data/private/digest-articles/knowledge_base-input.json

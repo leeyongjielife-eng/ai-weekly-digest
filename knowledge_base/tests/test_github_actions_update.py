@@ -41,7 +41,10 @@ def main() -> int:
         "knowledge_base/scripts/import_articles_json.py --data knowledge_base/data/articles.export.json --replace",
         "knowledge_base/scripts/run_scheduled_update.py --provider auto",
         "actions/upload-artifact@v4",
-        "gh run download '${{ github.event.workflow_run.id }}'",
+        "digest_run_id='${{ github.event.workflow_run.id }}'",
+        "--workflow ai-digest.yml",
+        "select(.createdAt >= $cutoff)",
+        "if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy_only != true }}",
         "--input knowledge_base/data/private/digest-articles/knowledge_base-input.json",
         "actions/deploy-pages@v4",
         "knowledge_base/data/private/last-scheduled-update.json",
@@ -65,12 +68,13 @@ def main() -> int:
         "Install dependencies",
         "Restore private runtime files",
         "Seed SQLite from public article snapshot",
-        "Run scheduled update",
         "Validate updated data and site",
         "Commit updated public site artifacts",
     ):
         if update_guard not in step_block(name):
             errors.append(f"Deploy-only runs must skip the update step: {name}")
+    if "github.event_name == 'workflow_dispatch' && inputs.deploy_only != true" not in step_block("Run scheduled update"):
+        errors.append("Manual Gmail update must be limited to non-deploy-only workflow_dispatch runs.")
     static_validation = step_block("Validate committed static site")
     if "inputs.deploy_only == true" not in static_validation or "test_static_site.py --data knowledge_base/data/articles.export.json" not in static_validation:
         errors.append("Deploy-only runs must validate the committed static site before publication.")
