@@ -1,5 +1,1245 @@
 [
   {
+    "id": "art_7f08b3ee43a0859e",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/community-wisdom-negotiating-a-lowball",
+    "title": "🧠 Community Wisdom: Negotiating a lowball offer, designers earning a seat in product decisions, resources for building an MCP server, and more",
+    "author": "Kiyani",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-24T15:11:42+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_d34982012b9aedbf",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/how-i-ai-meta-muse-wonder-how-brooke",
+    "title": "🎙️ How I AI: Meta Muse Wonder + How Brooke Lacey is scaling video with AI",
+    "author": "Lenny Rachitsky",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-19T15:03:35+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_3013f9811fb1e14c",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/claude-cuts-my-tiktok-how-this-creator",
+    "title": "“Claude cuts my TikTok”: How this creator is scaling video with AI | Brooke Lacey",
+    "author": "Claire Vo",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-19T12:04:52+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_86e6001ae15d628d",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://latent.space/p/ainews-openais-patch-the-planet-program/",
+    "title": "[AINews] OpenAI’s Patch the Planet program is 1 of 2 parties to discover PHP2Shell vulnerabilities in core PHP affecting 70% of the web, using GPT-5.6 Sol; coordinated response over 2 months",
+    "author": "Latent Space",
+    "source": "Latent Space",
+    "source_type": "其他",
+    "published_at": "2026-10-22T07:42:44+00:00",
+    "summary_zh": "OpenAI 的 Patch the Planet 项目与 Wiz 分别利用 GPT-5.6 Sol 和 Gemini 4 Argon 独立发现 PHP 核心内存破坏漏洞 PHP2Shell（CVE-2026-109618/109619），可导致 WordPress、Drupal、Joomla 的未认证远程代码执行；经过约两个月的协调修复后披露，Cloudflare 在补丁发布前部署了 WAF 缓解规则。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "工程、基础设施与安全",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "工程、基础设施与安全",
+      "Latent Space"
+    ],
+    "key_points": [
+      "漏洞根因在 PHP 引擎对内存耗尽和致命错误的处理，而非插件或应用认证逻辑，因此无法靠等待插件更新修复，必须升级 PHP 运行时本身。",
+      "这是多方独立发现的故事：Calif/OpenAI 用 GPT-5.6 Sol、Wiz 用 Gemini 4 Argon 及自研工具分别找到同一批漏洞，说明前沿模型已能实际参与高危漏洞发现与补丁验证，而非仅停留在基准测试。",
+      "Cloudflare 在补丁发布前部署覆盖已知利用向量的 WAF 规则（含免费层），但明确称其为临时措施，运营者仍须在补丁发布时立即升级；NSA 建议无法及时缓解时下线系统。",
+      "OpenAI 将此事定位为“Defender's Window”——模型先于攻击者发现漏洞以争取防御时间，但该表述是“据我们所知”，不能证明此前无攻击者掌握漏洞；同时研究者访问政策（Daybreak 审查准入 vs Anthropic 限制）引发争议。"
+    ]
+  },
+  {
+    "id": "art_e13abf3ab355d050",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://latent.space/p/moshi/",
+    "title": "You are the Team — Anekha Sokhal, Moshi",
+    "author": "Latent.Space",
+    "source": "Latent Space",
+    "source_type": "其他",
+    "published_at": "2026-10-22T14:03:40+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Latent Space"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_43fa73ddaf377eb5",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://techcrunch.com/2026/10/24/the-ai-graveyard-a-running-list-of-projects-and-startups-that-didnt-make-it/",
+    "title": "The AI graveyard: a running list of projects and startups that didn’t make it",
+    "author": "Lauren Forristal",
+    "source": "TechCrunch AI",
+    "source_type": "其他",
+    "published_at": "2026-10-24T19:00:00+00:00",
+    "summary_zh": "TechCrunch 汇总了一份 AI 项目与创业公司的“墓地”清单，记录 Relay、Character.ai、Humane AI Pin 等产品的关停、转型或未达预期，并指出约 42% 的企业 AI 计划最终被放弃。文章将失败原因归结为资金不足、技术挑战、竞争、规模化困难与需求疲软，并强调大平台把功能内化会挤压独立产品。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "商业、创业与投资",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "商业、创业与投资",
+      "TechCrunch AI"
+    ],
+    "key_points": [
+      "独立 AI 工具面临被平台内化的结构性风险：Relay 因 OpenAI、Google 等把工作流自动化直接内置而失去存在理由，ChatGPT Atlas、Operator、DALL-E 也被并入 ChatGPT 主应用。",
+      "S&P Global 数据显示约 42% 的企业 AI 计划最终被母公司放弃，失败原因包括资金不足、技术挑战、竞争、难以规模化和用户需求疲软。",
+      "AI 硬件的高关注度不等于产品成熟：Humane AI Pin 融资 2.3 亿美元后因性能与电池安全问题关停业务，资产以 1.16 亿美元被 HP 收购；Rabbit R1 首销 10 万台但早期评价认为产品未完成。",
+      "用户行为会决定产品形态：Notion Mail 发现用户更愿意用独立 AI agent 处理收件箱，于是计划关停该产品；Yupp 虽能对比 800 多个模型，但未达到足够的产品市场契合。"
+    ]
+  },
+  {
+    "id": "art_a286ccfbec858524",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://simonwillison.net/2026/Oct/19/my-obituary-for-programming/",
+    "title": "My obituary for programming",
+    "author": "Simon Willison",
+    "source": "Simon Willison",
+    "source_type": "其他",
+    "published_at": "2026-10-19T23:58:25+00:00",
+    "summary_zh": "Simon Willison 引述 Jeremy Scheff 的观点，指出编码智能体让职业程序员失去的，是那种把编程当作解谜游戏的乐趣：过去他们因解决难题而获得高薪和掌控权，如今 LLM 改变了这一价值结构。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "工作方式与职业变化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "工作方式与职业变化",
+      "Simon Willison"
+    ],
+    "key_points": [
+      "编程曾是一份罕见的高薪工作：报酬与逻辑谜题的难度挂钩，连简单问题也值钱，因为普通人做不了。",
+      "程序员过去掌握策略、时间线和可行性定义权，这种对工作方式的控制权是职业吸引力的重要部分。",
+      "对享受构建可运行系统、不太在意具体问题本身的程序员，LLM 是持续利好；对以直接解题为乐趣的人，损失真实存在。",
+      "编码智能体带来的核心冲击不只是效率提升，而是重新分配了“谁来解决难题”以及解题乐趣的归属。"
+    ]
+  },
+  {
+    "id": "art_fee5d6bca690475f",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://techcrunch.com/2026/10/22/left-alone-with-nothing-to-do-ai-agents-started-playing/",
+    "title": "Left alone with nothing to do, AI agents started playing",
+    "author": "Aditya Mehta",
+    "source": "TechCrunch AI",
+    "source_type": "其他",
+    "published_at": "2026-10-23T00:45:37+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "TechCrunch AI"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_9e0308113d32ae3f",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://simonwillison.net/2026/Oct/23/kimi-k31-pro/",
+    "title": "Introducing Kimi K3.1 Pro",
+    "author": "Simon Willison",
+    "source": "Simon Willison",
+    "source_type": "其他",
+    "published_at": "2026-10-23T19:40:54+00:00",
+    "summary_zh": "Moonshot 发布 Kimi K3.1 Pro，API 定价与 GPT-6.1 Sol 相同、为 Claude Opus 5.5 的一半，并承诺 11 月 4 日前开放完整模型权重；Artificial Analysis 评分 55，仅次于 Opus 5.5，是首个接近前沿水平的准开源权重模型。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "模型与平台",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "模型与平台",
+      "Simon Willison"
+    ],
+    "key_points": [
+      "Kimi K3.1 Pro 定价为输入 $2/百万 token、输出 $10/百万 token，与 GPT-6.1 Sol 持平，是 Claude Opus 5.5 的一半；另提供 2-3 倍速度但价格翻倍的 Highspeed 版本，输入缓存命中价格不变。",
+      "Moonshot 承诺 2026 年 11 月 4 日前发布完整模型权重，目前仅 API 可用；Artificial Analysis 评分 55，超过 Claude Fable 5.1、GPT-6 Astra 和 Gemini 4 Argon（均 53），仅落后 Opus 5.5（58），是准开源权重模型首次接近前沿水平。",
+      "作者用 LLM 0.32 的 llm openai endpoint 命令调用 Moonshot 的 OpenAI 兼容接口，并通过重定向 stdout/stderr 保存输出与推理轨迹，因为该命令本身不记录结果——这是接入任意兼容端点时可复用的调试方法。",
+      "模型支持 low、medium、max 三档 reasoning effort，作者用同一 SVG 生成任务对比不同档位输出，作为快速评估模型能力的轻量测试方式。"
+    ]
+  },
+  {
+    "id": "art_40634a33b7feb1d3",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://blog.cloudflare.com/clairic-extraction-model/",
+    "title": "Introducing Clairic, a new System One class of extraction models",
+    "author": "Kevin Flansburg",
+    "source": "Cloudflare AI",
+    "source_type": "其他",
+    "published_at": "2026-10-19T17:48:26+00:00",
+    "summary_zh": "Cloudflare 发布 System One 类提取模型 Clairic 预览版，托管于 Workers AI，可单次前向传播从非结构化输入中提取、计算、估计和预测带类型的值，比传统 LLM 更快、更便宜、更准确，并计划开源权重。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "模型与平台",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "模型与平台",
+      "Cloudflare AI"
+    ],
+    "key_points": [
+      "Clairic 不生成 token，单次前向传播即返回结果，只对输入计费，通常一秒内响应；请求由文本（最多四张可选图片）和带类型的字段映射组成，字段数量不限，超出单次容量时服务端拆分为并行批次再合并。",
+      "输出为强类型值并附带 p_null 与置信度：提取值带字符偏移 span，计算值遵循类型规则（如金额两位小数），估计值返回中位数与 80% 区间，预测值逐步给出区间；缺失字段返回 null 而非编造。",
+      "与 LLM 提取相比，Clairic 避免无效 JSON、生成时误读数字、无法溯源等问题，减少多层解析、schema 校验、重试和抽查的管道复杂度，且三十个字段的成本约等于三个字段。",
+      "System One 模型分工：提取模型把原始输入转为类型化值，决策模型（如 Clef）在固定选项中给出概率，LLM 负责开放式文本，三者可串联完成从解析数据到决策再到表达的工作流。"
+    ]
+  },
+  {
+    "id": "art_e0747ebfca0e8ec5",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://jack-clark.net/2026/10/19/import-ai-477-in-which-i-tell-the-imf-the-singularity-has-begun/",
+    "title": "Import AI 477: In which I tell the IMF the Singularity has begun",
+    "author": "Jack Clark",
+    "source": "Import AI",
+    "source_type": "其他",
+    "published_at": "2026-10-19T12:31:37+00:00",
+    "summary_zh": "Jack Clark 在 IMF 演讲中提出，2026 年已出现 AI 在前沿科学领域自主产出的证据，标志着“奇点”的早期阶段已经开始，并呼吁经济学家和政策制定者为科学进步加速带来的巨大收益与风险做好准备。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "研究、政策与行业趋势",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "研究、政策与行业趋势",
+      "Import AI"
+    ],
+    "key_points": [
+      "AI 已能对多个科学领域的前沿问题做出核心贡献，如提出纳维-斯托克斯方程、雅可比猜想等数学难题的解法，从头设计病毒、发现药物候选，以及远程自主操作实验室设备。",
+      "同一底层前沿模型（如 Claude、ChatGPT、Gemini）同时支撑多个学科的突破，说明能力提升是通用而非孤立的，这使科学整体加速成为可能。",
+      "量化指标显示能力陡增：Humanity's Last Exam 最高分从 2025 年 1 月的 8% 升至 67.7%，FrontierMath 从 2% 升至 94%，TheoPhysEval 中 AI 对未发表理论物理问题的表现同样突出。",
+      "AI 在编程领域的进步已使 Anthropic 研究人员的代码产出接近此前的 10 倍，但同一能力也同时提升了网络攻防两端，说明进步与风险不可分割。"
+    ]
+  },
+  {
+    "id": "art_5e09805dda87945d",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://github.blog/ai-and-ml/github-copilot/how-to-continue-a-github-copilot-app-session-in-vs-code/",
+    "title": "How to continue a GitHub Copilot app session in VS Code",
+    "author": "Kayla Cinnamon",
+    "source": "GitHub AI & ML",
+    "source_type": "其他",
+    "published_at": "2026-10-19T18:47:22+00:00",
+    "summary_zh": "介绍如何将 GitHub Copilot 应用中的 agent 会话直接迁移到 VS Code 继续工作，保留对话、代码改动和 worktree 上下文，实现从 agent 自动执行到人工审查、编辑、本地测试和推送 PR 的连续工作流。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "AI 产品与工具",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "AI 产品与工具",
+      "GitHub AI & ML"
+    ],
+    "key_points": [
+      "会话不仅包含修改的文件，还记录任务、计划和对话历史；在 VS Code 中打开会话时，这些上下文与 diff、worktree 一并保留，无需重新描述任务或复制历史到新聊天。",
+      "在 VS Code 中审查 agent 改动时，应检查代码是否解决问题、是否符合仓库约定、错误与边界情况是否处理、测试是否覆盖变更、是否修改了无关文件。",
+      "人工编辑直接发生在会话关联的 worktree 上，手动修改与 agent 改动叠加，无需复制文件或重建分支；随后用集成终端运行测试、lint 和本地开发服务器验证行为。",
+      "可在提示 Copilot 与手动编辑之间迭代切换，因为仍在原会话中，Copilot 能理解“更新后的标签”等指代；推送分支即更新会话已跟踪的 PR，无需手动重新关联。"
+    ]
+  },
+  {
+    "id": "art_1c5f83daf4c5b5dc",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://blog.cloudflare.com/webmcp-commerce/",
+    "title": "How Commerce.com and Cloudflare are getting storefronts ready for AI agents",
+    "author": "Matthew Conroy",
+    "source": "Cloudflare AI",
+    "source_type": "其他",
+    "published_at": "2026-10-21T13:00:00+00:00",
+    "summary_zh": "Cloudflare 与 Commerce.com 合作，通过边缘注入 WebMCP 脚本，让近 10 万个店铺无需改代码即可向 AI 代理暴露结构化购物工具，同时提供商户级退出开关和自定义 MCP 路径支持。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "Cloudflare AI"
+    ],
+    "key_points": [
+      "WebMCP 让 AI 代理直接调用页面上的结构化工具（如 search_products、add_to_cart），替代模拟点击 HTML 的低效方式，减少 token 消耗并避免主题变更导致的失效。",
+      "Commerce.com 通过 Cloudflare 边缘规则和主机名元数据实现平台级开启、商户级退出，退出店铺零额外延迟且不注入脚本，兼顾规模化部署与商户控制权。",
+      "WebMCP 在购物者浏览器会话内执行，代理看到与用户相同的价格和购物车，支付环节仍由用户手动完成，凭证不流向第三方。",
+      "WebMCP 与服务器端 MCP 互补：前者服务浏览器内代理，后者服务跨站直连代理，两者共享同一套购物工具，商户无需二选一。"
+    ]
+  },
+  {
+    "id": "art_806b1f92932cb664",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://github.blog/ai-and-ml/github-copilot/how-3-java-champions-are-using-github-copilot-for-increased-productivity/",
+    "title": "How 3 Java Champions are using GitHub Copilot for increased productivity",
+    "author": "Julien Dubois",
+    "source": "GitHub AI & ML",
+    "source_type": "其他",
+    "published_at": "2026-10-20T16:05:03+00:00",
+    "summary_zh": "三位资深 Java Champion 分享了在生产与开源项目中使用 GitHub Copilot 的具体做法：AI 能大幅压缩开发时间，但开发者仍需提供上下文、验证结果并对交付负责。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "AI 产品与工具",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "AI 产品与工具",
+      "GitHub AI & ML"
+    ],
+    "key_points": [
+      "Vlad Mihalcea 用 Copilot 将原本需数周的功能开发压缩到两天，并训练自定义 skill 模仿自己 65 篇文章的行文风格，让生成的文档与代码符合既有规范。",
+      "Patrick Baumgartner 强调“委托执行而非委托责任”：迁移 900 张教学幻灯片时先定义目标、约束与验证方式，再用截图、PDF 和并排运行做证据化验收，全程约 8-10 小时。",
+      "Copilot 可作为“陪练”挑战方案假设：在数学学习应用中，它促使作者放弃通用化设想，转而对齐瑞士各州课程顺序，并采用无后端架构避免收集儿童数据。",
+      "按任务类型切换模型：深度思考用大上下文、高推理档模型，生成报告、发布说明等简单任务用轻量模型以节省 token。"
+    ]
+  },
+  {
+    "id": "art_ba1e969f5ed16b52",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://techcrunch.com/2026/10/24/all-the-ai-agents-that-can-live-in-your-text-messages/",
+    "title": "Here are the top AI agents that can live in your text messages",
+    "author": "Lauren Forristal",
+    "source": "TechCrunch AI",
+    "source_type": "其他",
+    "published_at": "2026-10-24T14:00:00+00:00",
+    "summary_zh": "文章盘点了十余款可直接通过短信或 iMessage 交互的 AI Agent，它们能记住上下文、连接已有应用并代为完成日程、预订、购物等任务，覆盖通用助理、家庭、旅行和工作等场景。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "AI 产品与工具",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "AI 产品与工具",
+      "TechCrunch AI"
+    ],
+    "key_points": [
+      "短信型 Agent 的核心差异不在对话，而在能否连接日历、邮箱等已有服务并端到端完成任务，部分产品（如 Comma、Folk）还强调自查结果、多步执行和跨设备记忆。",
+      "家庭场景是明显的细分赛道：Fambot、Ohai、Ollie、Orbits 都把学校通知、家务、餐食等分散信息汇总成计划，Ollie 以率先获得 SOC 2 合规作为差异化卖点。",
+      "商业模式已初步分化：Ask Proxy 按天/按员工收费，Martin 每月 21 美元起，Maverick Pro 约 30 美元/月含 500 次任务，Fambot 计划定价接近一份流媒体订阅。",
+      "Instinct 以 10 亿美元估值融资 10 亿美元，并为每个助理分配独立邮箱来代注册和管理账号，这种自主性同时引发隐私与安全担忧，说明能力边界与信任设计是产品关键。"
+    ]
+  },
+  {
+    "id": "art_68e2ee5d21f7dc1b",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://blog.cloudflare.com/obsessive-inference-optimization/",
+    "title": "Cutting our inference bill by 68% by being obsessive about optimization",
+    "author": "Ryan Skidmore",
+    "source": "Cloudflare AI",
+    "source_type": "其他",
+    "published_at": "2026-10-19T19:12:53+00:00",
+    "summary_zh": "Cloudflare 的 AI 代码审查器通过优化缓存前缀共享、减少 LLM 调用次数和调整模型与推理强度，将平均审查成本从 2.43 美元降至 0.77 美元（降幅 68%），中位审查时间从 4 分 09 秒缩短至 1 分 32 秒。其中约 40% 的节省来自代码优化，其余来自模型选择和 effort 调整。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "工程、基础设施与安全",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "工程、基础设施与安全",
+      "Cloudflare AI"
+    ],
+    "key_points": [
+      "成本上涨的主因是模型更换和 token 量膨胀：迁移到 Anthropic 模型使单任务成本从 1.38 美元升至 2.03 美元，每次审查 token 量从 91 万增至 299 万，缓存写入和读取合计占支出 77%。",
+      "缓存前缀共享是最大的代码层优化：原先系统提示中混入仓库特定信息导致跨仓库无法复用缓存，拆分出共享前缀后首次请求缓存命中率从 14%-26% 提升，单次审查成本从 2.47 美元降至 2.02 美元。",
+      "减少 LLM 调用次数效果显著：将内部标准参考索引直接写入 prompt 而非让模型用工具读取，使 Codex 审查器调用次数从 15.9 降至 9.6、单次成本从 1.12 美元降至 0.72 美元；三个审查器共享同一前缀并错峰启动，每个再省约 9 美分。",
+      "模型与 effort 调整贡献了 1.67 美元节省中的 1.06 美元：Opus 5.5 medium 与 Opus 5 在审查结果上无显著差异但更快更省，Sonnet 5.5 在同 token 价格下比 Sonnet 5 便宜 47%-62%，且关键发现数量相当。"
+    ]
+  },
+  {
+    "id": "art_a96c40ed231988b9",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://latent.space/p/claude-mods/",
+    "title": "Claude Mods: Flipping the Harness Inside Out",
+    "author": "Dan McAteer",
+    "source": "Latent Space",
+    "source_type": "其他",
+    "published_at": "2026-10-21T13:04:19+00:00",
+    "summary_zh": "Claude Mods 是 Claude Code 的插件机制，允许用户用 TypeScript/JavaScript 编写中间件来定制 agent harness 的交互与渲染，把 harness 从面向机器的接口反转为面向人类注意力的接口。作者认为 harness 正成为新的平台层，并以 You Should Know、Next Steps Supervisor 等实例说明其价值与噪音、成本、信任等代价。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "Latent Space"
+    ],
+    "key_points": [
+      "Claude Mods 本质是 agent harness 的中间件：mod 可响应 prompt、工具调用、界面渲染等事件，观察、修改渲染或接管默认行为，从而让用户与 Claude 共同设计人机交互层。",
+      "作者提出 harness 方向反转：从 agent 对机器的接口，变为 agent 对人类注意力的接口；Claude Mods 让人类层可编程，且 Claude Code 内置 skill 可用自然语言让 Claude 直接生成 mod。",
+      "对比三种 Attention Interface：ChatGPT Intelligent UI 由模型在实验室框架内逐答案生成界面、控制少；Cursor PR Routing & Approval 由团队写策略但交互流程固定；Claude Mods 让用户用代码自定义任意环节，代价是需自己负责其有效性。",
+      "Mods 的实际代价包括：触发过于频繁导致噪音（作者 111 轮中 99 轮触发 Next Steps Supervisor）、每次检查约 5–6k 输入等效 token 的成本，以及 mod 以用户权限运行且不被沙箱隔离带来的信任风险。"
+    ]
+  },
+  {
+    "id": "art_ce20b0d6454246c4",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/claude-duet-is-beautiful-i-still",
+    "title": "Claude Duet is beautiful. I still forgot to use it",
+    "author": "Claire Vo",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-21T20:25:18+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_7fa30abfca2c7ff1",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://simonwillison.net/2026/Oct/20/battledrones/",
+    "title": "Battle Drones - a vibe coded RTS with audio-based multiplayer",
+    "author": "Simon Willison",
+    "source": "Simon Willison",
+    "source_type": "其他",
+    "published_at": "2026-10-20T19:34:19+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Simon Willison"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_584594248487e319",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/an-86-minute-guide-to-finding-pmf",
+    "title": "An 86-minute guide to finding PMF | Rob Snyder (Author, The Power of Pull)",
+    "author": "Lenny Rachitsky",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-25T12:31:34+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_7623f794020a436d",
+    "email_received_at": "2026-10-26T12:55:36+08:00",
+    "canonical_url": "https://www.oneusefulthing.org/p/30-months-on-the-exponential-in-charts",
+    "title": "30 Months on the Exponential (in Charts)",
+    "author": "Ethan Mollick",
+    "source": "Ethan Mollick",
+    "source_type": "其他",
+    "published_at": "2026-10-20T15:57:59+00:00",
+    "summary_zh": "Ethan Mollick 通过图表回顾其两本 AI 书籍间隔 30 个月的进展，指出 AI 能力呈指数级提升但发展不均衡，人类与 AI 的协作方式正从聊天机器人转向代理式工作。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "研究、政策与行业趋势",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "研究、政策与行业趋势",
+      "Ethan Mollick"
+    ],
+    "key_points": [
+      "AI 能力增长呈指数级但极不均衡：从 GPT-4 到 2026 年，已有 180 个模型超越 GPT-4 发布时的水平，其中 19 个可在智能手机上运行；METR 基准显示 AI 可完成的人类工作量从 4 分钟任务增至 17 小时，且成本大幅下降。",
+      "工作方式出现第三种模式“召唤者”（conjurer）：用户召唤代理、分配任务并评估结果，而非像半人马或赛博格模式那样始终在环；作者用 Opus 5.5 在 Claude Projects 中让编排代理自动生成图表、研究、布局和引用，几分钟完成原本数小时的工作。",
+      "AI 能力前沿仍然参差不齐：长文写作依然薄弱，数学解题则从糟糕变为超人水平；即使 AI 表现优异，小缺口仍产生大量人类需求。",
+      "作者认为人类优势在于深度知识、广度知识、品味和能动性，并据此判断何时将工作交给 AI、何时完全避免。"
+    ]
+  },
+  {
+    "id": "art_8018cd28aecd136f",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/community-wisdom-prds-for-agents",
+    "title": "🧠 Community Wisdom: PRDs for agents, tracking competitor messaging, whether software moats still exist, exercising startup options when you leave, and more",
+    "author": "Kiyani",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-17T13:53:57+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_1382fb41f4443858",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/how-i-ai-how-meta-designed-muse-with",
+    "title": "🎙️ How I AI: How Meta designed Muse with Alex Cornell",
+    "author": "Lenny Rachitsky",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-12T15:00:38+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_39b03f627696e97f",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://simonwillison.net/2026/Oct/13/llm-gemini/",
+    "title": "llm-gemini 0.35",
+    "author": "Simon Willison",
+    "source": "Simon Willison",
+    "source_type": "其他",
+    "published_at": "2026-10-13T22:28:54+00:00",
+    "summary_zh": "Simon Willison 为 llm-gemini 插件新增对 Gemini 4 Argon 模型的支持，并实测其 SVG 生成能力与定价表现。Argon 发布价为每百万输入 2 美元、输出 10 美元，但 12 月 1 日起价格翻倍。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "模型与平台",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "模型与平台",
+      "Simon Willison"
+    ],
+    "key_points": [
+      "Gemini 4 Argon 通过 Gemini API 及每月 100 美元订阅计划提供，延续 Gemini 在 SVG 生成上的优势，作者用鹈鹕图做了低中高三档测试。",
+      "Argon 发布价为输入 2 美元/百万 token、输出 10 美元/百万 token，与 GPT-6 Sol 持平，是 Claude Opus 5.5 的一半，但 12 月 1 日起翻倍至与 Opus 5.5 同价。",
+      "作者指出模型价格已不宜直接比较，真正关键是在 agentic harness 中完成目标所需的总 token 成本；Artificial Analysis 基准总成本显示 Argon 约 2407 美元，接近 GLM-5.3，明显低于 OpenAI、Anthropic 和 Meta 最新模型。",
+      "作者用 ChatGPT 辅助编辑图表以调整信息框布局，并核对了数据准确性，展示了 AI 工具在数据可视化排版中的实际用法。"
+    ]
+  },
+  {
+    "id": "art_fe88897c2a464af3",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://www.latent.space/p/ainews-agents-disprove-polysemanticity",
+    "title": "[AINews] Agents disprove Polysemanticity; greatly improve Interpretability & Alignment",
+    "author": "Latent Space",
+    "source": "Latent Space",
+    "source_type": "其他",
+    "published_at": "2026-10-16T04:16:45+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Latent Space"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_fcf73aabe3e37fa7",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://techcrunch.com/2026/10/17/replit-is-no-longer-working-with-anthropic-ceo-says/",
+    "title": "Replit makes OpenAI its default over Anthropic, CEO says",
+    "author": "Kirsten Korosec, Lucas Ropek, Rebecca Bellan",
+    "source": "TechCrunch AI",
+    "source_type": "其他",
+    "published_at": "2026-10-17T18:48:08+00:00",
+    "summary_zh": "Replit CEO Amjad Masad 在 TechCrunch Disrupt 上表示，公司已不再与 Anthropic 合作，转而将 OpenAI 的 ChatGPT 设为默认模型，原因是成本、合作关系和性能三方面考量；但他随后澄清平台仍对模型保持中立，用户仍可选用 Anthropic 模型。文章还披露 Replit 企业收入占比从去年的 2% 升至约 15%，B2B 收入已超过总收入的 50%。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "AI 产品与工具",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "AI 产品与工具",
+      "TechCrunch AI"
+    ],
+    "key_points": [
+      "Replit 将 OpenAI 设为 Replit Agent 的默认模型，理由是内部与公开基准显示相关模型在从零构建 vibe-coded 应用上表现更好，同时兼顾成本与合作伙伴关系；由于多数用户倾向使用默认选项，这一调整可能显著削减其向 Anthropic 的支出。",
+      "Masad 称 Replit 曾是 Anthropic 前五大客户，但平台保持模型无关，用户仍可选 Claude 等模型；不过有知情人士反驳其“不再合作”的说法，且公司近期博客和员工社媒仍在推广 Anthropic 模型，显示对外表述与实际情况存在张力。",
+      "Replit 收入结构正从个人开发者转向企业：企业合同收入占比从去年的 2% 升至今年的约 15%，B2B 已超过总收入的一半，Masad 预计 2027 年企业与政府客户将贡献过半收入。",
+      "Masad 提出 Agent 需要“栖息地”才能安全工作：良好的编排、错误恢复、安全与沙箱、网络、身份与授权等基础设施，是把 AI 安全部署出去的前提。"
+    ]
+  },
+  {
+    "id": "art_fdc555784f183633",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://simonwillison.net/2026/Oct/13/redesigning-source-control-at-anthropic/",
+    "title": "Redesigning source control at Anthropic",
+    "author": "Simon Willison",
+    "source": "Simon Willison",
+    "source_type": "其他",
+    "published_at": "2026-10-13T23:00:06+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Simon Willison"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_388004979cb49712",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/metas-new-muse-wonder-model-good",
+    "title": "Meta’s new ‘Muse Wonder’ model: good for AI agents, bad for design",
+    "author": "Claire Vo",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-14T12:04:05+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_34013be11de2ae69",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://simonwillison.net/2026/Oct/15/latex/",
+    "title": "LaTeX renderer",
+    "author": "Simon Willison",
+    "source": "Simon Willison",
+    "source_type": "其他",
+    "published_at": "2026-10-15T02:07:28+00:00",
+    "summary_zh": "Simon Willison 受 Tiny Little Office 将文档数据存入 URL fragment 的启发，用 Claude Code 构建了一个 LaTeX 渲染工具：通过 #fragment 传入 LaTeX 代码即可渲染，并支持压缩前缀、编辑器与渲染视图切换、从 URL/Gist 加载，以及 iframe sandbox 防 XSS。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "AI 产品与工具",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "AI 产品与工具",
+      "Simon Willison"
+    ],
+    "key_points": [
+      "把文档内容编码进 URL 的 #fragment，可让每个生成的文档变成可收藏、可分享的链接，且无需后端存储。",
+      "为 Agent 提供 llms.txt 说明 URL 构造规则，Claude 能据此直接生成可渲染的文档链接，这是一种让 AI 工具可被代理调用的实用模式。",
+      "用 iframe sandbox 隔离渲染内容以防范 XSS，并复用已有的 SVG in Markdown 工具中的 Gist/URL 加载机制，体现工具间能力复用的工程思路。",
+      "技术栈选用 CDN 上的 Pako 做压缩、MathJax 与 faster-latex 做渲染、DOMPurify 做净化，并通过自定义压缩字典优化 LaTeX 的 URL 体积。"
+    ]
+  },
+  {
+    "id": "art_1bd4b6f11f5d0573",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/a-mind-expanding-conversation-on",
+    "title": "Inside the black box of AI: How AI models actually think | Emmanuel Ameisen (Anthropic)",
+    "author": "Lenny Rachitsky",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-18T12:31:36+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_f8441924d3a33e10",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://jack-clark.net/2026/10/12/import-ai-476-creativity-and-rsi-worse-than-china-open-weight-models-ai-goes-to-space/",
+    "title": "Import AI 476: Creativity and RSI; worse-than-China open weight models; AI goes to space",
+    "author": "Jack Clark",
+    "source": "Import AI",
+    "source_type": "其他",
+    "published_at": "2026-10-12T12:30:39+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Import AI"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_72a577bde70c641d",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/how-to-tell-if-a-startup-has-a-moat",
+    "title": "How to tell if a startup has a moat",
+    "author": "Dan Hockenmaier",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-13T12:45:41+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_3b02ca9d4e41b0af",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/how-meta-designed-muse-an-ai-agent",
+    "title": "How Meta designed Muse: an AI agent people actually want to talk to | Alex Cornell (Design Director)",
+    "author": "Claire Vo",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-12T12:03:55+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_e71374164f2cb1ad",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://www.latent.space/p/claude-dynamic-workflows",
+    "title": "How Anthropic’s Dynamic Workflows Coordinate Claude Agents (Updated with video!)",
+    "author": "Richard MacManus",
+    "source": "Latent Space",
+    "source_type": "其他",
+    "published_at": "2026-10-12T18:18:17+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Latent Space"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_7a679d710e8c186b",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://github.blog/ai-and-ml/githubs-model-for-secret-detection-finding-more-secrets-with-less-noise/",
+    "title": "GitHub’s model for secret detection: Finding more secrets with less noise",
+    "author": "Batu Ozturkler",
+    "source": "GitHub AI & ML",
+    "source_type": "其他",
+    "published_at": "2026-10-13T17:56:33+00:00",
+    "summary_zh": "GitHub 为密钥扫描设计了一个两阶段流水线：先用正则高召回地生成候选，再用微调后的 ModernBERT 分类器结合文件路径、变量名和上下文判断是否为真实密钥。该方案在 A/B 实验中使仓库所有者加权接受率提升 11.5%，后推扫描中位执行时间降低 86%，服务成本相比远程 LLM 调用降低 98%。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "工程、基础设施与安全",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "工程、基础设施与安全",
+      "GitHub AI & ML"
+    ],
+    "key_points": [
+      "两阶段设计把确定性正则与机器学习分工：正则负责高召回地找候选，分类器只负责区分“像密钥”和“是真密钥”，模型不替代规则扫描。",
+      "误报主要来自“硬负样本”——文档占位符、测试样例、校验和、脱敏值等语法上像密钥但不可用的字符串，分类器通过文件路径、变量名和邻近代码文本学习这些上下文信号。",
+      "选择小型微调编码器而非通用 LLM 是出于服务形态：短候选窗口、高吞吐、低延迟的分类任务更适合 ModernBERT，导出 ONNX 并做 8 位量化后推理更快、成本更低。",
+      "训练数据混合产品反馈样本、高召回正则候选和针对稀疏难例的合成数据，并按仓库、候选值分组切分以避免近重复泄漏；阈值先离线评估再在生产流量上验证后逐步放量。"
+    ]
+  },
+  {
+    "id": "art_23216cfbe10c8c92",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-how-to-teach-copilot-about-your-codebase/",
+    "title": "GitHub Copilot app for Beginners: How to teach Copilot about your codebase",
+    "author": "Christopher Harrison",
+    "source": "GitHub AI & ML",
+    "source_type": "其他",
+    "published_at": "2026-10-12T17:43:59+00:00",
+    "summary_zh": "文章介绍四种让 GitHub Copilot 理解代码库上下文的方式：仓库级与路径级自定义指令、封装可重复流程的 Agent Skills、面向复杂任务的自定义 Agent，以及通过 MCP 服务器连接外部工具和数据源。核心思路是把团队约定和流程沉淀在仓库里，让 Copilot 自动加载，而不是每次任务都重复解释。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "AI 产品与工具",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "AI 产品与工具",
+      "GitHub AI & ML"
+    ],
+    "key_points": [
+      "自定义指令分两层：.github/copilot-instructions.md 定义全仓库通用的架构、命名和测试规范，.github/instructions 下的文件用 applyTo 字段按文件类型精准生效，避免用一套规则套所有文件。",
+      "Agent Skills 适合封装只在特定流程中才需要的知识，例如 .github/skills/quality-checks 下的 SKILL.md 说明何时启用、跑哪些测试和 lint 脚本、各脚本检查什么以及常见失败如何排查，让 Copilot 按既定流程执行而非猜测命令。",
+      "自定义 Agent 面向跨多个文件、需要多种工具和上下文的复杂任务（如无障碍审查），在 .github/agents 中定义其目标、指令、工具和项目上下文，相当于为某类反复出现的工作建立专门角色。",
+      "MCP 服务器把 Copilot 的能力扩展到仓库之外，例如接入 Playwright 后可让它在浏览器中打开并操作应用做手动功能验证，从而不仅依赖自动化检查，还能确认界面行为符合预期。"
+    ]
+  },
+  {
+    "id": "art_35cd62faf12b8e71",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://techcrunch.com/2026/10/18/disney-agrees-to-hire-the-majority-of-character-ais-workforce/",
+    "title": "Disney agrees to hire the majority of Character.AI’s workforce",
+    "author": "Anthony Ha",
+    "source": "TechCrunch AI",
+    "source_type": "其他",
+    "published_at": "2026-10-18T16:30:00+00:00",
+    "summary_zh": "聊天机器人初创公司 Character.AI 申请破产后，迪士尼同意向至少 60 名员工发出录用通知，并支付约 6000 万美元年薪；其前 CEO 已出任迪士尼首位 CTO，迪士尼还同意以 2000 万美元收购部分资产。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "商业、创业与投资",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "商业、创业与投资",
+      "TechCrunch AI"
+    ],
+    "key_points": [
+      "Character.AI 尽管拥有庞大且活跃的用户群，仍因高成本、潜在诉讼责任和监管压力而陷入困境，最终申请破产，说明消费级 AI 聊天产品的用户规模不等于商业可持续性。",
+      "迪士尼以约 2000 万美元收购部分资产，并以约 6000 万美元年薪接收至少 60 名员工（占员工多数），这种“资产+团队”的收购方式比整体收购更轻，也绕开了部分负债与监管风险。",
+      "Character.AI 前 CEO Karandeep Anand 先出任迪士尼首位 CTO，随后公司被拆分收购，反映出 AI 人才向大型内容与娱乐公司流动的趋势。",
+      "该交易属于 stalking horse bid（假马竞标），其他公司仍可提出更高报价，说明破产程序中的资产与团队交易存在变数。"
+    ]
+  },
+  {
+    "id": "art_247153705736c57d",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://www.latent.space/p/crossing-the-threshold",
+    "title": "Crossing the Threshold: How OpenAI and Anthropic Approach Autonomy and Safety in Financial Agents",
+    "author": "Richard MacManus",
+    "source": "Latent Space",
+    "source_type": "其他",
+    "published_at": "2026-10-14T21:40:52+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Latent Space"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_1beb66d0b231d0b1",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://blog.cloudflare.com/verified-bots-accountability/",
+    "title": "Continuous accountability for Verified bots",
+    "author": "Chris Tsoukaladelis",
+    "source": "Cloudflare AI",
+    "source_type": "其他",
+    "published_at": "2026-10-16T13:00:00+00:00",
+    "summary_zh": "Cloudflare 为 Verified Bot 引入持续行为评估机制，在身份验证之外，通过观察机器人是否遵守 robots.txt 和 HTTP 429 限速信号来动态衡量信任度，并计划向所有客户开放可配置的信任阈值。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "工程、基础设施与安全",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "工程、基础设施与安全",
+      "Cloudflare AI"
+    ],
+    "key_points": [
+      "身份验证只解决“你是谁”，信任需靠长期行为累积：Cloudflare 将风险（单次请求的即时危害可能）与信任（长期一致行为）区分开，曾因 Perplexity 机器人绕过网站退出抓取的意愿而将其从 Verified 列表移除。",
+      "评估信号聚焦两条“常识规则”：机器人是否遵守 robots.txt 等站点偏好，以及收到 HTTP 429 后是否降速或暂停；系统关注重复性违规模式而非孤立事件，并转化为可解释的信任区间。",
+      "robots.txt 只是最低规则，未声明不等于允许；站点可通过其他信号表达不欢迎继续访问，机器人运营者需主动响应直接反馈。",
+      "该机制与 Bot Preference Sync、Bot Management 组成问责闭环：站点发布偏好、观察机器人是否持续遵守、再决定流量处理方式，未来客户可自选信任阈值。"
+    ]
+  },
+  {
+    "id": "art_d05f789212e75b03",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://blog.cloudflare.com/cloudflare-openai-discovery-agentic-web/",
+    "title": "Cloudflare and OpenAI: Making AI discovery better for everyone",
+    "author": "James Balfour (OpenAI)",
+    "source": "Cloudflare AI",
+    "source_type": "其他",
+    "published_at": "2026-10-15T13:00:00+00:00",
+    "summary_zh": "Cloudflare 与 OpenAI 的联合研究试点显示，利用 Cloudflare 网络信号可帮助 ChatGPT 搜索爬虫发现并索引数亿个此前未知的网页，同时通过过滤无效页面、标记单页风险、传递变更信号来减少无效抓取，提升发现效率。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "AI 产品与工具",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "AI 产品与工具",
+      "Cloudflare AI"
+    ],
+    "key_points": [
+      "试点覆盖约 1% 的 Cloudflare 网络，已让 OpenAI 发现并索引数亿个新网页，说明网络层信号能有效补充传统链接发现机制的盲区。",
+      "爬虫效率的关键在于抓取前过滤：识别不存在的文件、全站重定向到首页、重复内容等模式，可在抓取前削减无效工作，降低站点负载。",
+      "安全信号可按单页而非整域标记风险（如被植入假登录页），避免因一个被攻破的页面而惩罚整个站点。",
+      "变更信号用于判断页面是否值得再次访问，目标是在持续发现新内容的同时减少重复抓取；该研究仅使用网页元数据用于搜索发现，不涉及将页面内容用于模型训练。"
+    ]
+  },
+  {
+    "id": "art_68b9f741f3df646e",
+    "email_received_at": "2026-10-19T12:49:49+08:00",
+    "canonical_url": "https://techcrunch.com/video/a-nvidia-insider-turned-vc-on-why-robotics-hasnt-hit-its-chatgpt-moment-yet/",
+    "title": "An Nvidia insider-turned-VC on why robotics hasn’t hit its ChatGPT moment, yet",
+    "author": "Theresa Loconsolo",
+    "source": "TechCrunch AI",
+    "source_type": "其他",
+    "published_at": "2026-10-16T16:30:00+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "TechCrunch AI"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_2812e23de3468673",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/community-wisdom-community-wisdom",
+    "title": "🧠 Community Wisdom: Community Wisdom Top Contributors Summer Class 2026 + ML recommendation systems, getting back into product after being fired, deciding when to quit a side project, and more",
+    "author": null,
+    "source": "lennysnewsletter.com",
+    "source_type": "Newsletter",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-10 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "lennysnewsletter.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_1f763ab5e7bf2d3a",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/how-i-ai-8-real-jev-use-cases-how",
+    "title": "🎙️ How I AI: 8 real Jev use cases + How OpenAI uses ChatGPT Sites (live at DevDay!) + Claire’s DevDay recap",
+    "author": null,
+    "source": "lennysnewsletter.com",
+    "source_type": "Newsletter",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-10 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "模型与平台",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "模型与平台",
+      "lennysnewsletter.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_0ded9c8bd760f4af",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/why-every-company-now-needs-to-think",
+    "title": "Why every company now needs to think and operate like a lab team | Josh Woodward (Google Labs, Gemini, AI Studio)",
+    "author": null,
+    "source": "lennysnewsletter.com",
+    "source_type": "Newsletter",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-10 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "模型与平台",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "模型与平台",
+      "lennysnewsletter.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_c6fb2b313984d9d2",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://github.blog/ai-and-ml/github-copilot/secret-protection-must-scale-with-software/",
+    "title": "Secret protection must scale with software",
+    "author": null,
+    "source": "github.blog",
+    "source_type": "公司或工程博客",
+    "published_at": null,
+    "summary_zh": "GitHub 产品经理基于九个季度的数据指出，AI 代理参与代码提交的比例从一年前的不足 10% 升至三分之一，但开发者并未变得更粗心，而是被开发速度甩在身后；因此平台必须承担更多防护工作，通过上下文感知分类器在推送前拦截更多密钥泄露，减少对人工响应的依赖。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "工程、基础设施与安全",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "工程、基础设施与安全",
+      "github.blog"
+    ],
+    "key_points": [
+      "GitHub 上三分之一的 pull request 已涉及 AI 代理，一年前不足十分之一；若趋势延续，两年内大部分推送到 GitHub 的代码可能由代理编写，且很多代码可能永远不会被人类完整阅读。",
+      "九个季度数据显示，筛查推送量增长 2.84 倍、携带凭据的推送增长 2.59 倍，但每次推送的泄露普遍率没有统计上可检测的趋势；开发者覆盖推送拦截的比例从 6.63% 线性降至 3.93%，说明开发者更理解风险而非更粗心。",
+      "人工撤销泄露密钥的平均时间约 40 天，约五分之一超过 90 天；在代码创建加速而人工修复无法同步扩展的情况下，平台必须提前预防更多泄露并降低剩余事件的人工处理量。",
+      "GitHub 与微软应用科学团队构建的 ModernBERT 分类器可在不到两毫秒内评估一批候选密钥，精度高于现有基于 LLM 的流水线且成本极低，有望将可预防的密钥数量翻倍以上，并已扩展到 Copilot CLI 和 Copilot App 的 /security-review 命令。"
+    ]
+  },
+  {
+    "id": "art_6f397884428e9f0f",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://github.blog/ai-and-ml/github-copilot/reviewbench-an-open-benchmark-for-ai-code-review/",
+    "title": "ReviewBench: An open benchmark for AI code review",
+    "author": null,
+    "source": "github.blog",
+    "source_type": "公司或工程博客",
+    "published_at": null,
+    "summary_zh": "GitHub 发布 ReviewBench，一个基于 1.039 亿真实 PR 分布构建的 AI 代码审查开放基准，包含 219 个 PR、19 种语言，采用多源金标准与可配置指标，用于离线评估代码审查 Agent。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "AI 产品与工具",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "AI 产品与工具",
+      "github.blog"
+    ],
+    "key_points": [
+      "ReviewBench 从 1.039 亿个 GitHub PR 中提取真实工作负载分布，最终选取 187 个开源仓库的 219 个 PR、覆盖 19 种语言，并刻意向多文件、可审查的中等规模 PR 加权，避免小改动主导评测。",
+      "评测同时报告固定金标准指标与增强指标：固定金标准会随 Agent 能力提升而变得不完整，增强指标可识别 Agent 新发现的问题而非直接判错，跨系统比较以 grounded recall 为主。",
+      "评估支持按严重程度、类别切片，并可通过调整 Fβ 中的 β 在召回与精确率之间切换偏好，排行榜随偏好重新排序，适配不同团队的审查策略。",
+      "Copilot 代码审查的离线评测与线上 A/B 实验方向一致：多模型集成审查实验预测精确率、召回率、评论量上升且单次审查成本下降，线上对应为 addressed rate +8.0%、召回 +13.6%、评论量 +61%、成本 -8.0%，严重问题评论预测 +227%、线上 +262%。"
+    ]
+  },
+  {
+    "id": "art_d43019accfd19e1e",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://simonwillison.net/2026/Oct/5/felix-rieseberg/",
+    "title": "Quoting Felix Rieseberg",
+    "author": null,
+    "source": "simonwillison.net",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "Anthropic 的 Felix Rieseberg 解释 Cowork 从本地 VM 迁移到云端沙箱的原因：旧版本在用户电脑上运行 VM 来执行工具调用，带来磁盘、电池和性能负担，且合上笔记本工作就会中断；新版本把模型推理和 VM 都放到云端，每个会话独立沙箱，需要访问用户设备文件时由桌面应用负责。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "simonwillison.net"
+    ],
+    "key_points": [
+      "旧版 Cowork 为能力、安全和隐私把 VM 放在本地，只映射用户显式加入会话的数据，但用户不满其磁盘、电池和性能开销，以及关盖即停的限制。",
+      "新版把模型推理和 VM 都迁到云端，每个会话获得独立沙箱、不与其他会话共享状态，从而支持手机使用和持续运行。",
+      "云端 VM 需要用户设备上的文件时，由桌面应用承担文件访问的工具调用，形成云端执行与本地权限的分离架构。",
+      "这一改动说明 Agent 产品的本地执行环境会带来体验成本，把重计算外移、把设备访问收窄为受控工具调用是可行的产品取舍。"
+    ]
+  },
+  {
+    "id": "art_4a9f5b72faa10f5c",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://blog.cloudflare.com/clef-faster-cheaper-multimodal/",
+    "title": "Introducing Clef-omni with full multimodality, plus a faster Clef and a cheaper Clef-flash",
+    "author": null,
+    "source": "blog.cloudflare.com",
+    "source_type": "个人博客",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-10 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "blog.cloudflare.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_85af42551fba4be2",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://jack-clark.net/2026/10/05/import-ai-475-swarm-scaling-google-deepmind-watermarks-biology-and-the-ai-science-economy/",
+    "title": "Import AI 475: Swarm scaling; Google DeepMind watermarks biology; and the AI science economy",
+    "author": null,
+    "source": "jack-clark.net",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "本期 Import AI 讨论了群体智能（swarm）的扩展规律、美国公众对 AI 企业自律的不信任、Google DeepMind 为合成生物学设计的 SynthID Bio 水印，以及 SciUniverse 基准测试和 DeepMind 提出的自动化科学经济构想。核心信息是：swarm 通过并行换取速度但存在收益递减，AI 在自动化实验室中的实操能力仍有限，而未来 AI 科学家将受限于物理资源，需要市场机制来分配实验资源。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "研究、政策与行业趋势",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "研究、政策与行业趋势",
+      "jack-clark.net"
+    ],
+    "key_points": [
+      "Swarm 可视为一种新的推理扩展方式：4 个 agent 的 swarm 总 token 消耗约为单 agent 的两倍，但每个 agent 只需一半 token，并行执行理论上可将任务时间减半；然而随着 agent 数量增加会出现类似经济学中“踩脚”参数的收益递减，10 倍 agent 仅带来 3 到 5 倍性能提升。",
+      "CSAIP 民调显示 61% 美国人认为企业自愿自律“不够”，54% 认为政府应制定并执行 AI 规则，选民偏好与华盛顿政策立场之间存在不稳定张力。",
+      "Google DeepMind 的 SynthID Bio 针对合成生物学数据设计水印，通过选择特定氨基酸和调整 3D 结构原子坐标嵌入可检测信号，在 VEGF-A、SARS-CoV-2 spike RBD 和 PD-L1 三个靶点的湿实验室测试中，水印设计在命中率、结合亲和力和序列多样性上与未水印版本相当。",
+      "SciUniverse 基准包含 92 个任务、17 个任务族，覆盖样品制备、仪器控制、协议适配等；最强模型 Claude Fable 5.1 通过率仅 45.3%，单任务成本 40.61 美元，说明 AI 操作自动化实验室的能力仍处于早期。"
+    ]
+  },
+  {
+    "id": "art_a0f6e38f65e9c89b",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://techcrunch.com/2026/10/10/all-the-ai-agents-that-can-live-in-your-text-messages/",
+    "title": "Here are the top AI agents that can live in your text messages",
+    "author": null,
+    "source": "techcrunch.com",
+    "source_type": "媒体",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-10 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "Agent 与自动化",
+      "techcrunch.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_44b03140de4a0c7b",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://blog.cloudflare.com/birthday-week-2026-wrap-up/",
+    "title": "Everything we launched during Birthday Week 2026",
+    "author": null,
+    "source": "blog.cloudflare.com",
+    "source_type": "个人博客",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-10 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "blog.cloudflare.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_231befe88d753d02",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://simonwillison.net/2026/Oct/7/claude-haiku-5-5/",
+    "title": "Claude Haiku 5.5",
+    "author": null,
+    "source": "simonwillison.net",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "Anthropic 发布 Claude Haiku 5.5，定价与 GPT-6 Luna 对齐（10 万 token 内 $0.10/$0.50），但采用更耗 token 的新分词器，实际成本上升；同时 Anthropic 为订阅用户提供每月 API 额度并下调 Sonnet 5.5 缓存读取价格。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "模型与平台",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "模型与平台",
+      "simonwillison.net"
+    ],
+    "key_points": [
+      "Haiku 5.5 在 10 万 token 以内与 GPT-6 Luna 同价且基准分数更高，但超过 10 万 token 后价格涨 5 倍至 $0.50/$2.50，而 Luna 到 27.2 万 token 才涨到 $0.20/$0.75，长上下文场景 Luna 更划算。",
+      "新分词器使同一长提示消耗约 1.25 倍 token，构成隐性涨价，评估模型成本时需按实际 token 用量而非标价比较。",
+      "Haiku 5.5 无法关闭推理，默认 medium 档；低档生成 SVG 约 7 秒、0.0936 美分，最高档耗时 5 分 9 秒、3.3826 美分，说明推理档位对延迟和成本影响显著。",
+      "Anthropic 为 Max 5x、Max 20x 和 Team 订阅者提供每月 $100/$200/最高 $500 的 API 额度，额度与订阅费等值、不滚存，且可关闭自动充值以避免超额账单。"
+    ]
+  },
+  {
+    "id": "art_22732f8185e35596",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://www.latent.space/p/stacklok",
+    "title": "Can a Cloud-Native Harness Make Agents Reliable Beyond the Desktop?",
+    "author": null,
+    "source": "latent.space",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "Stacklok 的两位 Kubernetes 创始人推出开源云原生 Agent harness Mecatl，将 Agent 循环与工具执行、状态存储解耦，使企业能在云端集中管理和治理 Agent 工作负载，减少对前沿实验室和超大规模云厂商的依赖。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "latent.space"
+    ],
+    "key_points": [
+      "Mecatl 的核心设计是把 Agent 循环从客户端、模型提供商、状态存储和执行环境中独立出来，避免桌面优先 harness 中循环、本地执行和会话状态耦合在同一进程的问题。",
+      "Stacklok 认为企业未来会像管理邮件一样管理员工与 Agent 的交互，因此需要集中化的身份、授权、策略和审计能力，而非让 Agent 停留在个人桌面。",
+      "Stacklok 的商业路径是开源 ToolHive（MCP 服务器管理）和 Mecatl（harness），再通过企业级控制平面（identity、authorization、policy、auditing）收费，解决多集群、多云扩展后的治理问题。",
+      "其 AI Gateway 聚焦访问控制、预算、报告和提供商路由，而把语义路由的模型选择留给 harness 层，因为 harness 拥有更多上下文。"
+    ]
+  },
+  {
+    "id": "art_dd1a4ba899e07fb1",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://techcrunch.com/video/amazon-and-others-are-done-keeping-data-center-deals-secret-is-it-enough-to-build-trust/",
+    "title": "Amazon and others are done keeping data center deals secret. Is it enough to build trust?",
+    "author": null,
+    "source": "techcrunch.com",
+    "source_type": "媒体",
+    "published_at": null,
+    "summary_zh": "待补全：来自 2026-10 AI Weekly Digest 邮件的文章链接，等待复用邮件项目结果或正文补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "techcrunch.com"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_305ba874f36ffe29",
+    "email_received_at": "2026-10-12T05:22:20+00:00",
+    "canonical_url": "https://simonwillison.net/2026/Oct/9/built-using-my-voice/",
+    "title": "A new feature for my blog, built using my voice",
+    "author": null,
+    "source": "simonwillison.net",
+    "source_type": "其他",
+    "published_at": null,
+    "summary_zh": "Simon Willison 用 ChatGPT 桌面版 Codex 的语音对话模式，在做饭的半小时里几乎全程靠说话为博客开发了 Newsletters 索引页，包括 Django 模型、四个导入脚本、归档页面和搜索集成，最后再通过打字完成代码审查和部署。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "AI 产品与工具",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "AI 产品与工具",
+      "simonwillison.net"
+    ],
+    "key_points": [
+      "语音编码代理的关键优势是多任务并行：作者在做饭时用语音完成模型、迁移、视图、模板和导入函数等大部分开发工作，把原本被占用的时间转化为产出。",
+      "语音模式适合搭建和方向性调整，但细节阶段仍需打字：粘贴示例、错误信息或直接高亮代码比用语言描述更高效，作者最终用额外半小时打字完成审查和修正。",
+      "带视觉预览的语音编码比纯语音更强：先启动本地开发服务器并在浏览器中预览，再通过语音让模型修改，可以边看效果边反馈，形成快速迭代循环。",
+      "模型能自主补全实现细节：GPT-6 Astra 知道 Substack 未公开的 /api/v1/archive 接口，并自行搜索分页方法，说明编码代理在明确目标下可承担探索性工程任务。"
+    ]
+  },
+  {
     "id": "art_24e8417f33f9c70a",
     "email_received_at": "2026-10-05T05:02:25+00:00",
     "canonical_url": "https://www.lennysnewsletter.com/p/community-wisdom-getting-value-from",

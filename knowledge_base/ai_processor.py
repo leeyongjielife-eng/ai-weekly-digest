@@ -265,6 +265,21 @@ def coerce_confidence(value: Any) -> float | None:
 
 
 def complete_with_provider(provider: str, article: dict[str, Any]) -> dict[str, Any]:
+    # SDK errors must follow the same per-article failure path as invalid AI output.
+    try:
+        return _complete_with_provider(provider, article)
+    except AIProcessingError:
+        raise
+    except Exception as error:
+        # SDK messages can contain request URLs or credentials; keep diagnostics safe.
+        status = getattr(error, "status_code", getattr(error, "code", None))
+        status_text = f" status={status}" if isinstance(status, int) else ""
+        raise AIProcessingError(
+            f"{provider} request failed: {type(error).__name__}{status_text}"
+        ) from error
+
+
+def _complete_with_provider(provider: str, article: dict[str, Any]) -> dict[str, Any]:
     fields = missing_response_fields(article)
     prompt = build_prompt(article, fields)
     if provider == "gemini":

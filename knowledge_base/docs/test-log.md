@@ -12,6 +12,7 @@
 
 | 数据编号 | 内容 | 来源 | 是否敏感 | 用途 |
 |---|---|---|---|---|
+| `RUN-KB-UPDATE-20261102` | `F-018C-3` 更新故障修复 | 公开快照、文章 artifact、隔离故障样例 | PASS | `ISSUE-KB-014`、`ISSUE-KB-015` |
 | `DATA-INIT-001` | 用户确认的五文件文档框架和数据约束快照 | 当前任务输入 | 否 | 验证初始化文档 |
 | `DATA-F-001-001` | 最近三周 3 封 AI Weekly Digest 真实邮件文章测试数据 | Gmail 只读导出，已本地生成并被 Git 忽略 | 是 | 后续页面和数据验证 |
 
@@ -2455,3 +2456,33 @@
 - 调整措施：DATE／CATEGORY 改为带 `aria-expanded` 的按钮；点击时只展开一个列表，按 Escape 可关闭。触屏样式让展开列表进入页面布局并启用链接点击，桌面悬停行为继续保留。线上复查发现全局 `pointerdown` 关闭逻辑会让部分指针点击刚展开就关闭，随后移除此逻辑。
 - 验证：`test_static_site.py` 通过（139 篇、8 个日期页、8 个分类页）；390×844 和 820×1180 浏览器视口中，点击 DATE／CATEGORY 后的链接分别成功进入日期页与分类页；修正全局关闭逻辑后，在普通浏览器视口点击 DATE 并成功进入日期页；生成后的首页和 CSS 与生成脚本一致。
 - 结论：PASS（本地验证）。
+
+## ISSUE-KB-014 SDK 异常中断新文章发布
+
+- 2026-11-02 诊断：2026-10-26 云端 run `40356679042` 在 Gemini 返回 503 时退出，未导出文章和站点。
+- 原因：增量流程只捕获 `AIProcessingError`，供应商 SDK 异常类型不在此边界内。
+- 修复：在供应商调用边界统一转换异常；单篇记录安全错误类型和数值状态码，继续处理并生成页面。
+- 回归：模拟一篇 SDK 503、一篇成功、一篇视频跳过，确认 3 篇均导出且详情页生成，状态为 1 失败、1 成功、1 跳过；错误诊断不含请求细节。
+- 状态：代码测试通过。
+
+## ISSUE-KB-015 英文摘要导致发布校验失败
+
+- 2026-11-02 诊断：2026-10-26 云端 run `40271552479` 虽新增 21 篇，但 11 篇英文摘要触发 `summary_zh: must contain Chinese text`，阻止发布。
+- 原因：导入器虽判断英文摘要为缺失字段，仍将英文写进中文摘要列；视频/正文不足或服务失败时无法替换。
+- 修复：只复用含中文的摘要；优先保留已有中文摘要，其余使用显式待补全提示，保持 `email_only` 状态。
+- 回归：混合批次经过真实导入、导出和构站，全部通过文章字段验证；英文输入不会覆盖已有中文摘要。
+- 状态：代码测试通过。
+
+## RUN-KB-UPDATE-20261102
+
+- 日期：2026-11-02（Asia/Shanghai）。
+- 环境：以 `origin/main` 的 `7443aaa` 为基线的独立 worktree；原工作区已有改动完整保留。
+- 通过：`test_incremental_update.py`（含 SDK 故障发布回归）、`test_ai_processor.py`、`test_structured_article_importer.py`、`test_scheduled_update.py`、`test_github_actions_update.py`。
+- SQLite 回归首次因忽略的 `test-articles.json` 未随工作树出现而未运行；用当前公开快照生成本地测试输入后，`test_data_store.py` 通过（139 篇往返验证）。不复制私有邮件测试数据。
+- 恢复来源：10 月 19 日、26 日已发送周报的 `digest-articles` artifact；10 月 12 日通过已连接 Gmail 提取文章链接。只保存文章记录，不保存邮件正文或标识。
+- 另查：本地旧 Gmail readonly OAuth 刷新失败（`RefreshError`），不影响使用文章 artifact 的云端自动更新；重新授权尚未完成。
+- 自定义域名：`wingkit.top` 的 DNSPod 控制台需要用户登录；域名绑定和 DNS 修改尚未执行。
+
+- 恢复结果：139 → 194 篇，新增 55 篇；51 篇正文成功、4 篇失败；28 篇 AI 补齐成功、2 篇响应格式不合格、21 篇按正文/视频规则跳过。失败保留待补全，不阻断导出和页面生成。
+- 全量通过：`test_article_data.py --data knowledge_base/data/articles.export.json`（194 篇）、`test_static_site.py --data knowledge_base/data/articles.export.json`（11 日期页、8 分类页、194 详情页）、`git diff --check`。
+- 结论：本地代码与恢复内容 PASS；发布、DNS 接入及人工验收另记。

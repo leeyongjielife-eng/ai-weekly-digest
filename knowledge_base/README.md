@@ -16,7 +16,7 @@ AI 内容知识库是一个个人阅读工具，用来把邮件中值得保留�
 
 ## 当前状态
 
-项目已进入正式阶段，当前静态站点包含 84 篇文章、5 个日期页、8 个分类页和 84 个详情页，最新收录日期为 2026-09-14。其中 73 篇已完成结构化处理，11 篇仍为 `email_only`；其中 3 篇因无法获取文章简介内容，经人工确认后保留在“待人工确认”分类。
+当前静态站点包含 194 篇文章、11 个日期页、8 个分类页和 194 个详情页，最新收录日期为 2026-10-26。其中 128 篇已完成结构化处理，66 篇为 `email_only`，保留待补全或已人工确认无法获取内容的状态。2026-11-02 已恢复 10 月 12 日、19 日、26 日漏更新的 55 篇文章。
 
 本地已支持一键增量更新和每周一定时更新；GitHub Actions 已启用独立的知识库自动更新与 Pages 部署流程。
 
@@ -79,3 +79,31 @@ knowledge_base/.venv/bin/python -B knowledge_base/scripts/run_scheduled_update.p
 ## 文档说明
 
 本文件只面向使用者说明项目。开发范围、数据定义和执行规则以 [`AGENTS.md`](AGENTS.md) 路由到的权威文档为准。
+
+## 接入 wingkit.top
+
+本站沿用 GitHub Pages，腾讯云 DNSPod 管理域名解析，无需另购服务器。
+当前 Pages 配置尚未绑定自定义域名；DNS 接入前继续使用原 Pages 地址。
+
+1. 在仓库 Settings → Pages → Custom domain 保存 `wingkit.top`。
+2. 在腾讯云 DNSPod 为 `wingkit.top` 添加以下记录（默认线路即可）：
+
+| 主机记录 | 类型 | 记录值 |
+|---|---|---|
+| @ | A | 185.199.108.153 |
+| @ | A | 185.199.109.153 |
+| @ | A | 185.199.110.153 |
+| @ | A | 185.199.111.153 |
+| www | CNAME | leeyongjielife-eng.github.io |
+
+3. 等待 GitHub Pages 的 DNS 检查与证书签发完成，开启 Enforce HTTPS。
+4. 验证首页、日期页、分类页和文章页均能通过 `https://wingkit.top` 打开。
+
+发布采用 GitHub Actions artifact；按 GitHub 文档，无需在产物中添加 CNAME 文件。
+参考：[GitHub Pages 自定义域名官方说明](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)。
+
+## 更新失败时
+
+- AI 服务异常现在按单篇记录失败，仍导出文章并生成站点；失败文章保留“待补全”状态。
+- 英文 RSS 摘要不会作为中文摘要发布；已有中文摘要可复用，否则显示待补全提示。
+- 自动更新使用已发送周报的文章 artifact；本地 Gmail readonly OAuth 过期会影响手动按月份读取，需要重新授权。它不影响使用 artifact 的自动更新。

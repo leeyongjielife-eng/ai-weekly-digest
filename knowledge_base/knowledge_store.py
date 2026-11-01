@@ -286,6 +286,7 @@ def import_structured_articles(
         COMPAT_WHY_IT_MATTERS,
         PENDING_SUMMARY,
         default_tags,
+        has_cjk,
         normalize_structured_articles,
         stable_article_id,
     )
@@ -331,7 +332,11 @@ def import_structured_articles(
             source_type = article.source_type or (existing["source_type"] if existing else "其他")
             author = article.author if article.author is not None else (existing["author"] if existing else None)
             published_at = article.published_at if article.published_at is not None else (existing["published_at"] if existing else None)
-            summary_zh = article.summary_zh or (existing["summary_zh"] if existing else PENDING_SUMMARY)
+            # English RSS/email summaries are not reusable Chinese summaries.
+            # Preserve a valid existing translation, otherwise publish an honest placeholder.
+            incoming_summary = article.summary_zh if has_cjk(article.summary_zh) else None
+            existing_summary = existing["summary_zh"] if existing else None
+            summary_zh = incoming_summary or (existing_summary if has_cjk(existing_summary) else PENDING_SUMMARY)
             key_points = article.key_points or existing_key_points
             primary_category = article.primary_category or (existing["primary_category"] if existing else "待人工确认")
             why_it_matters = existing["why_it_matters"] if existing else COMPAT_WHY_IT_MATTERS
