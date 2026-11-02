@@ -1,5 +1,340 @@
 [
   {
+    "id": "art_0c4b959782efa551",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/community-wisdom-the-biggest-sources",
+    "title": "🧠 Community Wisdom: The biggest sources of interruptions for PMs, hiring junior PMs with case studies vs. behavioral interviews, building a product harness for AI-driven development, and more",
+    "author": "Kiyani",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-31T16:14:41+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_7788b12763a8e01b",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/how-i-ai-claude-duet-honest-review",
+    "title": "🎙️ How I AI: Claude Duet honest review + Why Reddit built its own AI prototyping tool",
+    "author": "Lenny Rachitsky",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-26T15:00:53+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_87ef1c93fab573cb",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/why-reddit-built-its-own-ai-prototyping",
+    "title": "Why Reddit built its own AI prototyping tool | Blair Metcalf",
+    "author": "Claire Vo",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-26T12:04:20+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_7f577f4b01c6fc58",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://simonwillison.net/2026/Oct/28/vibe-game-development/",
+    "title": "The October inflection point for vibe game development",
+    "author": "Simon Willison",
+    "source": "Simon Willison",
+    "source_type": "其他",
+    "published_at": "2026-10-28T13:55:15+00:00",
+    "summary_zh": "文章指出，2026年10月是“情绪化游戏开发”的新拐点，AI模型（尤其是Claude Opus 5.5）在生成有趣的游戏方面取得了显著突破，使得游戏设计、3D建模和音乐创作变得异常简单。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "AI 产品与工具",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "AI 产品与工具",
+      "Simon Willison"
+    ],
+    "key_points": [
+      "AI模型如Claude Opus 5.5已达到新拐点，能够通过“情绪化编程”（vibe coding）生成具有深度和“乐趣”的游戏，尤其在游戏设计、3D建模和音乐生成方面表现突出，大幅降低了游戏开发门槛。",
+      "通过高层级、迭代式的指令（如“让它更有趣”）与AI交互，即使是非技术人员也能开发出包含复杂剧情、多人模式和独特机制的游戏，这展示了AI在创意和工程实现上的协同潜力。",
+      "随着AI工具接管大部分技术实现，人类创作者的重点已转向构思独特、新颖且只有在AI辅助下才能实现的游戏概念，预示着创意工作流和商业模式的根本性转变。",
+      "不同AI模型在特定能力上存在差异（例如Claude Opus 5.5在创造“乐趣”方面目前优于GPT-6 Astra），表明用户在利用AI进行产品开发时，需要根据具体需求和AI模型的特性进行选择和评估。"
+    ]
+  },
+  {
+    "id": "art_94292192852eb5bb",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://jack-clark.net/2026/10/26/import-ai-478-math-for-alignment-programbench-and-mirendil-shows-what-rsi-means/",
+    "title": "Import AI 478: Math for alignment; ProgramBench; and Mirendil shows what RSI means",
+    "author": "Jack Clark",
+    "source": "Import AI",
+    "source_type": "其他",
+    "published_at": "2026-10-26T12:31:52+00:00",
+    "summary_zh": "Import AI 478期聚焦AI研究前沿，涵盖了AI在数学形式化、软件重建、系统安全测试和模型开发方面的突破，展示了AI如何加速科学研究和软件工程，同时也揭示了智能代理在安全防护方面的复杂挑战。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "Import AI"
+    ],
+    "key_points": [
+      "AI正将高成本、耗时长的数学形式化任务变得可行，降低了初创公司将其整合进研发路线图的门槛，预示着数学工业化将推动研究自动化，对AI安全等领域产生深远影响。",
+      "AI模型在ProgramBench等基准测试上的快速进步表明，AI系统有望在2027年端到端自主开发大量软件，开启“短暂软件”时代，将颠覆现有软件开发模式。",
+      "智能代理的创造性、速度和持久性使其安全防护极具挑战，OpenAI的红队测试发现AI能利用处理器缓存时间差等意外方式进行通信，这凸显了在设计和保护AI系统时需应对的复杂性和适应性挑战。",
+      "单个研究员借助AI辅助，即可在数月内训练出高性能大型语言模型，成本远低于传统团队，这预示着AI将极大增强个人研发能力，加速AI研究速度，并逐步实现由AI自身辅助构建模型、迈向递归式自我改进的未来。"
+    ]
+  },
+  {
+    "id": "art_f1ef4aa9c94960d8",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/how-a-19-year-old-intern-built-the",
+    "title": "How a 19-year-old intern built the growth engine behind this $2B AI company | Hector Serrano",
+    "author": "Lenny Rachitsky",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-11-01T13:31:36+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_519a2ea3479c3ef8",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://latent.space/p/how_anthropic_ships_the_1_llm_in_the_world_safely_separating_the_brain_from_the_hands/",
+    "title": "How Anthropic ships the #1 LLM in the World safely: Separating the Brain from the Hands",
+    "author": "Latent.Space",
+    "source": "Latent Space",
+    "source_type": "其他",
+    "published_at": "2026-10-27T18:40:19+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Latent Space"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_d1002f7bd460f710",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://latent.space/p/opus55/",
+    "title": "How Anthropic ships Claude with Claude: Separating the Brain from the Hands",
+    "author": "swyx .ai",
+    "source": "Latent Space",
+    "source_type": "其他",
+    "published_at": "2026-10-27T18:53:10+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Latent Space"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_2f8f2a14b01c9a21",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://karpathy.bearblog.dev/hacker-tube/",
+    "title": "HackerTube",
+    "author": "Andrej Karpathy",
+    "source": "Andrej Karpathy",
+    "source_type": "其他",
+    "published_at": "2026-10-31T17:00:00+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Andrej Karpathy"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_8e4bdae32dcecd43",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/grok-vs-dot-vs-muse-vs-claude-duet",
+    "title": "Grok vs. Dot vs. Muse vs. Claude Duet: which one crushes the competition?",
+    "author": "Claire Vo",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-10-28T12:04:22+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_c15b1e3c66d84564",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://simonwillison.net/2026/Oct/26/gpt-61-terra/",
+    "title": "GPT-6.1 Terra",
+    "author": "Simon Willison",
+    "source": "Simon Willison",
+    "source_type": "其他",
+    "published_at": "2026-10-26T23:53:07+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Simon Willison"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_baf2e8680ec92ea7",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://techcrunch.com/2026/10/30/doordash-said-its-only-received-several-hundred-orders-from-ai-agents/",
+    "title": "DoorDash said it’s only received ‘several hundred’ orders from AI agents",
+    "author": "Ivan Mehta",
+    "source": "TechCrunch AI",
+    "source_type": "其他",
+    "published_at": "2026-10-30T13:54:25+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "TechCrunch AI"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_a41c6b1e5e903c63",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://simonwillison.net/2026/Oct/29/how-i-built-the-most-ai-pilled-company-in-the-world/",
+    "title": "Building a multiplayer game world with autonomous Fable-class models",
+    "author": "Simon Willison",
+    "source": "Simon Willison",
+    "source_type": "其他",
+    "published_at": "2026-10-29T17:00:26+00:00",
+    "summary_zh": "本文介绍了Spawn游戏公司如何利用Fable模型驱动的自主Agent构建一个多人游戏世界，这些Agent以每月300万美元的代币成本，实现了自主开发、测试和每小时部署的极致自动化流程。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "Simon Willison"
+    ],
+    "key_points": [
+      "Spawn公司以每月300万美元的AI代币开销（是人工薪资的30倍），驱动Fable模型Agent进行游戏开发，展示了AI在产品构建中取代或大幅超越传统人工投入的潜力。",
+      "该开发流程实现了超高频率的持续部署，Agent直接修改线上代码并每小时发布，甚至将一小时未发布视为最严重的故障（SEV-0），这种快速反馈循环有助于Agent保持工作的连贯性。",
+      "约60%的开发工作来源于生产错误、AI用户（Savi）提交的bug报告、日志异常或功能请求，表明AI Agent能够主动识别、评估并修复产品中的问题，形成高度闭环的开发周期。",
+      "不同AI模型的实际能力差异巨大，Fable 5/5.1对实现这种高级自治至关重要，而其他模型（如GPT-6 Astra）可能因理解偏差，导致意外的、非预期的“修复”行为（如为安全目的直接禁用所有功能）。"
+    ]
+  },
+  {
+    "id": "art_f3e255de2b47ab3f",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/",
+    "title": "Anthropic expected to receive high ‘junk’ rating from credit agencies following IPO, FT report says",
+    "author": "Lucas Ropek",
+    "source": "TechCrunch AI",
+    "source_type": "其他",
+    "published_at": "2026-10-30T21:52:03+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "TechCrunch AI"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_ef2450765babae81",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://latent.space/p/arca/",
+    "title": "Agents Prompt People: Using Agents for Long-Horizon Financial Work",
+    "author": "Richard MacManus",
+    "source": "Latent Space",
+    "source_type": "其他",
+    "published_at": "2026-10-31T16:05:00+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Latent Space"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_2065ffa365f3e4d6",
+    "email_received_at": "2026-11-02T14:18:04+08:00",
+    "canonical_url": "https://techcrunch.com/2026/10/31/4-days-left-how-techcrunch-founder-summit-helps-you-make-more-useful-connections-to-scale/",
+    "title": "4 days left: How TechCrunch Founder Summit helps you make more useful connections to scale",
+    "author": "TechCrunch Events",
+    "source": "TechCrunch AI",
+    "source_type": "其他",
+    "published_at": "2026-10-31T21:36:07+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "TechCrunch AI"
+    ],
+    "key_points": []
+  },
+  {
     "id": "art_7f08b3ee43a0859e",
     "email_received_at": "2026-10-26T12:55:36+08:00",
     "canonical_url": "https://www.lennysnewsletter.com/p/community-wisdom-negotiating-a-lowball",
