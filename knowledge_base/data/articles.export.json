@@ -1,5 +1,374 @@
 [
   {
+    "id": "art_2e1f9bd5020d843a",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/how-i-ai-grok-vs-dot-vs-muse-vs-duet",
+    "title": "🎙️ How I AI: Grok vs. Dot vs. Muse vs. Duet + How Figma’s PMs actually use AI every day",
+    "author": "Lenny Rachitsky",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-11-02T16:02:08+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_f14e00213ff02ea8",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://latent.space/p/ainews-llms-can-read-write-neural-network-weights-weight-space-programming-cuts-autoresearch-out-of/",
+    "title": "[AINews] LLMs can read & write neural network weights: \"Weight Space Programming\" cuts Autoresearch out of the RSI loop",
+    "author": "swyx .ai",
+    "source": "Latent Space",
+    "source_type": "其他",
+    "published_at": "2026-11-03T05:35:00+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Latent Space"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_ce1929f850b35180",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://latent.space/p/ainews-it-s-swapping-season/",
+    "title": "[AINews] It's Swapping Season",
+    "author": "swyx .ai",
+    "source": "Latent Space",
+    "source_type": "其他",
+    "published_at": "2026-11-05T06:24:09+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Latent Space"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_4453ca977df4bdb8",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/what-it-actually-takes-to-build-frontier",
+    "title": "Why PMs are suddenly valuable again | Tulsee Doshi (Head of Product, Gemini)",
+    "author": "Lenny Rachitsky",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-11-08T13:31:32+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_93776c9c2a6b392f",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://simonwillison.net/2026/Nov/2/census-bureau-super-intelligence/",
+    "title": "The U.S. Census Bureau and “Super Intelligence”",
+    "author": "Simon Willison",
+    "source": "Simon Willison",
+    "source_type": "其他",
+    "published_at": "2026-11-02T13:31:26+00:00",
+    "summary_zh": "美国人口普查局更新了其关于企业AI采用率的调查问题，从关注“商品或服务生产”扩展到“任何业务功能”，导致AI采用率数据显著上升。最新的变化是根据行政命令将“人工智能”术语改为“超级智能”，这可能进一步影响未来数据的可比性。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "研究、政策与行业趋势",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "研究、政策与行业趋势",
+      "Simon Willison"
+    ],
+    "key_points": [
+      "AI采用率数据极易受定义影响：调查问卷中“人工智能”定义的变化（从“用于生产商品或服务”到“用于任何业务功能”）使大型公司报告的AI采用率从2025年9月的12%上升到2026年10月的40%，表明AI技术落地的衡量标准会极大地影响报告结果。",
+      "政策法规对AI术语和数据收集的影响深远：美国行政命令14434要求将调查问卷中的“人工智能”改为“超级智能”，这不仅改变了官方语境，也可能引入数据分析的混淆，提示关注政策对行业定义和数据可比性的潜在影响。",
+      "利用AI工具进行数据分析与洞察：作者使用GPT-5、Claude的Code Interpreter和GPT-6 Astra Extra High等AI工具进行数据分析和图表生成，展示了大型语言模型在处理和可视化统计数据方面的实际应用能力。"
+    ]
+  },
+  {
+    "id": "art_d13fbfe75d78ae19",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://blog.cloudflare.com/personal-agents-visibility-control/",
+    "title": "See the agents, set the terms: new visibility and control for personal agents",
+    "author": "Nicole Justus",
+    "source": "Cloudflare AI",
+    "source_type": "其他",
+    "published_at": "2026-11-04T14:00:00+00:00",
+    "summary_zh": "Cloudflare推出了新功能，帮助网站所有者深入了解个人代理（Personal Agents）对其网站的访问活动，并能根据业务需求设置更精细的访问控制策略。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "Cloudflare AI"
+    ],
+    "key_points": [
+      "个人代理（Personal Agents）正成为连接人类与互联网的新兴中介，能将用户指令转化为网站上的请求和操作，这一趋势预示着自动化和AI应用将更深入地融入日常网络交互。",
+      "对于网站所有者而言，管理个人代理流量面临挑战：无法区分有用互动与潜在风险，若一概阻拦可能流失客户；这凸显了精细化代理管理对商业运营的重要性。",
+      "Cloudflare新推出的分析工具能提供详细的个人代理活动视图（如访问量、行为路径），并允许网站通过“AI爬虫和代理访问策略”对特定代理设置允许、限制或阻止等访问规则，实现基于业务场景的精准控制。",
+      "未来个人代理发展的一个重要方向是如何在代理行为中保留用户上下文，包括用户身份、授权行为及声誉评估，这对于构建负责任且高效的AI代理生态系统至关重要。"
+    ]
+  },
+  {
+    "id": "art_f1a111e72742f0df",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
+    "title": "Qwen 3.8 27B on my laptop can interpret model weights, too",
+    "author": "Simon Willison",
+    "source": "Simon Willison",
+    "source_type": "其他",
+    "published_at": "2026-11-03T16:29:48+00:00",
+    "summary_zh": "本文介绍了前沿及本地LLM解释模型权重的能力，特别指出GPT-6 Astra能够进行“权重空间编程”以理解并修改神经网络权重，而Qwen 3.8 27B在作者笔记本上也能完成类似任务。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "Simon Willison"
+    ],
+    "key_points": [
+      "AI模型自我理解与优化新范式：前沿LLMs（如GPT-6 Astra）已能实现“权重空间编程”，即无需外部工具，仅通过分析原始权重即可理解神经网络功能，甚至编辑自身权重来修复缺陷、提升性能，例如大幅提升了Qwen3.5-0.8B的数学推理能力。",
+      "本地化大型模型潜力：即使是个人笔记本上运行的Qwen 3.8 27B等本地LLM，也展现了不使用外部工具，直接解读复杂神经网络权重的能力，能成功推断出模型训练的游戏类型，证明了本地高性能AI在特定高级任务上的潜力。",
+      "AI推理过程的复杂性：LLM在进行权重分析和游戏类型判断时产生的推理轨迹极其复杂且难以直观理解，这揭示了AI内部工作机制的非透明性，对未来AI可解释性研究提出了挑战。",
+      "对AI自主性演进的审慎展望：作者认为虽然模型能够解释和修改自身权重令人印象深刻，但仍需谨慎看待其对“源代码时代”的颠覆性影响，不应过度解读，警示AI自主性发展带来的潜在复杂性。"
+    ]
+  },
+  {
+    "id": "art_c822924fc1f280c7",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://techcrunch.com/2026/11/05/palo-alto-networks-in-talks-to-buy-ai-agent-security-startup-clutch-for-500m/",
+    "title": "Palo Alto Networks in talks to buy AI agent security startup Clutch for $500M",
+    "author": "Marina Temkin",
+    "source": "TechCrunch AI",
+    "source_type": "其他",
+    "published_at": "2026-11-06T06:28:32+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "TechCrunch AI"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_2d23850120e57d6c",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://techcrunch.com/2026/11/06/meta-introduces-spaces-a-new-way-to-collaborate-with-your-muse-agent/",
+    "title": "Meta introduces Spaces, a new way to collaborate with your Muse agent",
+    "author": "Lucas Ropek",
+    "source": "TechCrunch AI",
+    "source_type": "其他",
+    "published_at": "2026-11-06T18:44:20+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "TechCrunch AI"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_dd05751b54a3a1ac",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/lennys-newsletter-holiday-gift-guide-057",
+    "title": "Lenny’s Newsletter holiday gift guide 2026",
+    "author": "Lenny Rachitsky",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-11-03T14:45:33+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_bc31bff0ac2f4da8",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://jack-clark.net/2026/11/02/import-ai-479-spacewar-low-latency-tasks-versus-llms-genie-4/",
+    "title": "Import AI 479: Spacewar; low-latency tasks versus LLMs; Genie 4",
+    "author": "Jack Clark",
+    "source": "Import AI",
+    "source_type": "其他",
+    "published_at": "2026-11-02T14:30:54+00:00",
+    "summary_zh": "本文介绍了Realtime-Bench基准测试，揭示了当前大型语言模型（LLMs）在低延迟实时交互任务中的局限性，并探讨了Metis公司为提升AI系统可靠性而探索的融合符号与神经网络的新型架构。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "Import AI"
+    ],
+    "key_points": [
+      "Realtime-Bench基准测试表明，当前LLMs在需要实时决策的低延迟互动任务（如游戏、在线交易）中表现极差，即便是顶尖模型在真实世界延迟下成功率也仅为36%。",
+      "该基准评估AI系统在时间状态感知（RT-Perceive）、自适应推理（RT-Deliberate）和时间感知行动选择（RT-Act）方面的能力，这些是构建高性能AI代理的关键素质。",
+      "Metis公司正探索融合符号与神经推理的AI架构，旨在通过引入明确且持久的认知状态和经审计的推理过程，构建更可靠、可解释且减少幻觉的AI系统。",
+      "当前AI Agent在处理实时、低延迟任务时，由于缺乏对时序状态感知和时间敏感决策的能力而性能受限，这为AI产品开发和自动化工作流设计提供了明确的改进方向。"
+    ]
+  },
+  {
+    "id": "art_c262b9961ff71dc3",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://techcrunch.com/2026/11/06/hundreds-of-artex-ai-hacking-tools-found-publicly-exposed-to-the-web/",
+    "title": "Hundreds of Artex AI hacking tools found publicly exposed to the web",
+    "author": "Zack Whittaker",
+    "source": "TechCrunch AI",
+    "source_type": "其他",
+    "published_at": "2026-11-06T18:44:38+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "TechCrunch AI"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_c4cd7eed2a813f19",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://www.lennysnewsletter.com/p/how-figmas-pms-actually-use-ai-every",
+    "title": "How Figma’s PMs actually use AI every day | Ezra Mechaber (PM, Figma)",
+    "author": "Claire Vo",
+    "source": "Lenny Rachitsky",
+    "source_type": "其他",
+    "published_at": "2026-11-02T13:04:11+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Lenny Rachitsky"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_cfd192eda4f22e6c",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://simonwillison.net/2026/Nov/9/details-summary/",
+    "title": "Hide your slop PR descriptions behind <details><summary>",
+    "author": "Simon Willison",
+    "source": "Simon Willison",
+    "source_type": "其他",
+    "published_at": "2026-11-09T04:25:05+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Simon Willison"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_00a42c9331cf0d4a",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://latent.space/p/building_legal_agents_when_you_can_t_see_the_data_-_jacob_lauritzen_cto_of_legora/",
+    "title": "Building Legal Agents When You Can't See the Data - Jacob Lauritzen, CTO of Legora",
+    "author": "Latent.Space",
+    "source": "Latent Space",
+    "source_type": "其他",
+    "published_at": "2026-11-02T22:54:03+00:00",
+    "summary_zh": "待补全：缺少可复用的文章摘要，等待正文抓取或 AI 补齐。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "待人工确认",
+    "value_score": 3,
+    "content_status": "email_only",
+    "tags": [
+      "待人工确认",
+      "Latent Space"
+    ],
+    "key_points": []
+  },
+  {
+    "id": "art_aff32afb63af01e7",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://github.blog/ai-and-ml/github-copilot/beyond-code-generation-a-developers-guide-to-agentic-engineering/",
+    "title": "Beyond code generation: A developer’s guide to agentic engineering",
+    "author": "Nick Liffen",
+    "source": "GitHub AI & ML",
+    "source_type": "其他",
+    "published_at": "2026-11-06T22:15:59+00:00",
+    "summary_zh": "本文介绍了超越代码生成的“智能体工程”（agentic engineering）如何帮助开发者在软件开发生命周期（规划、构建、验证、观察）的各个阶段，利用GitHub Copilot等AI工具提高效率，将精力从繁琐的事务性工作转移到高价值的判断和决策上。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "GitHub AI & ML"
+    ],
+    "key_points": [
+      "AI代理促使开发者将工作重心从重复性任务转向软件开发生命周期（规划、构建、验证、观察）中需要更高判断力的决策，以提升整体生产力。",
+      "在规划阶段，AI工具如Copilot能整合分散的需求上下文，将其转化为结构化的GitHub Issue，并利用智能体工作流将低复杂度任务分配给AI，使开发人员专注于制定复杂策略和决策。",
+      "为大幅缩短因AI采纳率提高而增长的拉取请求审查时间（研究显示增加441%），AI能够通过自动代码质量检查、提供分级反馈、安全漏洞扫描和自动修复/合并功能，优化审查流程。",
+      "AI系统通过会话连续性、云沙盒执行、隔离式仓库副本及共享记忆（如Copilot Dreaming），支持开发者同时处理多个任务，实现跨设备无缝工作，并通过学习历史交互持续改进协助效率和一致性。"
+    ]
+  },
+  {
+    "id": "art_7303cf34c367e545",
+    "email_received_at": "2026-11-09T14:45:28+08:00",
+    "canonical_url": "https://blog.cloudflare.com/trusted-agent-delegation/",
+    "title": "Agents aren’t humans (but they kinda are)",
+    "author": "Bryan Becker",
+    "source": "Cloudflare AI",
+    "source_type": "其他",
+    "published_at": "2026-11-05T17:03:04+00:00",
+    "summary_zh": "AI代理（Agent）作为用户与网站之间的中间层日益普及，它们可以模拟人类行为并并行操作，但这也导致网站难以识别、服务和追究最终用户的责任，从而引发了传统安全与欺诈预防机制的失效。",
+    "why_it_matters": "历史兼容字段：当前阶段不生成。",
+    "primary_category": "Agent 与自动化",
+    "value_score": 3,
+    "content_status": "complete",
+    "tags": [
+      "Agent 与自动化",
+      "Cloudflare AI"
+    ],
+    "key_points": [
+      "AI代理的流量正迅速增长，未来可能超越人类浏览量，迫使网站运营者重新思考其与用户的互动模式。",
+      "代理作为中间层，模糊了用户身份，使得网站难以应用传统的身份验证、信誉评估和责任追溯机制，导致欺诈、合规和资源耗尽等新挑战。",
+      "文章提出“中间层原则”，强调无论是否存在中间层，用户与网站的业务关系和安全责任都必须得到维护，网站需要新工具来识别和追究通过代理行动的用户及代理本身的责任。",
+      "网站需警惕代理带来的新风险，如友好欺诈、身份伪造、政策规避以及对风险认证系统的破坏，这些问题要求网站重新设计其安全和运营策略。"
+    ]
+  },
+  {
     "id": "art_0c4b959782efa551",
     "email_received_at": "2026-11-02T14:18:04+08:00",
     "canonical_url": "https://www.lennysnewsletter.com/p/community-wisdom-the-biggest-sources",
